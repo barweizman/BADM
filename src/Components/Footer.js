@@ -51,7 +51,7 @@ const Footer = () => {
                 />
               </Paper>
             </Grid>
-            <Typography textAlign="center">
+            <Typography textAlign="center" fontSize={12}>
               {author.name}
             </Typography>
             <IconButton
