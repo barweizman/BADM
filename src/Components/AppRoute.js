@@ -6,10 +6,12 @@ import LoginPage from "./Pages/LoginPage";
 import HomePage from "./Pages/HomePage";
 import Register from "./Pages/Register";
 import Footer from "./Footer";
+import MyNavbar from "./MyNavbar";
 
 const AppRoute = () => {
   return (
     <Stack>
+      <MyNavbar />
       <Routes>
         <Route path={paths.index} element={<HomePage />} />
         <Route path={paths.login} element={<LoginPage />} />
