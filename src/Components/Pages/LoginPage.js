@@ -1,9 +1,12 @@
 import React from "react";
-import { Grid, Stack, TextField } from "@mui/material";
+import { Grid, Stack, TextField, Typography } from "@mui/material";
 
 const LoginPage = () => {
   return (
     <Stack>
+      <Typography textAlign="center" variant="h4" mt={2}>
+        Login
+      </Typography>
       <Grid
         container
         justifyContenet="center"
