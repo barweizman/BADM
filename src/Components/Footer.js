@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, IconButton, Typography } from "@mui/material";
 import theme from "../Constants/theme";
 import { authours, GITHUB_ICON, LINKEDIN_ICON } from "../Constants/naming";
 
@@ -17,7 +17,45 @@ const Footer = () => {
         height: theme.spacing(30)
       }}
     >
-      <Grid container spacing={5} justifyContent="space-around" />
+      <Grid container spacing={5} justifyContent="space-around">
+        {authours.map(author =>
+          <Grid item>
+            <Typography textAlign="center">
+              {author.name}
+            </Typography>
+            <IconButton
+              style={{ marginRight: theme.spacing(2) }}
+              rel="noopener noreferrer"
+              target="_blank"
+              href={author.linkedin}
+            >
+              <Box
+                component="img"
+                src={LINKEDIN_ICON}
+                sx={{
+                  height: "30px",
+                  width: "30px"
+                }}
+              />
+            </IconButton>
+            <IconButton
+              style={{ marginRight: theme.spacing(2) }}
+              rel="noopener noreferrer"
+              target="_blank"
+              href={author.github}
+            >
+              <Box
+                component="img"
+                src={GITHUB_ICON}
+                sx={{
+                  height: "30px",
+                  width: "30px"
+                }}
+              />
+            </IconButton>
+          </Grid>
+        )}
+      </Grid>
     </Typography>
   );
 };
