@@ -51,39 +51,41 @@ const Footer = () => {
                 />
               </Paper>
             </Grid>
-            <Typography textAlign="center" fontSize={12}>
+            <Typography textAlign="center" fontSize={15}>
               {author.name}
             </Typography>
-            <IconButton
-              style={{ marginRight: theme.spacing(2) }}
-              rel="noopener noreferrer"
-              target="_blank"
-              href={author.linkedin}
-            >
-              <Box
-                component="img"
-                src={LINKEDIN_ICON}
-                sx={{
-                  height: "30px",
-                  width: "30px"
-                }}
-              />
-            </IconButton>
-            <IconButton
-              style={{ marginRight: theme.spacing(2) }}
-              rel="noopener noreferrer"
-              target="_blank"
-              href={author.github}
-            >
-              <Box
-                component="img"
-                src={GITHUB_ICON}
-                sx={{
-                  height: "30px",
-                  width: "30px"
-                }}
-              />
-            </IconButton>
+            <Grid container justifyContent="center" mb={2} mt={2}>
+              <IconButton
+                style={{ marginRight: theme.spacing(2) }}
+                rel="noopener noreferrer"
+                target="_blank"
+                href={author.linkedin}
+              >
+                <Box
+                  component="img"
+                  src={LINKEDIN_ICON}
+                  sx={{
+                    height: "30px",
+                    width: "30px"
+                  }}
+                />
+              </IconButton>
+              <IconButton
+                style={{ marginRight: theme.spacing(2) }}
+                rel="noopener noreferrer"
+                target="_blank"
+                href={author.github}
+              >
+                <Box
+                  component="img"
+                  src={GITHUB_ICON}
+                  sx={{
+                    height: "30px",
+                    width: "30px"
+                  }}
+                />
+              </IconButton>
+            </Grid>
           </Grid>
         )}
       </Grid>
