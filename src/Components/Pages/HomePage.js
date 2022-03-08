@@ -1,8 +1,12 @@
 import React from "react";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 const HomePage = () => {
-  return <Grid>homepage</Grid>;
+  return (
+    <Grid>
+      <Typography textAlign="center">homepage</Typography>
+    </Grid>
+  );
 };
 
 export default HomePage;

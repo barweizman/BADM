@@ -1,18 +1,24 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 import theme from "../Constants/theme";
+import { authours, GITHUB_ICON, LINKEDIN_ICON } from "../Constants/naming";
 
 const Footer = () => {
   return (
-    <Box
+    <Typography
+      component="footer"
       sx={{
+        display: "flex",
+        position: "sticky",
+        bottom: 0,
+        left: 0,
         width: "100%",
-        height: theme.spacing(50),
-        backgroundColor: theme.palette.secondary.light
+        backgroundColor: theme.palette.primary.main,
+        height: theme.spacing(30)
       }}
     >
-      <Typography>Bar Alice David Maayan</Typography>
-    </Box>
+      <Grid container spacing={5} justifyContent="space-around" />
+    </Typography>
   );
 };
 
