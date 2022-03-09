@@ -26,7 +26,7 @@ const Footer = () => {
     >
       <Grid container spacing={5} justifyContent="space-around">
         {authours.map(author =>
-          <Grid item>
+          <Grid item key={author.name}>
             <Grid container justifyContent="center" mb={2} mt={2}>
               <Paper
                 sx={{
