@@ -16,12 +16,12 @@ const Footer = () => {
       component="footer"
       sx={{
         display: "flex",
-        position: "sticky",
         bottom: 0,
         left: 0,
         width: "100%",
         backgroundColor: theme.palette.primary.main,
-        height: theme.spacing(30)
+        height: theme.spacing(30),
+        position: "absolute"
       }}
     >
       <Grid container spacing={5} justifyContent="space-around">
