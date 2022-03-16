@@ -18,6 +18,6 @@
     "linebreak-style": "off",
     "quotes": [2, "double"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/function-component-definition": ["arrow-function"]
+    "react/function-component-definition": "off"
   }
 }
