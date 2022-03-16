@@ -1,8 +1,9 @@
 import React from "react";
-import { AppBar, Button, Grid, Toolbar } from "@mui/material";
+import { AppBar, Button, Toolbar } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
 import theme from "../Constants/theme";
 import paths from "../Constants/paths";
-import { useNavigate } from "react-router-dom";
 
 const MyNavbar = () => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const MyNavbar = () => {
             borderRadius: theme.spacing(1),
             color: "white"
           }}
-          variant="contained"
+          variant="outlined"
           onClick={handleLoginClicked}
         >
           Login
@@ -37,7 +38,7 @@ const MyNavbar = () => {
             borderRadius: theme.spacing(1),
             color: "white"
           }}
-          variant="contained"
+          variant="outlined"
           onClick={handleRegisterClicked}
         >
           Register

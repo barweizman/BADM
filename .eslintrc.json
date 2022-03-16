@@ -18,6 +18,11 @@
     "linebreak-style": "off",
     "quotes": [2, "double"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/function-component-definition": "off"
+    "react/function-component-definition": "off",
+    "no-confusing-arrow": [
+      "error",
+      { "allowParens": true, "onlyOneSimpleParam": false }
+  ],
+  "no-console": "off"
   }
 }

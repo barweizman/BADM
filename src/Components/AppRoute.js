@@ -8,18 +8,15 @@ import Register from "./Pages/Register";
 import Footer from "./Footer";
 import MyNavbar from "./MyNavbar";
 
-const AppRoute = () => {
-  return (
-    <Stack>
-      <MyNavbar />
-      <Routes>
-        <Route path={paths.index} element={<HomePage />} />
-        <Route path={paths.login} element={<LoginPage />} />
-        <Route path={paths.register} element={<Register />} />
-      </Routes>
-      <Footer />
-    </Stack>
-  );
-};
+const AppRoute = () =>
+  <Stack>
+    <MyNavbar />
+    <Routes>
+      <Route path={paths.index} element={<HomePage />} />
+      <Route path={paths.login} element={<LoginPage />} />
+      <Route path={paths.register} element={<Register />} />
+    </Routes>
+    <Footer />
+  </Stack>;
 
 export default AppRoute;
