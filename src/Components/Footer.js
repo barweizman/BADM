@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Box,
-  Grid,
-  IconButton,
-  Typography,
-  Avatar,
-  Paper
-} from "@mui/material";
+import { Box, Grid, IconButton, Typography, Paper } from "@mui/material";
 import theme from "../Constants/theme";
 import { authours, GITHUB_ICON, LINKEDIN_ICON } from "../Constants/naming";
 
@@ -21,11 +14,11 @@ const Footer = () => {
         width: "100%",
         backgroundColor: theme.palette.primary.main,
         height: theme.spacing(30),
-        position: "absolute"
+        position: "absolute",
       }}
     >
       <Grid container spacing={5} justifyContent="space-around">
-        {authours.map(author =>
+        {authours.map((author) => (
           <Grid item key={author.name}>
             <Grid container justifyContent="center" mb={2} mt={2}>
               <Paper
@@ -37,7 +30,7 @@ const Footer = () => {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
-                  boxShadow: "0 3px 6px 2px #746D69"
+                  boxShadow: "0 3px 6px 2px #746D69",
                 }}
               >
                 <Box
@@ -46,7 +39,7 @@ const Footer = () => {
                   sx={{
                     height: theme.spacing(10),
                     my: 4,
-                    borderRadius: theme.spacing(5)
+                    borderRadius: theme.spacing(5),
                   }}
                 />
               </Paper>
@@ -66,7 +59,7 @@ const Footer = () => {
                   src={LINKEDIN_ICON}
                   sx={{
                     height: "30px",
-                    width: "30px"
+                    width: "30px",
                   }}
                 />
               </IconButton>
@@ -81,13 +74,13 @@ const Footer = () => {
                   src={GITHUB_ICON}
                   sx={{
                     height: "30px",
-                    width: "30px"
+                    width: "30px",
                   }}
                 />
               </IconButton>
             </Grid>
           </Grid>
-        )}
+        ))}
       </Grid>
     </Typography>
   );
