@@ -1,10 +1,10 @@
-const expect = require('chai').expect;
+const { expect } = require("chai");
 
-describe('Array' , () => {
-    describe('#sort', () => {
-        it('should sort the array by name',() => {
-            var names = ['Bar','Alice','Maayan','David'];
-            expect(names.sort()).to.be.eql(['Alice','Bar','David','Maayan']);
-        });
+describe("Array", () => {
+  describe("#sort", () => {
+    it("should sort the array by name", () => {
+      const names = ["Bar", "Alice", "Maayan", "David"];
+      expect(names.sort()).to.be.eql(["Alice", "Bar", "David", "Maayan"]);
     });
+  });
 });

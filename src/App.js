@@ -1,8 +1,10 @@
 import React from "react";
-import "./App.css";
 import { ThemeProvider } from "@mui/styles";
 import { BrowserRouter } from "react-router-dom";
+
 import AppRoute from "./Components/AppRoute";
+
+import "./App.css";
 import theme from "./Constants/theme";
 
 function App() {
