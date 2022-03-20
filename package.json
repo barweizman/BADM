@@ -24,7 +24,8 @@
     "start": "node app",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
-    "test": "mocha tests/*.spec.js --color"
+    "test": "mocha tests/*.spec.js --color",
+    "lint": "eslint src/* --color"
   },
   "eslintConfig": {
     "extends": [
