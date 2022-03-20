@@ -1,3 +1,27 @@
+# How to run BADM ?
+To run BADM, follow the steps:
+1. Clone the repository
+2. Open terminal(pay attention to current folder), and run: `npm i` or `npm install`
+3. run: `npm run-script run`
+
+# Technologies and languages used:
+JS
+HTML
+CSS
+React
+Express
+NodeJS
+CircleCi
+Heroku
+ESLint
+Prettier
+Npm package manager
+Mocha test frameworkfor NodeJS
+Chai assertion library for NodeJS
+
+# App Description:
+Website infrastructure :)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
