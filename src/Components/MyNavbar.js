@@ -40,7 +40,7 @@ const MyNavbar = () => {
         <Button onClick={handleLogoClicked}>
           <Box
             component="img"
-            src="../favicon.ico"
+            src="./favicon.ico"
             sx={{ height: 50, width: 50 }}
           />
         </Button>

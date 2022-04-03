@@ -75,7 +75,7 @@ const LoginPage = () => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(../images/cup.png)",
+            backgroundImage: "url(./images/cup.png)",
             backgroundRepeat: "no-repeat",
             // eslint-disable-next-line no-confusing-arrow
             backgroundColor: t =>
