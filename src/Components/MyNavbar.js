@@ -30,7 +30,8 @@ const MyNavbar = () => {
         <Button
           sx={{
             borderRadius: theme.spacing(1),
-            color: "white"
+            color: "white",
+            textTransform: "capitalize"
           }}
           variant="outlined"
           onClick={handleLoginClicked}
@@ -47,7 +48,8 @@ const MyNavbar = () => {
         <Button
           sx={{
             borderRadius: theme.spacing(1),
-            color: "white"
+            color: "white",
+            textTransform: "capitalize"
           }}
           variant="outlined"
           onClick={handleRegisterClicked}
