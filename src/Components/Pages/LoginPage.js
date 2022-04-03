@@ -75,7 +75,8 @@ const LoginPage = () => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(./images/cup.png)",
+            backgroundImage:
+              "url(https://firebasestorage.googleapis.com/v0/b/javascriptblog-e9b5a.appspot.com/o/badm%2Fcup.png?alt=media&token=e0a775b9-f1f8-4e94-b814-716d1e42741e)",
             backgroundRepeat: "no-repeat",
             // eslint-disable-next-line no-confusing-arrow
             backgroundColor: t =>

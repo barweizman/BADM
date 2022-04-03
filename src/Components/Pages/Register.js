@@ -88,7 +88,8 @@ const Register = () => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(./images/mobile.png)",
+            backgroundImage:
+              "url(https://firebasestorage.googleapis.com/v0/b/javascriptblog-e9b5a.appspot.com/o/badm%2Fmobile.png?alt=media&token=c3a39017-00a4-4ea1-a6d7-c66a59dbb30d)",
             backgroundRepeat: "no-repeat",
             // eslint-disable-next-line no-confusing-arrow
             backgroundColor: t =>
