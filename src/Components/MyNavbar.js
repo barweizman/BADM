@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Button, Toolbar } from "@mui/material";
+import { AppBar, Box, Button, Toolbar } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import theme from "../Constants/theme";
@@ -15,11 +15,15 @@ const MyNavbar = () => {
     navigate(paths.register);
   };
 
+  const handleLogoClicked = () => {
+    navigate(paths.index);
+  };
+
   return (
     <AppBar
-      position="static"
+      position="sticky"
       sx={{
-        backgroundColor: theme.palette.secondary.main
+        backgroundColor: theme.palette.primary.main
       }}
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -32,6 +36,13 @@ const MyNavbar = () => {
           onClick={handleLoginClicked}
         >
           Login
+        </Button>
+        <Button onClick={handleLogoClicked}>
+          <Box
+            component="img"
+            src="../favicon.ico"
+            sx={{ height: 50, width: 50 }}
+          />
         </Button>
         <Button
           sx={{
