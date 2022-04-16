@@ -34,7 +34,4 @@ export const GITHUB_ICON = "https://www.svgrepo.com/show/341847/github.svg";
 export const LINKEDIN_ICON =
   "https://www.svgrepo.com/show/16193/linkedin-logo.svg";
 
-// validate password - Minimum eight characters, at least one letter and one number:
-export const validatePassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i;
-// validate email -
-export const validateEmail = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+export const JWT_SESSION_KEY = "C541863AQGUm3AQGUnXyAQGUmD_lxL-xIQjZb03AQE";

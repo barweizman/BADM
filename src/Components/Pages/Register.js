@@ -21,38 +21,55 @@ import {
 
 import theme from "../../Constants/theme";
 
-import { validateEmail, validatePassword } from "../../Constants/naming";
+import { validateEmail, validatePassword } from "../../Constants/validators";
 import Copyright from "../Copyright";
 import paths from "../../Constants/paths";
+import { registerUser } from "../../services/serverServices";
+import { rememberMeSession } from "../../Constants/helpers";
+
+const initialErrors = {
+  email: false,
+  password: false,
+  name: false,
+  failed: false
+};
 
 const Register = () => {
   const navigate = useNavigate();
-  const [passwordError, setPasswordError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [nameError, setNameError] = useState(false);
+  const [formErrors, setFormErrors] = useState(initialErrors);
   const [rememerMe, setRememberMe] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const handleValidationCheck = (email, password, name) => {
+  const handleValidationCheck = async (email, password, name) => {
     if (!validateEmail.test(email)) {
-      setEmailError(true);
+      setFormErrors({ ...initialErrors, email: true });
       console.log("Email must be in valid format");
       return;
     }
     if (name.length === 0) {
-      setNameError(true);
+      setFormErrors({ ...initialErrors, name: true });
     }
     if (!validatePassword.test(password)) {
-      setPasswordError(true);
+      setFormErrors({ ...initialErrors, password: true });
       console.log(
         "Password not valid,must include minimum eight characters, at least one letter and one number"
       );
       return;
-      // to do: add the pwd&email to DB
     }
-
-    console.log("Valid");
+    setFormErrors({ ...initialErrors });
+    setIsLoading(true);
+    const res = await registerUser(email, password);
+    setIsLoading(false);
+    if (res.status === 200) {
+      if (rememerMe) {
+        rememberMeSession(res.data.jwt);
+      }
+      navigate(paths.index);
+    } else {
+      setFormErrors({ ...initialErrors, failed: true });
+    }
   };
 
   const handleSubmit = event => {
@@ -128,31 +145,35 @@ const Register = () => {
                 required
                 fullWidth
                 id="email"
-                onFocus={() => setEmailError(false)}
+                disabled={isLoading}
+                onFocus={() => setFormErrors({ ...initialErrors })}
                 label="Email Address"
                 name="email"
                 autoFocus
-                error={emailError}
+                helperText={formErrors.failed && "User already exists"}
+                error={formErrors.email || formErrors.failed}
                 sx={{ mt: 1 }}
               />
               <TextField
                 autoComplete="name"
-                error={nameError}
+                error={formErrors.name}
                 fullWidth
                 required
+                disabled={isLoading}
                 id="name"
                 name="name"
                 label="Name"
                 type="name"
-                onFocus={() => setNameError(false)}
+                onFocus={() => setFormErrors({ ...initialErrors })}
                 variant="outlined"
                 sx={{ mt: 1 }}
               />
               <TextField
                 margin="normal"
                 required
-                error={passwordError}
+                error={formErrors.password}
                 fullWidth
+                disabled={isLoading}
                 InputProps={{
                   endAdornment: passwordVisible
                     ? <VisibilityOff
@@ -164,13 +185,13 @@ const Register = () => {
                         sx={{ color: "lightgray" }}
                       />
                 }}
-                onFocus={() => setPasswordError(false)}
+                onFocus={() => setFormErrors({ ...initialErrors })}
                 name="password"
                 label="Password"
                 type={passwordVisible ? "text" : "password"}
                 id="password"
                 helperText={
-                  passwordError &&
+                  formErrors.password &&
                   `Password not valid,must include minimum eight characters, at
                 least one letter and one number`
                 }
@@ -181,8 +202,9 @@ const Register = () => {
                 control={
                   <Checkbox
                     checked={rememerMe}
-                    onChange={handleToggleCheckBox}
                     color="primary"
+                    disabled={isLoading}
+                    onChange={handleToggleCheckBox}
                   />
                 }
                 label="Remember me"
@@ -191,6 +213,7 @@ const Register = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
+                disabled={isLoading}
                 sx={{
                   mt: 3,
                   mb: 2,

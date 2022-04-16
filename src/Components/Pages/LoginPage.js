@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   Checkbox,
+  CircularProgress,
   CssBaseline,
   FormControlLabel,
   Grid,
@@ -19,42 +20,49 @@ import {
   LockClockOutlined as LockOutlinedIcon
 } from "@mui/icons-material";
 
-import { validateEmail, validatePassword } from "../../Constants/naming";
+import { validateEmail } from "../../Constants/validators";
 import Copyright from "../Copyright";
 import paths from "../../Constants/paths";
+import { loginUser } from "../../services/serverServices";
+import { rememberMeSession } from "../../Constants/helpers";
+
+const initialErrors = {
+  email: false,
+  password: false,
+  notFound: false
+};
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const [passwordError, setPasswordError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [rememerMe, setRememberMe] = useState(true);
-  const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const handleValidationCheck = (email, password) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [rememberMe, setRememberMe] = useState(true);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [errors, setErrors] = useState({ ...initialErrors });
+
+  const handleValidationCheck = async (email, password) => {
     if (!validateEmail.test(email)) {
-      setEmailError(true);
+      setErrors({ ...initialErrors, email: true });
       console.log("Email must be in valid format");
       return;
     }
-    if (!validatePassword.test(password)) {
-      setPasswordError(true);
-      console.log(
-        "Password not valid,must include minimum eight characters, at least one letter and one number"
-      );
-      return;
-      // to do: add the pwd&email to DB
+    setIsLoading(true);
+    const res = await loginUser(email, password);
+    setIsLoading(false);
+    console.log(res);
+    if (res.status === 200) {
+      rememberMeSession(res.data.jwt);
+      navigate(paths.index);
+    } else {
+      setErrors({ ...initialErrors, notFound: true });
     }
-    console.log("Validated");
   };
 
   const handleSubmit = event => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password")
-    });
-    handleValidationCheck(data.email, data.password);
+
+    handleValidationCheck(data.get("email"), data.get("password"));
   };
 
   const handleToggleCheckBox = () => {
@@ -67,6 +75,7 @@ const LoginPage = () => {
 
   return (
     <Stack>
+      {isLoading && <CircularProgress />}
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
@@ -114,17 +123,18 @@ const LoginPage = () => {
                 required
                 fullWidth
                 id="email"
-                onFocus={() => setEmailError(false)}
+                onFocus={() => setErrors({ ...initialErrors })}
                 label="Email Address"
                 name="email"
                 autoComplete="email"
                 autoFocus
-                error={emailError}
+                helperText={errors.notFound && "User doesn't exists"}
+                error={errors.email || errors.notFound}
               />
               <TextField
                 margin="normal"
                 required
-                error={passwordError}
+                error={errors.password || errors.notFound}
                 fullWidth
                 InputProps={{
                   endAdornment: passwordVisible
@@ -137,7 +147,7 @@ const LoginPage = () => {
                         sx={{ color: "lightgray" }}
                       />
                 }}
-                onFocus={() => setPasswordError(false)}
+                onFocus={() => setErrors({ ...initialErrors })}
                 name="password"
                 label="Password"
                 type={passwordVisible ? "text" : "password"}
@@ -147,7 +157,7 @@ const LoginPage = () => {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={rememerMe}
+                    checked={rememberMe}
                     onChange={handleToggleCheckBox}
                     color="primary"
                   />
