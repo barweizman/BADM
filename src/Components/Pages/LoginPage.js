@@ -20,6 +20,9 @@ import {
   LockClockOutlined as LockOutlinedIcon
 } from "@mui/icons-material";
 
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/reducers/appState";
+
 import { validateEmail } from "../../Constants/validators";
 import Copyright from "../Copyright";
 import paths from "../../Constants/paths";
@@ -34,6 +37,7 @@ const initialErrors = {
 
 const LoginPage = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [isLoading, setIsLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
@@ -49,9 +53,11 @@ const LoginPage = () => {
     setIsLoading(true);
     const res = await loginUser(email, password);
     setIsLoading(false);
-    console.log(res);
     if (res.status === 200) {
-      rememberMeSession(res.data.jwt);
+      if (rememberMe) {
+        rememberMeSession(res.data.jwt);
+      }
+      dispatch(setUser(res.data.user));
       navigate(paths.index);
     } else {
       setErrors({ ...initialErrors, notFound: true });

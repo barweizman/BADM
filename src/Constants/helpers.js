@@ -5,3 +5,7 @@ export const rememberMeSession = jwt => {
 };
 
 export const getJwtKey = () => localStorage.getItem(JWT_SESSION_KEY);
+
+export const endLoginSession = () => {
+  localStorage.removeItem(JWT_SESSION_KEY);
+};

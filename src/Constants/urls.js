@@ -3,6 +3,7 @@ const api = "api";
 const authEndPoint = `/${api}/auth`;
 const authRegister = "/register";
 const authLogin = "/login";
+const authGetUser = "/getUser";
 
 export const cartEndPoint = `/${api}/carts`;
 
@@ -24,6 +25,7 @@ const userGetAll = "getUsers";
 
 export const loginURL = `${authEndPoint}/${authLogin}`;
 export const registerURL = `${authEndPoint}/${authRegister}`;
+export const getUserURL = `${authEndPoint}/${authGetUser}`;
 
 export const addProductURL = `${productEndPoint}/${productAdd}`;
 export const updateProductURL = `${productEndPoint}/${productUpdate}`;

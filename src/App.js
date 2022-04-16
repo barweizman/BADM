@@ -1,18 +1,22 @@
 import React from "react";
 import { ThemeProvider } from "@mui/styles";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 
 import AppRoute from "./Components/AppRoute";
 
 import "./App.css";
 import theme from "./Constants/theme";
+import store from "./store/store";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <AppRoute />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <AppRoute />
+        </BrowserRouter>
+      </Provider>
     </ThemeProvider>
   );
 }

@@ -19,6 +19,9 @@ import {
   LockClockOutlined as LockOutlinedIcon
 } from "@mui/icons-material";
 
+import { useDispatch } from "react-redux";
+import { setUser } from "../../store/reducers/appState";
+
 import theme from "../../Constants/theme";
 
 import { validateEmail, validatePassword } from "../../Constants/validators";
@@ -36,6 +39,7 @@ const initialErrors = {
 
 const Register = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formErrors, setFormErrors] = useState(initialErrors);
   const [rememerMe, setRememberMe] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -66,6 +70,7 @@ const Register = () => {
       if (rememerMe) {
         rememberMeSession(res.data.jwt);
       }
+      dispatch(setUser(res.data.user));
       navigate(paths.index);
     } else {
       setFormErrors({ ...initialErrors, failed: true });
