@@ -3,7 +3,7 @@ import { ThemeProvider } from "@mui/styles";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 
-import AppRoute from "./Components/AppRoute";
+import AppRoute from "./AppRoute";
 
 import "./App.css";
 import theme from "./Constants/theme";

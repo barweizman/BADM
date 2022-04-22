@@ -5,12 +5,10 @@ import {
   Box,
   Button,
   Checkbox,
-  CircularProgress,
   CssBaseline,
   FormControlLabel,
   Grid,
   Paper,
-  Stack,
   TextField,
   Typography
 } from "@mui/material";
@@ -21,67 +19,90 @@ import {
 } from "@mui/icons-material";
 
 import { useDispatch } from "react-redux";
-import { setUser } from "../../store/reducers/appState";
+import { setUser } from "../store/reducers/appState";
 
-import { validateEmail } from "../../Constants/validators";
-import Copyright from "../Copyright";
-import paths from "../../Constants/paths";
-import { loginUser } from "../../services/serverServices";
-import { rememberMeSession } from "../../Constants/helpers";
+import theme from "../Constants/theme";
+
+import { validateEmail, validatePassword } from "../Constants/validators";
+import Copyright from "../Components/Copyright";
+import paths from "../Constants/paths";
+import { registerUser } from "../services/serverServices";
+import { rememberMeSession } from "../Constants/helpers";
+import MyNavbar from "../Components/MyNavbar";
 
 const initialErrors = {
   email: false,
   password: false,
-  notFound: false
+  name: false,
+  failed: false
 };
 
-const LoginPage = () => {
+const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const [formErrors, setFormErrors] = useState(initialErrors);
+  const [rememerMe, setRememberMe] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [rememberMe, setRememberMe] = useState(true);
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [errors, setErrors] = useState({ ...initialErrors });
 
-  const handleValidationCheck = async (email, password) => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const handleValidationCheck = async (email, password, name) => {
     if (!validateEmail.test(email)) {
-      setErrors({ ...initialErrors, email: true });
+      setFormErrors({ ...initialErrors, email: true });
       console.log("Email must be in valid format");
       return;
     }
+    if (name.length === 0) {
+      setFormErrors({ ...initialErrors, name: true });
+    }
+    if (!validatePassword.test(password)) {
+      setFormErrors({ ...initialErrors, password: true });
+      console.log(
+        "Password not valid,must include minimum eight characters, at least one letter and one number"
+      );
+      return;
+    }
+    setFormErrors({ ...initialErrors });
     setIsLoading(true);
-    const res = await loginUser(email, password);
+    const res = await registerUser(email, password);
     setIsLoading(false);
     if (res.status === 200) {
-      if (rememberMe) {
+      if (rememerMe) {
         rememberMeSession(res.data.jwt);
       }
       dispatch(setUser(res.data.user));
       navigate(paths.index);
     } else {
-      setErrors({ ...initialErrors, notFound: true });
+      setFormErrors({ ...initialErrors, failed: true });
     }
   };
 
   const handleSubmit = event => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-
-    handleValidationCheck(data.get("email"), data.get("password"));
+    console.log({
+      email: data.get("email"),
+      password: data.get("password"),
+      name: data.get("name")
+    });
+    handleValidationCheck(
+      data.get("email"),
+      data.get("password"),
+      data.get("name")
+    );
   };
 
   const handleToggleCheckBox = () => {
     setRememberMe(prevState => !prevState);
   };
 
-  const handleNavigateToSignup = () => {
-    navigate(paths.register);
+  const handleNavigateToLogin = () => {
+    navigate(paths.login);
   };
 
   return (
-    <Stack>
-      {isLoading && <CircularProgress />}
+    <>
+      <MyNavbar />
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
@@ -91,7 +112,7 @@ const LoginPage = () => {
           md={7}
           sx={{
             backgroundImage:
-              "url(https://firebasestorage.googleapis.com/v0/b/javascriptblog-e9b5a.appspot.com/o/badm%2Fcup.png?alt=media&token=e0a775b9-f1f8-4e94-b814-716d1e42741e)",
+              "url(https://firebasestorage.googleapis.com/v0/b/javascriptblog-e9b5a.appspot.com/o/badm%2Fmobile.png?alt=media&token=c3a39017-00a4-4ea1-a6d7-c66a59dbb30d)",
             backgroundRepeat: "no-repeat",
             // eslint-disable-next-line no-confusing-arrow
             backgroundColor: t =>
@@ -106,17 +127,17 @@ const LoginPage = () => {
           <Box
             sx={{
               my: 8,
-              mx: 4,
+              mx: 6,
               display: "flex",
               flexDirection: "column",
               alignItems: "center"
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+            <Avatar sx={{ m: 1, bgcolor: theme.palette.primary.main }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Register
             </Typography>
             <Box
               component="form"
@@ -125,23 +146,40 @@ const LoginPage = () => {
               sx={{ mt: 1 }}
             >
               <TextField
+                autoComplete="email"
                 margin="normal"
                 required
                 fullWidth
                 id="email"
-                onFocus={() => setErrors({ ...initialErrors })}
+                disabled={isLoading}
+                onFocus={() => setFormErrors({ ...initialErrors })}
                 label="Email Address"
                 name="email"
-                autoComplete="email"
                 autoFocus
-                helperText={errors.notFound && "User doesn't exists"}
-                error={errors.email || errors.notFound}
+                helperText={formErrors.failed && "User already exists"}
+                error={formErrors.email || formErrors.failed}
+                sx={{ mt: 1 }}
+              />
+              <TextField
+                autoComplete="name"
+                error={formErrors.name}
+                fullWidth
+                required
+                disabled={isLoading}
+                id="name"
+                name="name"
+                label="Name"
+                type="name"
+                onFocus={() => setFormErrors({ ...initialErrors })}
+                variant="outlined"
+                sx={{ mt: 1 }}
               />
               <TextField
                 margin="normal"
                 required
-                error={errors.password || errors.notFound}
+                error={formErrors.password}
                 fullWidth
+                disabled={isLoading}
                 InputProps={{
                   endAdornment: passwordVisible
                     ? <VisibilityOff
@@ -153,19 +191,26 @@ const LoginPage = () => {
                         sx={{ color: "lightgray" }}
                       />
                 }}
-                onFocus={() => setErrors({ ...initialErrors })}
+                onFocus={() => setFormErrors({ ...initialErrors })}
                 name="password"
                 label="Password"
                 type={passwordVisible ? "text" : "password"}
                 id="password"
+                helperText={
+                  formErrors.password &&
+                  `Password not valid,must include minimum eight characters, at
+                least one letter and one number`
+                }
                 autoComplete="current-password"
+                sx={{ mt: 2 }}
               />
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={rememberMe}
-                    onChange={handleToggleCheckBox}
+                    checked={rememerMe}
                     color="primary"
+                    disabled={isLoading}
+                    onChange={handleToggleCheckBox}
                   />
                 }
                 label="Remember me"
@@ -173,18 +218,23 @@ const LoginPage = () => {
               <Button
                 type="submit"
                 fullWidth
-                color="primary"
                 variant="contained"
-                sx={{ mt: 3, mb: 2, textTransform: "capitalize" }}
+                disabled={isLoading}
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  textTransform: "capitalize",
+                  bgcolor: theme.palette.primary.main
+                }}
               >
                 Sign In
               </Button>
               <Grid container justifyContent="center">
                 <Button
-                  onClick={handleNavigateToSignup}
+                  onClick={handleNavigateToLogin}
                   sx={{ textTransform: "capitalize" }}
                 >
-                  Dont have an account? Sign Up
+                  Already a member? Login
                 </Button>
               </Grid>
               <Copyright />
@@ -192,8 +242,8 @@ const LoginPage = () => {
           </Box>
         </Grid>
       </Grid>
-    </Stack>
+    </>
   );
 };
 
-export default LoginPage;
+export default Register;

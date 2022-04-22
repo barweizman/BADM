@@ -10,8 +10,11 @@ const theme = createTheme({
     },
     secondary: {
       main: "#FFF8F3",
-      light: "#3F3351",
-      dark: "#040303"
+      light: "#B9F8D3",
+      dark: "#A2D5AB"
+    },
+    teal: {
+      main: "#069A8E"
     }
   }
 });
