@@ -3,6 +3,7 @@ import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 import CategoryItem from "./CategoryItem";
+import SubTitle from "../SubTitle";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -16,6 +17,10 @@ const useStyles = makeStyles(() => ({
 const CategoriesList = ({ categories }) => {
   const classes = useStyles();
   return (
+    <>
+    <Grid mt={5} >
+    <SubTitle text="Categories" />
+    </Grid>
     <Grid className={classes.root}>
       {categories.map(category =>
         <CategoryItem
@@ -26,6 +31,7 @@ const CategoriesList = ({ categories }) => {
         />
       )}
     </Grid>
+    </>
   );
 };
 

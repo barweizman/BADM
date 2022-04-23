@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, styled, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { ArrowLeft, ArrowRight } from "@mui/icons-material";
+import { getIsMobile } from "../Constants/helpers";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -80,6 +81,14 @@ const StyledArrow = styled(Box)(({ direction }) => ({
   zIndex: 2
 }));
 
+const StyledContainer = styled(Box)(({ isMobile }) => ({
+  width: "100%",
+  height: "100vh",
+  display: isMobile ? "none" : "flex",
+  position: "relative",
+  overflow: "hidden"
+}));
+
 const Slider = ({ sliderItems }) => {
   const classes = useStyles();
   const [index, setIndex] = useState(0);
@@ -93,7 +102,7 @@ const Slider = ({ sliderItems }) => {
   };
 
   return (
-    <Box component="div" className={classes.root}>
+    <StyledContainer component="div" isMobile={getIsMobile()}>
       <StyledArrow
         direction={left}
         component="div"
@@ -129,7 +138,7 @@ const Slider = ({ sliderItems }) => {
       >
         <ArrowRight />
       </StyledArrow>
-    </Box>
+    </StyledContainer>
   );
 };
 

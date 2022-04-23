@@ -15,10 +15,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const FreeShipping = () => {
+const FreeShippingBar = () => {
   const classes = useStyles();
 
   return <Grid className={classes.root}>Free shipping on orders over 50$</Grid>;
 };
 
-export default FreeShipping;
+export default FreeShippingBar;

@@ -41,7 +41,10 @@ const useStyles = makeStyles(theme => ({
     color: "white",
     cursor: "pointer",
     fontWeight: 600,
-    textTransform: "capitalize"
+    textTransform: "capitalize",
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.dark
+    }
   }
 }));
 
@@ -57,6 +60,7 @@ const CategoryItem = ({ img, title, id }) => {
             component="h3"
             className={classes.title}
             textTransform="capitalize"
+            textAlign="center"
           >
             {title}
           </Typography>
