@@ -126,40 +126,40 @@ const LoginPage = () => {
               sx={{ mt: 1 }}
             >
               <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                onFocus={() => setErrors({ ...initialErrors })}
-                label="Email Address"
-                name="email"
                 autoComplete="email"
                 autoFocus
-                helperText={errors.notFound && "User doesn't exists"}
                 error={errors.email || errors.notFound}
+                helperText={errors.notFound && "User doesn't exists"}
+                fullWidth
+                id="email"
+                label="Email Address"
+                margin="normal"
+                name="email"
+                onFocus={() => setErrors({ ...initialErrors })}
+                required
               />
               <TextField
-                margin="normal"
-                required
+                autoComplete="current-password"
                 error={errors.password || errors.notFound}
                 fullWidth
                 InputProps={{
                   endAdornment: passwordVisible
-                    ? <VisibilityOff
-                        onClick={() => setPasswordVisible(false)}
-                        sx={{ color: "lightgray" }}
-                      />
-                    : <Visibility
-                        onClick={() => setPasswordVisible(true)}
-                        sx={{ color: "lightgray" }}
-                      />
+                  ? <VisibilityOff
+                  onClick={() => setPasswordVisible(false)}
+                  sx={{ color: "lightgray" }}
+                  />
+                  : <Visibility
+                  onClick={() => setPasswordVisible(true)}
+                  sx={{ color: "lightgray" }}
+                  />
                 }}
-                onFocus={() => setErrors({ ...initialErrors })}
-                name="password"
                 label="Password"
+                name="password"
+                onFocus={() => setErrors({ ...initialErrors })}
+                margin="normal"
+                required
                 type={passwordVisible ? "text" : "password"}
                 id="password"
-                autoComplete="current-password"
               />
               <FormControlLabel
                 control={
