@@ -1,9 +1,9 @@
 const api = "api";
 
 const authEndPoint = `/${api}/auth`;
-const authRegister = "/register";
-const authLogin = "/login";
-const authGetUser = "/getUser";
+const authRegister = "register";
+const authLogin = "login";
+const authGetUser = "getUser";
 
 export const cartEndPoint = `/${api}/carts`;
 

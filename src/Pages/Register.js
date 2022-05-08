@@ -64,7 +64,7 @@ const Register = () => {
     }
     setFormErrors({ ...initialErrors });
     setIsLoading(true);
-    const res = await registerUser(email, password);
+    const res = await registerUser(email, password, name);
     setIsLoading(false);
     if (res.status === 200) {
       if (rememerMe) {
@@ -80,11 +80,7 @@ const Register = () => {
   const handleSubmit = event => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-      name: data.get("name")
-    });
+    
     handleValidationCheck(
       data.get("email"),
       data.get("password"),
@@ -227,7 +223,7 @@ const Register = () => {
                   bgcolor: theme.palette.primary.main
                 }}
               >
-                Sign In
+                Sign Up
               </Button>
               <Grid container justifyContent="center">
                 <Button

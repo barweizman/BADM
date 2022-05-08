@@ -17,9 +17,9 @@ export const loginUser = async (email, password) => {
   }
 };
 
-export const registerUser = async (email, password) => {
+export const registerUser = async (email, password, name) => {
   try {
-    const res = await post(registerURL, { email, password });
+    const res = await post(registerURL, { email, password, name });
 
     return { data: res.data, status: res.status };
   } catch (err) {
