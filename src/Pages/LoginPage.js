@@ -11,12 +11,12 @@ import {
   Grid,
   Paper,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import {
   Visibility,
   VisibilityOff,
-  LockClockOutlined as LockOutlinedIcon
+  LockClockOutlined as LockOutlinedIcon,
 } from "@mui/icons-material";
 
 import { useDispatch } from "react-redux";
@@ -32,7 +32,7 @@ import { rememberMeSession } from "../Constants/helpers";
 const initialErrors = {
   email: false,
   password: false,
-  notFound: false
+  notFound: false,
 };
 
 const LoginPage = () => {
@@ -64,7 +64,7 @@ const LoginPage = () => {
     }
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -72,7 +72,7 @@ const LoginPage = () => {
   };
 
   const handleToggleCheckBox = () => {
-    setRememberMe(prevState => !prevState);
+    setRememberMe((prevState) => !prevState);
   };
 
   const handleNavigateToSignup = () => {
@@ -81,7 +81,7 @@ const LoginPage = () => {
 
   return (
     <>
-    <MyNavbar />
+      <MyNavbar />
       {isLoading && <CircularProgress />}
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
@@ -95,12 +95,12 @@ const LoginPage = () => {
               "url(https://firebasestorage.googleapis.com/v0/b/javascriptblog-e9b5a.appspot.com/o/badm%2Fcup.png?alt=media&token=e0a775b9-f1f8-4e94-b814-716d1e42741e)",
             backgroundRepeat: "no-repeat",
             // eslint-disable-next-line no-confusing-arrow
-            backgroundColor: t =>
+            backgroundColor: (t) =>
               t.palette.mode === "light"
                 ? t.palette.grey[50]
                 : t.palette.grey[900],
             backgroundSize: "cover",
-            backgroundPosition: "center"
+            backgroundPosition: "center",
           }}
         />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -110,14 +110,14 @@ const LoginPage = () => {
               mx: 4,
               display: "flex",
               flexDirection: "column",
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Login
             </Typography>
             <Box
               component="form"
@@ -143,15 +143,17 @@ const LoginPage = () => {
                 error={errors.password || errors.notFound}
                 fullWidth
                 InputProps={{
-                  endAdornment: passwordVisible
-                  ? <VisibilityOff
-                  onClick={() => setPasswordVisible(false)}
-                  sx={{ color: "lightgray" }}
-                  />
-                  : <Visibility
-                  onClick={() => setPasswordVisible(true)}
-                  sx={{ color: "lightgray" }}
-                  />
+                  endAdornment: passwordVisible ? (
+                    <VisibilityOff
+                      onClick={() => setPasswordVisible(false)}
+                      sx={{ color: "lightgray" }}
+                    />
+                  ) : (
+                    <Visibility
+                      onClick={() => setPasswordVisible(true)}
+                      sx={{ color: "lightgray" }}
+                    />
+                  ),
                 }}
                 label="Password"
                 name="password"

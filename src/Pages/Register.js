@@ -10,12 +10,12 @@ import {
   Grid,
   Paper,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import {
   Visibility,
   VisibilityOff,
-  LockClockOutlined as LockOutlinedIcon
+  LockClockOutlined as LockOutlinedIcon,
 } from "@mui/icons-material";
 
 import { useDispatch } from "react-redux";
@@ -34,7 +34,7 @@ const initialErrors = {
   email: false,
   password: false,
   name: false,
-  failed: false
+  failed: false,
 };
 
 const Register = () => {
@@ -43,21 +43,34 @@ const Register = () => {
   const [formErrors, setFormErrors] = useState(initialErrors);
   const [rememerMe, setRememberMe] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const handleValidationCheck = async (email, password, name) => {
+  const handleValidationCheck = async (
+    email,
+    password,
+    name,
+    passwordAgain
+  ) => {
     if (!validateEmail.test(email)) {
       setFormErrors({ ...initialErrors, email: true });
-      console.log("Email must be in valid format");
+      setErrorMsg("Email must be in valid format");
       return;
     }
     if (name.length === 0) {
       setFormErrors({ ...initialErrors, name: true });
+      setErrorMsg("Name cannot be empty");
+      return;
+    }
+    if (password.trim() !== passwordAgain.trim()) {
+      setFormErrors({ ...initialErrors, password: true });
+      setErrorMsg("Password doesn't match");
+      return;
     }
     if (!validatePassword.test(password)) {
       setFormErrors({ ...initialErrors, password: true });
-      console.log(
+      setErrorMsg(
         "Password not valid,must include minimum eight characters, at least one letter and one number"
       );
       return;
@@ -73,23 +86,25 @@ const Register = () => {
       dispatch(setUser(res.data.user));
       navigate(paths.index);
     } else {
-      setFormErrors({ ...initialErrors, failed: true });
+      setErrorMsg(res.msg);
+      setFormErrors({ ...initialErrors, email: true });
     }
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    
+
     handleValidationCheck(
       data.get("email"),
       data.get("password"),
-      data.get("name")
+      data.get("name"),
+      data.get("password-again")
     );
   };
 
   const handleToggleCheckBox = () => {
-    setRememberMe(prevState => !prevState);
+    setRememberMe((prevState) => !prevState);
   };
 
   const handleNavigateToLogin = () => {
@@ -111,12 +126,12 @@ const Register = () => {
               "url(https://firebasestorage.googleapis.com/v0/b/javascriptblog-e9b5a.appspot.com/o/badm%2Fmobile.png?alt=media&token=c3a39017-00a4-4ea1-a6d7-c66a59dbb30d)",
             backgroundRepeat: "no-repeat",
             // eslint-disable-next-line no-confusing-arrow
-            backgroundColor: t =>
+            backgroundColor: (t) =>
               t.palette.mode === "light"
                 ? t.palette.grey[50]
                 : t.palette.grey[900],
             backgroundSize: "cover",
-            backgroundPosition: "center"
+            backgroundPosition: "center",
           }}
         />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -126,7 +141,7 @@ const Register = () => {
               mx: 6,
               display: "flex",
               flexDirection: "column",
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: theme.palette.primary.main }}>
@@ -152,7 +167,7 @@ const Register = () => {
                 label="Email Address"
                 name="email"
                 autoFocus
-                helperText={formErrors.failed && "User already exists"}
+                helperText={formErrors.email && errorMsg}
                 error={formErrors.email || formErrors.failed}
                 sx={{ mt: 1 }}
               />
@@ -166,6 +181,7 @@ const Register = () => {
                 name="name"
                 label="Name"
                 type="name"
+                helperText={formErrors.name && errorMsg}
                 onFocus={() => setFormErrors({ ...initialErrors })}
                 variant="outlined"
                 sx={{ mt: 1 }}
@@ -177,26 +193,51 @@ const Register = () => {
                 fullWidth
                 disabled={isLoading}
                 InputProps={{
-                  endAdornment: passwordVisible
-                    ? <VisibilityOff
-                        onClick={() => setPasswordVisible(false)}
-                        sx={{ color: "lightgray" }}
-                      />
-                    : <Visibility
-                        onClick={() => setPasswordVisible(true)}
-                        sx={{ color: "lightgray" }}
-                      />
+                  endAdornment: passwordVisible ? (
+                    <VisibilityOff
+                      onClick={() => setPasswordVisible(false)}
+                      sx={{ color: "lightgray" }}
+                    />
+                  ) : (
+                    <Visibility
+                      onClick={() => setPasswordVisible(true)}
+                      sx={{ color: "lightgray" }}
+                    />
+                  ),
                 }}
                 onFocus={() => setFormErrors({ ...initialErrors })}
                 name="password"
                 label="Password"
                 type={passwordVisible ? "text" : "password"}
                 id="password"
-                helperText={
-                  formErrors.password &&
-                  `Password not valid,must include minimum eight characters, at
-                least one letter and one number`
-                }
+                helperText={formErrors.password && errorMsg}
+                autoComplete="current-password"
+                sx={{ mt: 2 }}
+              />
+              <TextField
+                margin="normal"
+                required
+                error={formErrors.password}
+                fullWidth
+                disabled={isLoading}
+                InputProps={{
+                  endAdornment: passwordVisible ? (
+                    <VisibilityOff
+                      onClick={() => setPasswordVisible(false)}
+                      sx={{ color: "lightgray" }}
+                    />
+                  ) : (
+                    <Visibility
+                      onClick={() => setPasswordVisible(true)}
+                      sx={{ color: "lightgray" }}
+                    />
+                  ),
+                }}
+                onFocus={() => setFormErrors({ ...initialErrors })}
+                name="password-again"
+                label="Write your password Again"
+                type={passwordVisible ? "text" : "password"}
+                id="password-again"
                 autoComplete="current-password"
                 sx={{ mt: 2 }}
               />
@@ -220,7 +261,7 @@ const Register = () => {
                   mt: 3,
                   mb: 2,
                   textTransform: "capitalize",
-                  bgcolor: theme.palette.primary.main
+                  bgcolor: theme.palette.primary.main,
                 }}
               >
                 Sign Up
