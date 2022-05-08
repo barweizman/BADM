@@ -24,6 +24,7 @@
       "error",
       { "allowParens": true, "onlyOneSimpleParam": false }
   ],
+  "no-underscore-dangle": "off",
   "no-console": "off"
   }
 }

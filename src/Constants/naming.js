@@ -41,3 +41,6 @@ export const filters = {
   newest: "newest",
   ascending: "asc"
 };
+
+export const INC = "INC";
+export const DEC = "DEC";

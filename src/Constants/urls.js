@@ -13,8 +13,9 @@ const productEndPoint = `/${api}/products`;
 const productAdd = "addProduct";
 const productUpdate = "updateProduct/:id";
 const productDelete = "deleteProduct/:id";
-const productFind = "findProduct/:id";
+const productFind = "findProduct";
 const productGet = "getProducts";
+const productGetFeatured = "getFeaturedProducts";
 
 const userEndPoint = `/${api}/users`;
 const userChangeInfo = "changeInfo/:id";
@@ -30,8 +31,9 @@ export const getUserURL = `${authEndPoint}/${authGetUser}`;
 export const addProductURL = `${productEndPoint}/${productAdd}`;
 export const updateProductURL = `${productEndPoint}/${productUpdate}`;
 export const deleteProductURL = `${productEndPoint}/${productDelete}`;
-export const findProductURL = `${productEndPoint}/${productFind}`;
+export const getProductByIdURL = `${productEndPoint}/${productFind}`;
 export const getAllProductsURL = `${productEndPoint}/${productGet}`;
+export const getFeaturedProductsURL = `${productEndPoint}/${productGetFeatured}`;
 
 export const changeUserInfoURL = `${userEndPoint}/${userChangeInfo}`;
 export const addToFavoritesUserURL = `${userEndPoint}/${userFavorites}`;
