@@ -11,6 +11,7 @@ import { categories, sliderItems } from "../Constants/data";
 import ProductsList from "../Components/Products/ProductsList";
 import NewsLetter from "../Components/NewsLetter";
 import { getFeaturedProducts } from "../services/serverServices";
+import WhatsappButton from "../Components/WhatsappButton";
 
 const HomePage = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -34,6 +35,7 @@ const HomePage = () => {
       <ProductsList products={featuredProducts} />
       <NewsLetter />
       <Footer />
+      <WhatsappButton />
     </Grid>
   );
 };

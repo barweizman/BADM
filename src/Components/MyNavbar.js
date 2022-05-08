@@ -9,17 +9,17 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
-import { getUser, logoutUser } from "../store/reducers/appState";
+import { useSelector } from "react-redux";
+import { getUser } from "../store/reducers/appState";
 
 import theme from "../Constants/theme";
 import paths from "../Constants/paths";
-import { endLoginSession } from "../Constants/helpers";
+import CartIconNavBar from "./Cart/CartIconNavBar";
 
 const MyNavbar = () => {
   const navigate = useNavigate();
   const state = useSelector(s => s);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const user = getUser(state);
 
@@ -31,15 +31,11 @@ const MyNavbar = () => {
     // link to profile page
   };
 
-  const handleLogoutClicked = () => {
-    endLoginSession();
-    dispatch(logoutUser());
-    navigate(paths.index);
-  };
-
-  const handleRegisterClicked = () => {
-    navigate(paths.register);
-  };
+  // const handleLogoutClicked = () => {
+  //   endLoginSession();
+  //   dispatch(logoutUser());
+  //   navigate(paths.index);
+  // };
 
   const handleLogoClicked = () => {
     navigate(paths.index);
@@ -53,26 +49,6 @@ const MyNavbar = () => {
       }}
     >
       <Toolbar sx={{ justifyContent: "space-between" }}>
-        <Button
-          sx={{
-            borderRadius: theme.spacing(1),
-            color: "white",
-            textTransform: "capitalize"
-          }}
-          variant="outlined"
-          onClick={
-            user !== undefined ? handleLogoutClicked : handleLoginClicked
-          }
-        >
-          {user !== undefined ? "Logout" : "Login"}
-        </Button>
-        <Button onClick={handleLogoClicked}>
-          <Box
-            component="img"
-            src="https://firebasestorage.googleapis.com/v0/b/javascriptblog-e9b5a.appspot.com/o/badm%2Ffavicon.ico?alt=media&token=b244b5b9-fdd7-411a-aacb-47a21294c245"
-            sx={{ height: 50, width: 50 }}
-          />
-        </Button>
         {user !== undefined
           ? <IconButton onClick={handleProfileClicked}>
               <Avatar>
@@ -86,10 +62,19 @@ const MyNavbar = () => {
                 textTransform: "capitalize"
               }}
               variant="outlined"
-              onClick={handleRegisterClicked}
+              onClick={handleLoginClicked}
             >
-              Register
+              Login
             </Button>}
+
+        <Button onClick={handleLogoClicked}>
+          <Box
+            component="img"
+            src="https://firebasestorage.googleapis.com/v0/b/javascriptblog-e9b5a.appspot.com/o/badm%2Ffavicon.ico?alt=media&token=b244b5b9-fdd7-411a-aacb-47a21294c245"
+            sx={{ height: 50, width: 50 }}
+          />
+        </Button>
+        <CartIconNavBar />
       </Toolbar>
     </AppBar>
   );

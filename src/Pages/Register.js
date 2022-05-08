@@ -42,6 +42,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const [formErrors, setFormErrors] = useState(initialErrors);
   const [rememerMe, setRememberMe] = useState(true);
+  const [termsOfUse, setTermsOfUse] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -106,6 +107,10 @@ const Register = () => {
   const handleToggleCheckBox = () => {
     setRememberMe((prevState) => !prevState);
   };
+
+  const handleToggleTermsOfUser = () => {
+    setTermsOfUse((prevState) => !prevState);
+  }
 
   const handleNavigateToLogin = () => {
     navigate(paths.login);
@@ -252,20 +257,35 @@ const Register = () => {
                 }
                 label="Remember me"
               />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={termsOfUse}
+                    color="warning"
+                    disabled={isLoading}
+                    onChange={handleToggleTermsOfUser}
+                  />
+                }
+                label={<span style={{color: "gray"}} >Terms of use</span>}
+              />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                disabled={isLoading}
+                disabled={isLoading || !termsOfUse}
                 sx={{
                   mt: 3,
-                  mb: 2,
                   textTransform: "capitalize",
                   bgcolor: theme.palette.primary.main,
                 }}
               >
                 Sign Up
               </Button>
+              {!termsOfUse && 
+              <Typography variant="subtitle1" fontSize={11}  >
+                You have to agree to our terms of use first
+              </Typography>
+              }
               <Grid container justifyContent="center">
                 <Button
                   onClick={handleNavigateToLogin}

@@ -3,5 +3,6 @@ export default Object.freeze({
   login: "/login",
   register: "/register",
   category: "/category",
-  product: "/product"
+  product: "/product",
+  cart: "/cart"
 });

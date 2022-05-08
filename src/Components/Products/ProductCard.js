@@ -67,16 +67,22 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const ProductCard = ({ id, img }) => {
+const ProductCard = ({ handleAddToCart, id, img, isInCart }) => {
   const classes = useStyles();
+
   return (
     <Box component="div" className={classes.container}>
       <Box component="div" className={classes.circle} />
       <Box component="img" className={classes.container} src={img} />
       <Box component="div" className={classes.info}>
-        <Box component="div" className={classes.icon}>
-          <ShoppingCart />
-        </Box>
+        {!isInCart &&
+          <Box
+            component="div"
+            className={classes.icon}
+            onClick={() => handleAddToCart()}
+          >
+            <ShoppingCart />
+          </Box>}
         <Box component="div" className={classes.icon}>
           <Link to={`${paths.product}/${id}`}>
             <Search />

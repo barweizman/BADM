@@ -2,6 +2,7 @@ import {
   getFeaturedProductsURL,
   getProductByIdURL,
   getUserURL,
+  joinNewsletterURL,
   loginURL,
   registerURL
 } from "../Constants/urls";
@@ -48,6 +49,16 @@ export const getProductById = async id => {
 export const getFeaturedProducts = async () => {
   try {
     const res = await get(getFeaturedProductsURL);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const joinNewsletter = async email => {
+  try {
+    const res = await post(joinNewsletterURL, { email });
+
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);

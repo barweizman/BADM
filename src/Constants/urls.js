@@ -6,6 +6,12 @@ const authLogin = "login";
 const authGetUser = "getUser";
 
 export const cartEndPoint = `/${api}/carts`;
+export const cartAdd = "addCart";
+export const cartGetById = "getCartById";
+export const cartDelete = "deleteCart/:id";
+export const cartFind = "findCart/:id";
+export const cartGetAll = "getCarts";
+export const cartUpdate = "updateCart/:id";
 
 export const orderEndPoint = `/${api}/orders`;
 
@@ -24,6 +30,9 @@ const userDelete = "deleteUser/:id";
 const userFind = "findUser/:id";
 const userGetAll = "getUsers";
 
+const newsletterEndPoint = `/${api}/newsletter`;
+const newsletterJoin = "join";
+
 export const loginURL = `${authEndPoint}/${authLogin}`;
 export const registerURL = `${authEndPoint}/${authRegister}`;
 export const getUserURL = `${authEndPoint}/${authGetUser}`;
@@ -40,3 +49,5 @@ export const addToFavoritesUserURL = `${userEndPoint}/${userFavorites}`;
 export const deleteUserURL = `${userEndPoint}/${userDelete}`;
 export const findUserURL = `${userEndPoint}/${userFind}`;
 export const getAllUsersURL = `${userEndPoint}/${userGetAll}`;
+
+export const joinNewsletterURL = `${newsletterEndPoint}/${newsletterJoin}`;

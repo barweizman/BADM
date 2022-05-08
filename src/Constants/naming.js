@@ -35,6 +35,7 @@ export const LINKEDIN_ICON =
   "https://www.svgrepo.com/show/16193/linkedin-logo.svg";
 
 export const JWT_SESSION_KEY = "C541863AQGUm3AQGUnXyAQGUmD_lxL-xIQjZb03AQE";
+export const IS_OVER_18_KEY = "asdaldkasldkas";
 
 export const filters = {
   price: "price",
