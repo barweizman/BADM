@@ -4,6 +4,7 @@ import {
   Avatar,
   Box,
   Button,
+  Grid,
   IconButton,
   Toolbar
 } from "@mui/material";
@@ -15,6 +16,7 @@ import { getUser } from "../store/reducers/appState";
 import theme from "../Constants/theme";
 import paths from "../Constants/paths";
 import CartIconNavBar from "./Cart/CartIconNavBar";
+import ProductSearch from "./NavBar/ProductSearch";
 
 const MyNavbar = () => {
   const navigate = useNavigate();
@@ -74,7 +76,10 @@ const MyNavbar = () => {
             sx={{ height: 50, width: 50 }}
           />
         </Button>
-        <CartIconNavBar />
+        <Grid sx={{ display: "flex" }}>
+          <ProductSearch />
+          <CartIconNavBar />
+        </Grid>
       </Toolbar>
     </AppBar>
   );

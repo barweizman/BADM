@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ProductsList = ({products}) => {
+const ProductsList = ({products, subTitle}) => {
   const classes = useStyles();
   const state = useSelector(s => s);
   const dispatch = useDispatch();
@@ -28,10 +28,10 @@ const ProductsList = ({products}) => {
 
   const userCart = getUserCart(state);
   const handleAddToCart = (product) => {
-    dispatch(addToUserCart(product));
+    dispatch(addToUserCart({product, quantity: 1}));
     setAddToCartAlert(true);
   }
-  console.log(userCart)
+
   return (
       <>
       <AppAlert
@@ -40,14 +40,14 @@ const ProductsList = ({products}) => {
       open={addToCartAlert} 
       handleClose={() => setAddToCartAlert(false)} 
       />
-      <SubTitle text="Featured Products" />
+      <SubTitle text={subTitle || "Featured Products"} />
     <Box component="div" className={classes.root}>
       {products.map(product =>
         <ProductCard 
         key={product._id} 
         id={product._id}
          img={product?.images[0] || ""}
-        isInCart={userCart.products.findIndex(item => item._id === product._id ) > -1} 
+        isInCart={userCart.products.findIndex(item => item?.product._id === product._id ) > -1} 
         handleAddToCart={() => handleAddToCart(product)}
         />
       )}

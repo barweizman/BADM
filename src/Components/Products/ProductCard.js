@@ -12,6 +12,7 @@ const useStyles = makeStyles(() => ({
     flex: 1,
     margin: "5px",
     minWidth: "280px",
+    maxWidth: "570px",
     height: "350px",
     display: "flex",
     alignItems: "center",

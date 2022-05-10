@@ -45,3 +45,5 @@ export const filters = {
 
 export const INC = "INC";
 export const DEC = "DEC";
+
+export const DEBOUNCE_TIME = 300;

@@ -21,6 +21,9 @@ export const getWindowDimensions = () => {
   return { width, height };
 };
 
+export const findCartProductIndex = (products, prodId) =>
+  products.findIndex(item => item?.product?._id === prodId);
+
 export const getIsMobile = () => {
   const { width } = getWindowDimensions();
   if (width < 600) {

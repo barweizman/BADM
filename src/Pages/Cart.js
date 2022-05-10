@@ -1,15 +1,17 @@
 /* eslint-disable no-confusing-arrow */
 import React from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
-import { Add, Remove } from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import { Grid, IconButton } from "@mui/material";
+import { Add, Delete, Remove } from "@mui/icons-material";
 
 import FreeShippingBar from "../Components/FreeShippingBar";
 import MyNavbar from "../Components/MyNavbar";
 import Footer from "../Components/Footer";
 
-import { getUserCart } from "../store/reducers/appState";
+import { getUserCart, removeFromCart } from "../store/reducers/appState";
 import { mobile } from "../Constants/responsive";
+import { findCartProductIndex } from "../Constants/helpers";
 
 const Container = styled.div``;
 
@@ -152,7 +154,17 @@ const Button = styled.button`
 
 const Cart = () => {
   const state = useSelector(s => s);
+  const dispatch = useDispatch();
   const cart = getUserCart(state);
+  
+  const handleRemoveFromCart = (productId) => {
+    dispatch(removeFromCart({id: productId }))
+    const prodIndex = findCartProductIndex(
+      cart.products,
+      productId
+    );
+    console.log(JSON.parse(JSON.stringify(cart.products)).splice(prodIndex, 1));
+  }
 
   return (
     <Container>
@@ -170,20 +182,20 @@ const Cart = () => {
         </Top>
         <Bottom>
           <Info>
-            {cart.products.map(product =>
-              <Product key={product._id} >
+            {cart.products.map(item =>
+              <Product key={item.product._id} >
                 <ProductDetail>
-                  <Image src={product?.images[0]} />
+                  <Image src={item.product?.images[0]} />
                   <Details>
                     <ProductName>
-                      <b>Product:</b> {product.title}
+                      <b>Product:</b> {item.product.title}
                     </ProductName>
                     <ProductId>
-                      <b>ID:</b> {product._id}
+                      <b>ID:</b> {item.product._id}
                     </ProductId>
-                    <ProductColor color={product.color} />
+                    <ProductColor color={item.product.color} />
                     <ProductSize>
-                      <b>Size:</b> {product.size}
+                      <b>Size:</b> {item.product.size}
                     </ProductSize>
                   </Details>
                 </ProductDetail>
@@ -191,13 +203,18 @@ const Cart = () => {
                   <ProductAmountContainer>
                     <Add />
                     <ProductAmount>
-                      {product.quantity + 1}
+                      {item.quantity}
                     </ProductAmount>
                     <Remove />
                   </ProductAmountContainer>
                   <ProductPrice>
-                    $ {product.price * (product.quantity + 1)}
+                    $ {item.product.price * item.quantity}
                   </ProductPrice>
+                <Grid >
+                <IconButton onClick={() => handleRemoveFromCart(item.product._id)} >
+                <Delete />
+                </IconButton>
+                </Grid>
                 </PriceDetail>
               </Product>
             )}
@@ -208,7 +225,7 @@ const Cart = () => {
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
               <SummaryItemPrice>
-                $ {cart.total}
+              ₪ {cart.total}
               </SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
@@ -222,7 +239,7 @@ const Cart = () => {
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>
-                $ {cart.total + 50} 
+              ₪ {cart.total} 
               </SummaryItemPrice>
             </SummaryItem>
             {/* <StripeCheckout

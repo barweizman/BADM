@@ -29,7 +29,8 @@ export const sliderItems = [
       "https://images.pexels.com/photos/1089932/pexels-photo-1089932.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     title: "Beer Summer Sale",
     description: "Summer sales on all our beers stars from now!",
-    bg: "f5fafd"
+    bg: "f5fafd",
+    name: "beer"
   },
   {
     id: "2",
@@ -37,7 +38,8 @@ export const sliderItems = [
 
     title: "Whiskey Collection",
     description: "DON'T compromise on Whiskey! Get 30% off on our new arrivals",
-    bg: "fcf1ed"
+    bg: "fcf1ed",
+    name: "whiskey"
   },
   {
     id: "3",
@@ -45,6 +47,7 @@ export const sliderItems = [
       "https://images.pexels.com/photos/1123260/pexels-photo-1123260.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
     title: "BADM Wine",
     description: "asdasd asd alskd laskdl ;askdlas kdlas dlajs ldajs ldas",
-    bg: "fbf0f4"
+    bg: "fbf0f4",
+    name: "wine"
   }
 ];

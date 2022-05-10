@@ -15,6 +15,7 @@
   "plugins": ["react"],
   "rules": {
     "react/prop-types": 0,
+    "no-unused-vars": "warn",
     "comma-style": "off",
     "linebreak-style": "off",
     "quotes": [2, "double"],
@@ -22,7 +23,7 @@
     "react/function-component-definition": "off",
     "no-confusing-arrow": [
       "error",
-      { "allowParens": true, "onlyOneSimpleParam": false }
+      { "allowParens": true, "onlyOneSimpleParam": false },
   ],
   "no-underscore-dangle": "off",
   "no-console": "off"

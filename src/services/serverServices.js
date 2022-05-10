@@ -1,6 +1,8 @@
 import {
+  getAllProductsURL,
   getFeaturedProductsURL,
   getProductByIdURL,
+  getSearchedProductURL,
   getUserURL,
   joinNewsletterURL,
   loginURL,
@@ -49,6 +51,24 @@ export const getProductById = async id => {
 export const getFeaturedProducts = async () => {
   try {
     const res = await get(getFeaturedProductsURL);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const getAllProducts = async category => {
+  try {
+    const res = await get(`${getAllProductsURL}?category=${category}`);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const getSearchedProduct = async val => {
+  try {
+    const res = await get(`${getSearchedProductURL}?searchVal=${val}`);
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);

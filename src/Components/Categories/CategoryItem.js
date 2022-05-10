@@ -48,12 +48,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const CategoryItem = ({ img, title, id }) => {
+const CategoryItem = ({ img, title, categoryName }) => {
   const classes = useStyles();
 
   return (
     <Grid className={classes.container}>
-      <Link to={`${paths.category}/${id}`}>
+      <Link to={`${paths.products}/${categoryName}`}>
         <Box component="img" src={img} className={classes.img} />
         <Grid className={classes.info}>
           <Typography
@@ -73,13 +73,13 @@ const CategoryItem = ({ img, title, id }) => {
 
 CategoryItem.propTypes = {
   img: PropTypes.string,
-  id: PropTypes.string,
+  categoryName: PropTypes.string,
   title: PropTypes.string
 };
 
 CategoryItem.defaultProps = {
   img: "",
-  id: "",
+  categoryName: "",
   title: ""
 };
 

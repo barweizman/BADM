@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { Box, styled, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { ArrowLeft, ArrowRight } from "@mui/icons-material";
+
 import { getIsMobile } from "../Constants/helpers";
+import paths from "../Constants/paths";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -91,6 +95,7 @@ const StyledContainer = styled(Box)(({ isMobile }) => ({
 
 const Slider = ({ sliderItems }) => {
   const classes = useStyles();
+  const navigate = useNavigate();
   const [index, setIndex] = useState(0);
 
   const handleSliderClicked = direction => {
@@ -99,6 +104,11 @@ const Slider = ({ sliderItems }) => {
     } else {
       setIndex(prevState => (prevState < 2 ? prevState + 1 : 0));
     }
+  };
+
+  const handleShowMoreClicked = categoryName => {
+    console.log("!@");
+    navigate(`${paths.products}/${categoryName}`);
   };
 
   return (
@@ -124,7 +134,11 @@ const Slider = ({ sliderItems }) => {
                 <Typography className={classes.description} component="p">
                   {item.description}
                 </Typography>
-                <Box component="button" className={classes.btn}>
+                <Box
+                  component="button"
+                  className={classes.btn}
+                  onClick={() => handleShowMoreClicked(item.name)}
+                >
                   Show Me More
                 </Box>
               </Box>

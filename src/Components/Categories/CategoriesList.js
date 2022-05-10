@@ -25,7 +25,7 @@ const CategoriesList = ({ categories }) => {
       {categories.map(category =>
         <CategoryItem
           key={category.id}
-          id={category.id}
+          categoryName={category.cat}
           title={category.title}
           img={category.img}
         />

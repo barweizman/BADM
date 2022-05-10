@@ -7,12 +7,14 @@ import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
 import Register from "./Pages/Register";
 import ProductPage from "./Pages/ProductPage";
+import SearchPageResult from "./Pages/SearchPageResult";
 
 import paths from "./Constants/paths";
 import { getIsOver18, getJwtKey, writeIsOver18 } from "./Constants/helpers";
 import { setUser } from "./store/reducers/appState";
 import { getUser } from "./services/serverServices";
 import Cart from "./Pages/Cart";
+import ProductsCategory from "./Pages/ProductsCategory";
 
 const AppRoute = () => {
   const dispatch = useDispatch();
@@ -49,6 +51,8 @@ const AppRoute = () => {
       <Route path={paths.login} element={<LoginPage />} />
       <Route path={paths.register} element={<Register />} />
       <Route path={`${paths.product}/:id`} element={<ProductPage />} />
+      <Route path={`${paths.products}/:category`} element={<ProductsCategory />} />
+      <Route path={paths.searchResult} element={<SearchPageResult />} />
       <Route path={paths.cart} element={<Cart />} />
     </Routes>
     </>

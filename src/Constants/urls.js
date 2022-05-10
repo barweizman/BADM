@@ -22,6 +22,7 @@ const productDelete = "deleteProduct/:id";
 const productFind = "findProduct";
 const productGet = "getProducts";
 const productGetFeatured = "getFeaturedProducts";
+const productSearch = "searchProducts";
 
 const userEndPoint = `/${api}/users`;
 const userChangeInfo = "changeInfo/:id";
@@ -43,6 +44,7 @@ export const deleteProductURL = `${productEndPoint}/${productDelete}`;
 export const getProductByIdURL = `${productEndPoint}/${productFind}`;
 export const getAllProductsURL = `${productEndPoint}/${productGet}`;
 export const getFeaturedProductsURL = `${productEndPoint}/${productGetFeatured}`;
+export const getSearchedProductURL = `${productEndPoint}/${productSearch}`;
 
 export const changeUserInfoURL = `${userEndPoint}/${userChangeInfo}`;
 export const addToFavoritesUserURL = `${userEndPoint}/${userFavorites}`;

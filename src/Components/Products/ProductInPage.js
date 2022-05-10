@@ -1,8 +1,14 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+
 import { Button, Grid, IconButton, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Add, Remove } from "@mui/icons-material";
+
+import AppAlert from "../AppAlert";
+
 import { DEC, INC } from "../../Constants/naming";
+import { addToUserCart } from "../../store/reducers/appState";
 
 // const FilterSizeOption = styled.option``;
 
@@ -108,8 +114,11 @@ const useStyles = makeStyles(() => ({
 
 const Product = ({ product }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
   const [imgIndex,setImgIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [addToCartAlert, setAddToCartAlert ] = useState(false);
 
   const handleImgIndex = (index) => {
       if(index > product?.images.length || index < 0) return;
@@ -125,7 +134,19 @@ const Product = ({ product }) => {
       }
   }
 
+  const handleAddToCart = () => {
+    dispatch(addToUserCart({product, quantity: 1}));
+    setAddToCartAlert(true);
+  }
+
   return (
+    <>
+    <AppAlert
+       hide={2000}
+      msg="Added to cart"
+      open={addToCartAlert} 
+      handleClose={() => setAddToCartAlert(false)} 
+      />
     <Grid className={classes.root}>
         <Grid  >
       <Grid className={classes.imgContainer}>
@@ -151,7 +172,7 @@ const Product = ({ product }) => {
           {product.description}
         </Typography>
         <Typography className={classes.price} variant="subtitle1">
-          {product.price}₪
+        ₪{product.price}
         </Typography>
         <Grid className={classes.filterContainer}>
             <Typography variant="subtitle1" className={classes.filterTitle}>
@@ -178,10 +199,11 @@ const Product = ({ product }) => {
 
         </Grid>
         <Grid className={classes.addContainer}>
-          <Button className={classes.btn}>Add To Cart</Button>
+          <Button className={classes.btn} onClick={handleAddToCart} >Add To Cart</Button>
         </Grid>
       </Grid>
     </Grid>
+    </>
   );
 };
 
