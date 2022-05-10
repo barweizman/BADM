@@ -1,4 +1,4 @@
-import { IS_OVER_18_KEY, JWT_SESSION_KEY } from "./naming";
+import { CART_SESSION_KEY, IS_OVER_18_KEY, JWT_SESSION_KEY } from "./naming";
 
 export const rememberMeSession = jwt => {
   localStorage.setItem(JWT_SESSION_KEY, jwt);
@@ -14,6 +14,21 @@ export const getIsOver18 = () => localStorage.getItem(IS_OVER_18_KEY);
 export const endLoginSession = () => {
   localStorage.removeItem(JWT_SESSION_KEY);
 };
+
+export const setCartSession = cart => {
+  localStorage.setItem(CART_SESSION_KEY, JSON.stringify(cart));
+}
+
+export const getCartSession = () => {
+  const sessionCart = localStorage.getItem(CART_SESSION_KEY);
+  if(sessionCart) {
+    return JSON.parse(sessionCart);
+  }
+  return {
+    products: [],
+    total: 0
+  }
+}
 
 export const getWindowDimensions = () => {
   const { innerWidth: width, innerHeight: height } = window;

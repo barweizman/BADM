@@ -9,6 +9,7 @@ import AppAlert from "../AppAlert";
 
 import { DEC, INC } from "../../Constants/naming";
 import { addToUserCart } from "../../store/reducers/appState";
+import theme from "../../Constants/theme";
 
 // const FilterSizeOption = styled.option``;
 
@@ -117,7 +118,7 @@ const Product = ({ product }) => {
   const dispatch = useDispatch();
 
   const [imgIndex,setImgIndex] = useState(0);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(product.quantity === 0 ? 0 :1);
   const [addToCartAlert, setAddToCartAlert ] = useState(false);
 
   const handleImgIndex = (index) => {
@@ -127,7 +128,7 @@ const Product = ({ product }) => {
   }
 
   const handleQuantityClicked = (action) => {
-      if(action === INC) {
+      if(action === INC && quantity < product.quantity ) {
           setQuantity(prevState => prevState + 1);
       }else if(action === DEC && quantity > 0) {
             setQuantity(prevState => prevState - 1);
@@ -175,8 +176,8 @@ const Product = ({ product }) => {
         ₪{product.price}
         </Typography>
         <Grid className={classes.filterContainer}>
-            <Typography variant="subtitle1" className={classes.filterTitle}>
-            Quantity
+            <Typography variant="span"  className={classes.filterTitle}>
+            Quantity left: {product.quantity}
             </Typography>
             <Grid container alignItems="center" >
             <IconButton onClick={() => handleQuantityClicked(INC)} >
@@ -196,11 +197,30 @@ const Product = ({ product }) => {
                     <option>{item}</option>
                 ))}
             </select>
-
         </Grid>
+        Categories:
+        {product?.category.map(category => (
+        <Typography 
+            variant="subtitle1"
+            mb={theme.spacing(2)}
+           className={classes.filterTitle}
+           textTransform="capitalize"
+           >
+          {category}
+        </Typography>
+        ))}
         <Grid className={classes.addContainer}>
-          <Button className={classes.btn} onClick={handleAddToCart} >Add To Cart</Button>
+          <Button 
+            className={classes.btn}
+            onClick={handleAddToCart}
+            disabled={product.quantity === 0}
+            >
+              Add To Cart
+            </Button>
         </Grid>
+            {product.quantity === 0 && (
+              <Typography color="error" >*Out of stock</Typography>
+            )}
       </Grid>
     </Grid>
     </>

@@ -23,7 +23,7 @@
     "react/function-component-definition": "off",
     "no-confusing-arrow": [
       "error",
-      { "allowParens": true, "onlyOneSimpleParam": false },
+      { "allowParens": true, "onlyOneSimpleParam": false }
   ],
   "no-underscore-dangle": "off",
   "no-console": "off"

@@ -14,11 +14,13 @@ import { getSearchResultProduct } from "../store/reducers/appState";
 import SearchBox from "../Components/SearchBox";
 import theme from "../Constants/theme";
 import NotFound from "../Components/Common/NotFound";
+import ProductSortByOptions from "../Components/ProductSortByOptions";
 
 const HomePageSearchResult = () => {
   const state = useSelector(s => s);
 
   const [featuredProducts, setFeaturedProducts] = useState([]);
+  const [sortBy, setSortBy] = useState("");
   const searchResultProduct = getSearchResultProduct(state);
 
   useEffect(() => {
@@ -42,7 +44,10 @@ const HomePageSearchResult = () => {
       />
       {searchResultProduct.length === 0
         ? <NotFound />
-        : <ProductsList subTitle=" " products={searchResultProduct} />}
+        : <>
+        <ProductSortByOptions sortBy={sortBy} handleSetSortBy={(val) => setSortBy(val)} />
+        <ProductsList subTitle=" " products={searchResultProduct} sortBy={sortBy} />
+        </>}
       <Divider
         sx={{
           mb: theme.spacing(4),

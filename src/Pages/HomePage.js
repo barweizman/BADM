@@ -20,7 +20,6 @@ const HomePage = () => {
     const getProducts = async () => {
       const res = await getFeaturedProducts();
       setFeaturedProducts(res.data);
-      console.log(res.data);
     };
 
     getProducts();

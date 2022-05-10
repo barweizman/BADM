@@ -36,11 +36,12 @@ export const LINKEDIN_ICON =
 
 export const JWT_SESSION_KEY = "C541863AQGUm3AQGUnXyAQGUmD_lxL-xIQjZb03AQE";
 export const IS_OVER_18_KEY = "asdaldkasldkas";
+export const CART_SESSION_KEY = "123asdaslfklqk3elkaldkas";
 
 export const filters = {
-  price: "price",
-  newest: "newest",
-  ascending: "asc"
+  date: "date",
+  highToLow: "highToLow",
+  lowToHigh: "lowToHigh"
 };
 
 export const INC = "INC";
