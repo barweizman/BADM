@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from "@reduxjs/toolkit";
-import { findCartProductIndex } from "../../Constants/helpers";
+import { calcCartTotal, findCartProductIndex } from "../../Constants/helpers";
 
 const initialState = {
   user: undefined,
@@ -31,7 +31,9 @@ export const sliceReducer = createSlice({
       if (prodIndex > -1) {
         state.cart.products[prodIndex] = {
           product: action.payload.id,
-          quantity: state.cart.products[prodIndex].quantity + 1
+          quantity:
+            state.cart.products[prodIndex].quantity +
+            (1 || action.payload.quantity)
         };
       } else {
         state.cart.products = [
@@ -42,18 +44,18 @@ export const sliceReducer = createSlice({
           }
         ];
       }
+      state.cart.total = calcCartTotal(state.cart.products);
     },
     removeFromCart: (state, action) => {
       const prodIndex = findCartProductIndex(
         state.cart.products,
         action.payload.id
       );
-      console.log(prodIndex);
       if (prodIndex > -1) {
         const newCart = [...state.cart.products];
-        console.log(newCart.splice(prodIndex, 1));
-        //   const newCart = state.cart.products.slice(prodIndex, 1);
-        //   state.cart.products = newCart;
+        newCart.splice(prodIndex, 1);
+        state.cart.products = newCart;
+        state.cart.total = calcCartTotal(state.cart.products);
       }
     },
     setSearchProdValue: (state, action) => {

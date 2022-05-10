@@ -24,6 +24,16 @@ export const getWindowDimensions = () => {
 export const findCartProductIndex = (products, prodId) =>
   products.findIndex(item => item?.product?._id === prodId);
 
+  export const calcCartTotal = (products) => {
+    let totalCart = 0;
+    products.map(item => {
+      totalCart += item.product.price * item.quantity
+      return 1;
+    });
+
+    return totalCart;
+  }
+
 export const getIsMobile = () => {
   const { width } = getWindowDimensions();
   if (width < 600) {
