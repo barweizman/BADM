@@ -8,10 +8,10 @@ import { makeStyles } from "@mui/styles";
 import ProductCard from "./ProductCard";
 import SubTitle from "../SubTitle";
 
-import { addToUserCart, getUser, getUserCart } from "../../store/reducers/appState";
+import { addToUserCart, getUser, getUserCart, setUser } from "../../store/reducers/appState";
 import AppAlert from "../AppAlert";
 import { filters } from "../../Constants/naming";
-import { addToUserFavoriteProducts } from "../../services/serverServices";
+import { addToUserFavoriteProducts, deleteProductFromUserFavorites } from "../../services/serverServices";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -39,8 +39,16 @@ const ProductsList = ({products, subTitle, sortBy}) => {
   }
 
   const handleAddToFavorites = async (productId) => {
-    setAlertMessage("Added to favorites");
-    addToUserFavoriteProducts(user._id, productId);
+    if(user.favorites.findIndex(prod => prod?.productId === productId ) > -1) {
+      setAlertMessage("Removed from favorites");
+      const res = await deleteProductFromUserFavorites(user._id, productId);
+      dispatch(setUser(res.data));
+    }else {
+      setAlertMessage("Added to favorites");
+      const res = await addToUserFavoriteProducts(user._id, productId);
+      console.log(res);
+      dispatch(setUser(res.data));
+    }
   }
 
   useEffect(() => {
@@ -62,7 +70,7 @@ const ProductsList = ({products, subTitle, sortBy}) => {
   useEffect(() => {
     setFilteredProducts(products);
   }, [products])
-
+  console.log()
   return (
       <>
       <AppAlert
@@ -73,21 +81,23 @@ const ProductsList = ({products, subTitle, sortBy}) => {
       />
       <SubTitle text={subTitle || "Featured Products"} />
     <Box component="div" className={classes.root}>
-      {filteredProducts.length > 0 ? filteredProducts.map(product =>
+      {filteredProducts?.length > 0 ? filteredProducts?.map(product =>
         <ProductCard 
         key={product._id} 
         id={product._id}
          img={product?.images[0] || ""}
         isInCart={userCart.products.findIndex(item => item?.product._id === product._id ) > -1 || product.quantity === 0} 
+        isInFavorites={user?.favorites.findIndex(prod => prod?.productId === product._id ) > -1}
         handleAddToCart={() => handleAddToCart(product)}
         handleAddToFavorites={() => handleAddToFavorites(product._id)}
         />
-      ): products.map(product =>
+      ): products?.map(product =>
           <ProductCard 
             key={product._id} 
             id={product._id}
             img={product?.images[0] || ""}
             isInCart={userCart.products.findIndex(item => item?.product._id === product._id ) > -1 || product.quantity === 0 } 
+            isInFavorites={user?.favorites.findIndex(prod => prod?.productId === product._id ) > -1}
             handleAddToCart={() => handleAddToCart(product)}
             handleAddToFavorites={() => handleAddToFavorites(product._id)}
           />

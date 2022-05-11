@@ -16,6 +16,7 @@ import { getUser } from "./services/serverServices";
 import Cart from "./Pages/Cart";
 import ProductsCategory from "./Pages/ProductsCategory";
 import MyFavoritesPage from "./Pages/MyFavoritesPage";
+import App404 from "./Pages/App404";
 
 const AppRoute = () => {
   const dispatch = useDispatch();
@@ -56,6 +57,7 @@ const AppRoute = () => {
       <Route path={paths.searchResult} element={<SearchPageResult />} />
       <Route path={paths.cart} element={<Cart />} />
       <Route path={paths.favorites} element={<MyFavoritesPage />} />
+      <Route path="*" element={<App404 />} />
     </Routes>
     </>
   );

@@ -9,7 +9,7 @@ import {
   registerURL,
   userFavoritesURL
 } from "../Constants/urls";
-import { handleErrResponse, post, get, put } from "./axios";
+import { handleErrResponse, post, get, put, del } from "./axios";
 
 export const loginUser = async (email, password) => {
   try {
@@ -79,6 +79,17 @@ export const getUserFavoriteProducts = async userId => {
 export const addToUserFavoriteProducts = async (userId, productId) => {
   try {
     const res = await put(
+      `${userFavoritesURL}/${userId}?productId=${productId}`
+    );
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const deleteProductFromUserFavorites = async (userId, productId) => {
+  try {
+    const res = await del(
       `${userFavoritesURL}/${userId}?productId=${productId}`
     );
     return { data: res.data, status: res.status };

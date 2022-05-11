@@ -1,17 +1,23 @@
 /* eslint-disable no-confusing-arrow */
 import React from "react";
-import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid, IconButton, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+import { Grid, IconButton } from "@mui/material";
 import { Add, Delete, Remove } from "@mui/icons-material";
 
+import AppAnimation from "../Components/AppAnimation";
 import FreeShippingBar from "../Components/FreeShippingBar";
 import MyNavbar from "../Components/MyNavbar";
 import Footer from "../Components/Footer";
 
+import EmptyCartAnimation from "../assets/animations/empty-cart.json";
+
 import { getUser, getUserCart, removeFromCart } from "../store/reducers/appState";
 import { mobile } from "../Constants/responsive";
 import { findCartProductIndex } from "../Constants/helpers";
+import paths from "../Constants/paths";
 
 const Container = styled.div``;
 
@@ -155,6 +161,7 @@ const Button = styled.button`
 const Cart = () => {
   const state = useSelector(s => s);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const user = getUser(state);
   const cart = getUserCart(state);
@@ -168,6 +175,18 @@ const Cart = () => {
     console.log(JSON.parse(JSON.stringify(cart.products)).splice(prodIndex, 1));
   }
 
+  const handleContinueShopping = () => {
+    navigate(paths.index);
+  }
+
+  const handleMoveToFavorite= () => {
+    navigate(paths.favorites);
+  }
+
+  const handleCheckoutClicked = () => {
+    navigate(paths.checkout);
+  }
+
   return (
     <Container>
       <FreeShippingBar />
@@ -175,12 +194,12 @@ const Cart = () => {
       <Wrapper>
         <Title>YOUR BAG</Title>
         <Top>
-          <TopButton>CONTINUE SHOPPING</TopButton>
+          <TopButton onClick={handleContinueShopping} >CONTINUE SHOPPING</TopButton>
           <TopTexts>
             <TopText>Shopping Bag({cart?.products.length})</TopText>
-            <TopText>Your Wishlist ({user?.favorites.length})</TopText>
+            <TopText onClick={handleMoveToFavorite} >Your Wishlist ({user?.favorites.length})</TopText>
           </TopTexts>
-          <TopButton type="filled">CHECKOUT NOW</TopButton>
+          <TopButton type="filled" onClick={handleCheckoutClicked} >CHECKOUT NOW</TopButton>
         </Top>
         <Bottom>
           <Info>
@@ -221,9 +240,7 @@ const Cart = () => {
               </Product>
             ) : (
               <Grid container justifyContent="center">
-                <Typography>
-                  Cart is empty
-                </Typography>
+                <AppAnimation title="Cart is empty" LottieCmp={EmptyCartAnimation} />
               </Grid>
             )}
             <Hr />
@@ -260,7 +277,7 @@ const Cart = () => {
               token={onToken}
               stripeKey={KEY}
             > */}
-            <Button>CHECKOUT NOW</Button>
+            <Button onClick={handleCheckoutClicked} >CHECKOUT NOW</Button>
             {/* </StripeCheckout> */}
           </Summary>
         </Bottom>

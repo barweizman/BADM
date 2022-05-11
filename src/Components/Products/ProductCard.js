@@ -3,7 +3,12 @@ import { Link } from "react-router-dom";
 
 import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { Favorite, Search, ShoppingCart } from "@mui/icons-material";
+import {
+  BookmarkRemove,
+  Favorite,
+  Search,
+  ShoppingCart
+} from "@mui/icons-material";
 
 import paths from "../../Constants/paths";
 
@@ -73,6 +78,7 @@ const ProductCard = ({
   id,
   img,
   isInCart,
+  isInFavorites,
   handleAddToFavorites
 }) => {
   const classes = useStyles();
@@ -100,7 +106,7 @@ const ProductCard = ({
           className={classes.icon}
           onClick={handleAddToFavorites}
         >
-          <Favorite />
+          {isInFavorites ? <BookmarkRemove /> : <Favorite />}
         </Box>
       </Box>
     </Box>

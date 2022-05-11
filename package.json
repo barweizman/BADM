@@ -16,6 +16,7 @@
     "axios": "^0.26.1",
     "express": "^4.17.3",
     "localized-strings": "^0.2.4",
+    "lottie-web": "^5.9.4",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",

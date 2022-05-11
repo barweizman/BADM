@@ -9,6 +9,8 @@ import WhatsappButton from "../Components/WhatsappButton";
 import ProductsList from "../Components/Products/ProductsList";
 import NewsLetter from "../Components/NewsLetter";
 
+import EmptyFavoritesAnimation from "../assets/animations/empty-favorite.json"
+
 import {
   getFeaturedProducts,
   getUserFavoriteProducts
@@ -16,6 +18,7 @@ import {
 
 import theme from "../Constants/theme";
 import { getUser } from "../store/reducers/appState";
+import AppAnimation from "../Components/AppAnimation";
 
 const MyFavoritesPage = () => {
   const state = useSelector(s => s);
@@ -37,7 +40,7 @@ const MyFavoritesPage = () => {
   useEffect(
     () => {
       const getCategoryProducts = async () => {
-        const res = await getUserFavoriteProducts(user._id);
+        const res = await getUserFavoriteProducts(user?._id);
         setFavoriteProducts(res.data);
       };
       if (user) {
@@ -52,7 +55,11 @@ const MyFavoritesPage = () => {
       <FreeShipping />
       <MyNavbar />
       <Box mt={theme.spacing(10)} />
-      <ProductsList subTitle="Your Favorites" products={favoriteProducts} />
+        <ProductsList subTitle="Your Favorites" products={favoriteProducts} />
+        {
+        favoriteProducts?.length === 0 && 
+        <AppAnimation title="Favorite list is empty" LottieCmp={EmptyFavoritesAnimation} />
+        }
       <Divider
         sx={{
           mb: theme.spacing(4),
