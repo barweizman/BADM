@@ -5,5 +5,6 @@ export default Object.freeze({
   product: "/product",
   products: "/products",
   cart: "/cart",
-  searchResult: "/search"
+  searchResult: "/search",
+  favorites: "/favorites"
 });

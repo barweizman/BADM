@@ -2,14 +2,14 @@
 import React from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid, IconButton } from "@mui/material";
+import { Grid, IconButton, Typography } from "@mui/material";
 import { Add, Delete, Remove } from "@mui/icons-material";
 
 import FreeShippingBar from "../Components/FreeShippingBar";
 import MyNavbar from "../Components/MyNavbar";
 import Footer from "../Components/Footer";
 
-import { getUserCart, removeFromCart } from "../store/reducers/appState";
+import { getUser, getUserCart, removeFromCart } from "../store/reducers/appState";
 import { mobile } from "../Constants/responsive";
 import { findCartProductIndex } from "../Constants/helpers";
 
@@ -155,6 +155,8 @@ const Button = styled.button`
 const Cart = () => {
   const state = useSelector(s => s);
   const dispatch = useDispatch();
+
+  const user = getUser(state);
   const cart = getUserCart(state);
   
   const handleRemoveFromCart = (productId) => {
@@ -175,14 +177,14 @@ const Cart = () => {
         <Top>
           <TopButton>CONTINUE SHOPPING</TopButton>
           <TopTexts>
-            <TopText>Shopping Bag(2)</TopText>
-            <TopText>Your Wishlist (0)</TopText>
+            <TopText>Shopping Bag({cart?.products.length})</TopText>
+            <TopText>Your Wishlist ({user?.favorites.length})</TopText>
           </TopTexts>
           <TopButton type="filled">CHECKOUT NOW</TopButton>
         </Top>
         <Bottom>
           <Info>
-            {cart.products.map(item =>
+            {cart?.products.length ? cart.products.map(item =>
               <Product key={item.product._id} >
                 <ProductDetail>
                   <Image src={item.product?.images[0]} />
@@ -217,6 +219,12 @@ const Cart = () => {
                 </Grid>
                 </PriceDetail>
               </Product>
+            ) : (
+              <Grid container justifyContent="center">
+                <Typography>
+                  Cart is empty
+                </Typography>
+              </Grid>
             )}
             <Hr />
           </Info>

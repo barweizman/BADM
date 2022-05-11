@@ -15,6 +15,7 @@ import { setUser } from "./store/reducers/appState";
 import { getUser } from "./services/serverServices";
 import Cart from "./Pages/Cart";
 import ProductsCategory from "./Pages/ProductsCategory";
+import MyFavoritesPage from "./Pages/MyFavoritesPage";
 
 const AppRoute = () => {
   const dispatch = useDispatch();
@@ -54,6 +55,7 @@ const AppRoute = () => {
       <Route path={`${paths.products}/:category`} element={<ProductsCategory />} />
       <Route path={paths.searchResult} element={<SearchPageResult />} />
       <Route path={paths.cart} element={<Cart />} />
+      <Route path={paths.favorites} element={<MyFavoritesPage />} />
     </Routes>
     </>
   );

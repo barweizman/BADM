@@ -79,13 +79,13 @@ export const {
   setSearchResultProducts
 } = sliceReducer.actions;
 
-export const getUser = state => state.appState.user;
+export const getUser = state => state?.appState?.user;
 
-export const getUserCart = state => state.appState.cart;
+export const getUserCart = state => state?.appState.cart;
 
-export const getSearchProdValue = state => state.appState.searchProdValue;
+export const getSearchProdValue = state => state?.appState.searchProdValue;
 
 export const getSearchResultProduct = state =>
-  state.appState.searchResultProduct;
+  state?.appState?.searchResultProduct;
 
 export default sliceReducer.reducer;

@@ -25,10 +25,10 @@ const productGetFeatured = "getFeaturedProducts";
 const productSearch = "searchProducts";
 
 const userEndPoint = `/${api}/users`;
-const userChangeInfo = "changeInfo/:id";
-const userFavorites = "favorites/:id";
-const userDelete = "deleteUser/:id";
-const userFind = "findUser/:id";
+const userChangeInfo = "changeInfo/";
+const userFavorites = "favorites";
+const userDelete = "deleteUser/";
+const userFind = "findUser/";
 const userGetAll = "getUsers";
 
 const newsletterEndPoint = `/${api}/newsletter`;
@@ -47,7 +47,7 @@ export const getFeaturedProductsURL = `${productEndPoint}/${productGetFeatured}`
 export const getSearchedProductURL = `${productEndPoint}/${productSearch}`;
 
 export const changeUserInfoURL = `${userEndPoint}/${userChangeInfo}`;
-export const addToFavoritesUserURL = `${userEndPoint}/${userFavorites}`;
+export const userFavoritesURL = `${userEndPoint}/${userFavorites}`;
 export const deleteUserURL = `${userEndPoint}/${userDelete}`;
 export const findUserURL = `${userEndPoint}/${userFind}`;
 export const getAllUsersURL = `${userEndPoint}/${userGetAll}`;

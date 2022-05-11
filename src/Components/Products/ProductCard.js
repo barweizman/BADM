@@ -68,7 +68,13 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const ProductCard = ({ handleAddToCart, id, img, isInCart }) => {
+const ProductCard = ({
+  handleAddToCart,
+  id,
+  img,
+  isInCart,
+  handleAddToFavorites
+}) => {
   const classes = useStyles();
 
   return (
@@ -80,7 +86,7 @@ const ProductCard = ({ handleAddToCart, id, img, isInCart }) => {
           <Box
             component="div"
             className={classes.icon}
-            onClick={() => handleAddToCart()}
+            onClick={handleAddToCart}
           >
             <ShoppingCart />
           </Box>}
@@ -89,7 +95,11 @@ const ProductCard = ({ handleAddToCart, id, img, isInCart }) => {
             <Search />
           </Link>
         </Box>
-        <Box component="div" className={classes.icon}>
+        <Box
+          component="div"
+          className={classes.icon}
+          onClick={handleAddToFavorites}
+        >
           <Favorite />
         </Box>
       </Box>

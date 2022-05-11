@@ -13,10 +13,12 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getUser } from "../store/reducers/appState";
 
-import theme from "../Constants/theme";
-import paths from "../Constants/paths";
 import CartIconNavBar from "./Cart/CartIconNavBar";
 import ProductSearch from "./NavBar/ProductSearch";
+import ProductFavorites from "./NavBar/ProductFavorites";
+
+import theme from "../Constants/theme";
+import paths from "../Constants/paths";
 
 const MyNavbar = () => {
   const navigate = useNavigate();
@@ -77,6 +79,7 @@ const MyNavbar = () => {
           />
         </Button>
         <Grid sx={{ display: "flex" }}>
+          {user !== undefined && <ProductFavorites />}
           <ProductSearch />
           <CartIconNavBar />
         </Grid>

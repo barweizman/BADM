@@ -8,9 +8,10 @@ import { makeStyles } from "@mui/styles";
 import ProductCard from "./ProductCard";
 import SubTitle from "../SubTitle";
 
-import { addToUserCart, getUserCart } from "../../store/reducers/appState";
+import { addToUserCart, getUser, getUserCart } from "../../store/reducers/appState";
 import AppAlert from "../AppAlert";
 import { filters } from "../../Constants/naming";
+import { addToUserFavoriteProducts } from "../../services/serverServices";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -25,13 +26,21 @@ const ProductsList = ({products, subTitle, sortBy}) => {
   const classes = useStyles();
   const state = useSelector(s => s);
   const dispatch = useDispatch();
-  const [addToCartAlert, setAddToCartAlert ] = useState(false);
+  
+  const user = getUser(state);
+  const [alertMessage, setAlertMessage ] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(products);
 
   const userCart = getUserCart(state);
+  
   const handleAddToCart = (product) => {
     dispatch(addToUserCart({product, quantity: 1}));
-    setAddToCartAlert(true);
+    setAlertMessage("Added to cart");
+  }
+
+  const handleAddToFavorites = async (productId) => {
+    setAlertMessage("Added to favorites");
+    addToUserFavoriteProducts(user._id, productId);
   }
 
   useEffect(() => {
@@ -58,9 +67,9 @@ const ProductsList = ({products, subTitle, sortBy}) => {
       <>
       <AppAlert
        hide={2000}
-      msg="Added to cart"
-      open={addToCartAlert} 
-      handleClose={() => setAddToCartAlert(false)} 
+      msg={alertMessage}
+      open={alertMessage.length > 0} 
+      handleClose={() => setAlertMessage("")} 
       />
       <SubTitle text={subTitle || "Featured Products"} />
     <Box component="div" className={classes.root}>
@@ -71,6 +80,7 @@ const ProductsList = ({products, subTitle, sortBy}) => {
          img={product?.images[0] || ""}
         isInCart={userCart.products.findIndex(item => item?.product._id === product._id ) > -1 || product.quantity === 0} 
         handleAddToCart={() => handleAddToCart(product)}
+        handleAddToFavorites={() => handleAddToFavorites(product._id)}
         />
       ): products.map(product =>
           <ProductCard 
@@ -79,6 +89,7 @@ const ProductsList = ({products, subTitle, sortBy}) => {
             img={product?.images[0] || ""}
             isInCart={userCart.products.findIndex(item => item?.product._id === product._id ) > -1 || product.quantity === 0 } 
             handleAddToCart={() => handleAddToCart(product)}
+            handleAddToFavorites={() => handleAddToFavorites(product._id)}
           />
         )
       }

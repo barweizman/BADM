@@ -6,9 +6,10 @@ import {
   getUserURL,
   joinNewsletterURL,
   loginURL,
-  registerURL
+  registerURL,
+  userFavoritesURL
 } from "../Constants/urls";
-import { handleErrResponse, post, get } from "./axios";
+import { handleErrResponse, post, get, put } from "./axios";
 
 export const loginUser = async (email, password) => {
   try {
@@ -60,6 +61,26 @@ export const getFeaturedProducts = async () => {
 export const getAllProducts = async category => {
   try {
     const res = await get(`${getAllProductsURL}?category=${category}`);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const getUserFavoriteProducts = async userId => {
+  try {
+    const res = await get(`${userFavoritesURL}/${userId}`);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const addToUserFavoriteProducts = async (userId, productId) => {
+  try {
+    const res = await put(
+      `${userFavoritesURL}/${userId}?productId=${productId}`
+    );
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);
