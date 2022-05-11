@@ -70,7 +70,7 @@ const ProductsList = ({products, subTitle, sortBy}) => {
   useEffect(() => {
     setFilteredProducts(products);
   }, [products])
-  console.log()
+
   return (
       <>
       <AppAlert

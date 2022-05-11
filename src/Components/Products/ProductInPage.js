@@ -11,8 +11,6 @@ import { DEC, INC } from "../../Constants/naming";
 import { addToUserCart } from "../../store/reducers/appState";
 import theme from "../../Constants/theme";
 
-// const FilterSizeOption = styled.option``;
-
 const useStyles = makeStyles(() => ({
   root: {
     padding: "50px",

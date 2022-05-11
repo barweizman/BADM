@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Box, Divider, Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 
+import AppAnimation from "../Components/AppAnimation";
 import Footer from "../Components/Footer";
 import FreeShipping from "../Components/FreeShippingBar";
 import MyNavbar from "../Components/MyNavbar";
 import WhatsappButton from "../Components/WhatsappButton";
 import ProductsList from "../Components/Products/ProductsList";
 import NewsLetter from "../Components/NewsLetter";
+import LoadingAnimation from "../Components/Common/LoadingAnimation";
 
 import EmptyFavoritesAnimation from "../assets/animations/empty-favorite.json"
 
@@ -18,7 +20,6 @@ import {
 
 import theme from "../Constants/theme";
 import { getUser } from "../store/reducers/appState";
-import AppAnimation from "../Components/AppAnimation";
 
 const MyFavoritesPage = () => {
   const state = useSelector(s => s);
@@ -26,6 +27,7 @@ const MyFavoritesPage = () => {
 
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [favoriteProducts, setFavoriteProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getFeatured = async () => {
@@ -41,6 +43,9 @@ const MyFavoritesPage = () => {
     () => {
       const getCategoryProducts = async () => {
         const res = await getUserFavoriteProducts(user?._id);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 1500)
         setFavoriteProducts(res.data);
       };
       if (user) {
@@ -55,9 +60,8 @@ const MyFavoritesPage = () => {
       <FreeShipping />
       <MyNavbar />
       <Box mt={theme.spacing(10)} />
-        <ProductsList subTitle="Your Favorites" products={favoriteProducts} />
-        {
-        favoriteProducts?.length === 0 && 
+        <ProductsList subTitle="Your Favorites" products={isLoading? [] :favoriteProducts} />
+        {isLoading ? (<LoadingAnimation title="Loading...."  />) : favoriteProducts?.length === 0  &&
         <AppAnimation title="Favorite list is empty" LottieCmp={EmptyFavoritesAnimation} />
         }
       <Divider

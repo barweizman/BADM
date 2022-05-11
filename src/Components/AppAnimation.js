@@ -25,7 +25,8 @@ const AppAnimation = ({ animationSize, loop, LottieCmp, title, subTitle }) => {
         sx={{
           maxHeight: animationSize || theme.spacing(40),
           maxWidth: animationSize ? animationSize * 1.2 : theme.spacing(45),
-          alignSelf: "center"
+          alignSelf: "center",
+          mb: theme.spacing(2)
         }}
       >
         <div id="lottie-div" />
