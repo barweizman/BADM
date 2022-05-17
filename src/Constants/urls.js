@@ -14,6 +14,12 @@ export const cartGetAll = "getCarts";
 export const cartUpdate = "updateCart/:id";
 
 export const orderEndPoint = `/${api}/orders`;
+const orderAdd = "addOrder";
+const orderUpdate = "updateOrder/:id";
+const orderDelete = "deleteOrder/:id";
+const orderFind = "findOrder/:id";
+const orderGetAll = "getOrders";
+const orderGetIncome = "getIncomeOrder/:month";
 
 const productEndPoint = `/${api}/products`;
 const productAdd = "addProduct";
@@ -51,5 +57,12 @@ export const userFavoritesURL = `${userEndPoint}/${userFavorites}`;
 export const deleteUserURL = `${userEndPoint}/${userDelete}`;
 export const findUserURL = `${userEndPoint}/${userFind}`;
 export const getAllUsersURL = `${userEndPoint}/${userGetAll}`;
+
+export const addOrderURL = `${orderEndPoint}/${orderAdd}`;
+export const deleteOrderURL = `${orderEndPoint}/${orderDelete}`;
+export const findOrderURL = `${orderEndPoint}/${orderFind}`;
+export const getAllOrdersURL = `${orderEndPoint}/${orderGetAll}`;
+export const getOrdersIncomeURL = `${orderEndPoint}/${orderGetIncome}`;
+export const updateOrderURL = `${orderEndPoint}/${orderUpdate}`;
 
 export const joinNewsletterURL = `${newsletterEndPoint}/${newsletterJoin}`;

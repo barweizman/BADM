@@ -18,7 +18,7 @@ const utilities = {
   children: [
     {
       id: "util-products",
-      title: "Add Product",
+      title: "Products",
       type: "item",
       url: paths.manageProducts,
       icon: icons.IconBuildingStore,

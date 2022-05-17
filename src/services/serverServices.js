@@ -1,6 +1,8 @@
 import {
   addProductURL,
+  getAllOrdersURL,
   getAllProductsURL,
+  getAllUsersURL,
   getFeaturedProductsURL,
   getProductByIdURL,
   getSearchedProductURL,
@@ -59,9 +61,11 @@ export const getFeaturedProducts = async () => {
   }
 };
 
-export const getAllProducts = async category => {
+export const getAllProducts = async (category, page, latest, getAll) => {
   try {
-    const res = await get(`${getAllProductsURL}?category=${category}`);
+    const res = await get(
+      `${getAllProductsURL}?category=${category}&getAll=${getAll}&page=${page}&latest=${latest}`
+    );
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);
@@ -141,6 +145,26 @@ export const adminAddProduct = async ({
       images,
       isFeatured
     });
+
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const getAllUsers = async () => {
+  try {
+    const res = await get(getAllUsersURL);
+
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const getAllOrders = async () => {
+  try {
+    const res = await get(getAllOrdersURL);
 
     return { data: res.data, status: res.status };
   } catch (err) {

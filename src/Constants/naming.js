@@ -54,6 +54,8 @@ export const productCategories = {
   classic: "Classic"
 };
 
+export const productTypes = ["Wine", "Beer", "Whiskey", "Vodka"];
+
 export const INC = "INC";
 export const DEC = "DEC";
 

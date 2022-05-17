@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { Box, Icon, Tab, Tabs, Typography } from "@mui/material";
 
 import MainCard from "../../ui-component/cards/MainCard";
 import SecondaryAction from "../../ui-component/cards/CardSecondaryAction";
 import AddProduct from "./ManageProductsTab/AddProduct";
 import AllProducts from "./ManageProductsTab/AllProducts";
+import { getAllProducts } from "../../../../services/serverServices";
 
 const TabPanel = props => {
   const { children, value, index, ...other } = props;
@@ -33,18 +34,34 @@ const a11yProps = index => ({
 });
 
 const ManageProducts = () => {
-  console.log("!");
   const [value, setValue] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [products, setProducts] = useState([]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  useEffect(() => {
+    const fun = async () => {
+      setIsLoading(true);
+      const res = await getAllProducts(null, null, null, true);
+      setIsLoading(false);
+
+      if (res.status === 200) {
+        setProducts(res.data);
+      } else {
+        // error
+      }
+    };
+    fun();
+  }, []);
+
   return (
     <MainCard
-      title="Basic Typography"
+      title="Manage Products"
       secondary={
-        <SecondaryAction link="https://next.material-ui.com/system/typography/" />
+        <SecondaryAction src="https://www.svgrepo.com/show/184613/wine.svg" />
       }
     >
       <Box sx={{ width: "100%" }}>
@@ -62,7 +79,7 @@ const ManageProducts = () => {
           <AddProduct />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <AllProducts />
+          <AllProducts products={products} isLoading={isLoading} />
         </TabPanel>
       </Box>
     </MainCard>

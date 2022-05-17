@@ -9,11 +9,15 @@ import {
   Stack,
   Switch,
   TextField,
-  Typography
+  Typography,
+  MenuItem
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useState } from "react";
-import { productCategories } from "../../../../../Constants/naming";
+import {
+  productCategories,
+  productTypes
+} from "../../../../../Constants/naming";
 import { adminAddProduct } from "../../../../../services/serverServices";
 
 const useStyles = makeStyles(() => ({
@@ -26,7 +30,7 @@ const initProductForm = {
   price: 0,
   categories: [],
   quantity: 0,
-  type: "",
+  type: productTypes[0],
   images: [],
   isFeatured: false
 };
@@ -59,13 +63,11 @@ const AddProduct = () => {
   const handleUploadProduct = async () => {
     setIsLoading(true);
     const res = await adminAddProduct(productForm);
-    console.log(res);
     if (res.status === 200) {
       // reset the product form.
       setProductForm({ ...initProductForm });
     } else {
       // errors..
-      console.log(res.status);
     }
     setIsLoading(false);
   };
@@ -163,6 +165,27 @@ const AddProduct = () => {
                 />
               </Grid>
             )}
+            <Grid item sx={{ display: "flex", maxWidth: 120 }}>
+              <TextField
+                label="Product Type"
+                name="type"
+                disabled={isLoading}
+                fullWidth
+                select
+                value={productForm.type}
+                onChange={e => handleFormChanged(e.target.name, e.target.value)}
+              >
+                {productTypes.map(type =>
+                  <MenuItem
+                    style={{ textTransform: "capitalize" }}
+                    key={type}
+                    value={type}
+                  >
+                    {type}
+                  </MenuItem>
+                )}
+              </TextField>
+            </Grid>
             <Grid item>
               <Typography>Is the product featured?</Typography>
               <Switch
