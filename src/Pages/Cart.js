@@ -14,7 +14,7 @@ import Footer from "../Components/Footer";
 
 import EmptyCartAnimation from "../assets/animations/empty-cart.json";
 
-import { getUser, getUserCart, removeFromCart } from "../store/reducers/appState";
+import { getUser, getUserCart, removeFromCart } from "../store/reducers/generalReducer";
 import { mobile } from "../Constants/responsive";
 import { findCartProductIndex } from "../Constants/helpers";
 import paths from "../Constants/paths";

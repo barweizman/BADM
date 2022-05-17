@@ -20,7 +20,7 @@ import {
 } from "@mui/icons-material";
 
 import { useDispatch } from "react-redux";
-import { setUser } from "../store/reducers/appState";
+import { setIsCurrentUserAdmin, setUser } from "../store/reducers/generalReducer";
 
 import { validateEmail } from "../Constants/validators";
 import Copyright from "../Components/Copyright";
@@ -56,6 +56,9 @@ const LoginPage = () => {
     if (res.status === 200) {
       if (rememberMe) {
         rememberMeSession(res.data.jwt);
+      }
+      if(res?.data?.user?.isAdming) {
+        dispatch(setIsCurrentUserAdmin(true));
       }
       dispatch(setUser(res.data.user));
       navigate(paths.index);

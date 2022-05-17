@@ -13,7 +13,7 @@ import ProductSortByOptions from "../Components/ProductSortByOptions";
 import SearchBox from "../Components/SearchBox";
 
 import { getFeaturedProducts } from "../services/serverServices";
-import { getSearchResultProduct } from "../store/reducers/appState";
+import { getSearchResultProduct } from "../store/reducers/generalReducer";
 import theme from "../Constants/theme";
 
 import SearchFailedAnimation from "../assets/animations/no-result.json"

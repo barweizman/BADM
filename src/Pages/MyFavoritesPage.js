@@ -19,7 +19,7 @@ import {
 } from "../services/serverServices";
 
 import theme from "../Constants/theme";
-import { getUser } from "../store/reducers/appState";
+import { getUser } from "../store/reducers/generalReducer";
 
 const MyFavoritesPage = () => {
   const state = useSelector(s => s);

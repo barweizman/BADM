@@ -11,7 +11,8 @@ const initialState = {
   user: undefined,
   cart: getCartSession(),
   searchProdValue: "",
-  searchResultProduct: []
+  searchResultProduct: [],
+  isAdmin: false,
 };
 
 export const sliceReducer = createSlice({
@@ -66,6 +67,9 @@ export const sliceReducer = createSlice({
     },
     setSearchResultProducts: (state, action) => {
       state.searchResultProduct = [...action.payload];
+    },
+    setIsCurrentUserAdmin: (state, action) => {
+      state.isAdmin = Boolean(action.payload);
     }
   }
 });
@@ -76,7 +80,8 @@ export const {
   addToUserCart,
   removeFromCart,
   setSearchProdValue,
-  setSearchResultProducts
+  setSearchResultProducts,
+  setIsCurrentUserAdmin
 } = sliceReducer.actions;
 
 export const getUser = state => state?.appState?.user;
@@ -84,6 +89,8 @@ export const getUser = state => state?.appState?.user;
 export const getUserCart = state => state?.appState.cart;
 
 export const getSearchProdValue = state => state?.appState.searchProdValue;
+
+export const getIsCurrentUserAdmin = state => state?.appState.isAdmin;
 
 export const getSearchResultProduct = state =>
   state?.appState?.searchResultProduct;

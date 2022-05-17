@@ -1,11 +1,11 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import PropTypes from "prop-types";
-import paths from "../../Constants/paths";
 
-const useStyles = makeStyles(theme => ({
+import paths from "../../Constants/paths";
+import theme from "../../Constants/theme";
+
+const useStyles = makeStyles(() => ({
   container: {
     flex: 1,
     margin: "3px",
@@ -69,12 +69,6 @@ const CategoryItem = ({ img, title, categoryName }) => {
       </Link>
     </Grid>
   );
-};
-
-CategoryItem.propTypes = {
-  img: PropTypes.string,
-  categoryName: PropTypes.string,
-  title: PropTypes.string
 };
 
 CategoryItem.defaultProps = {

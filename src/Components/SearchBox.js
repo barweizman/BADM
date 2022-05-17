@@ -10,7 +10,7 @@ import {
   getSearchProdValue,
   setSearchProdValue,
   setSearchResultProducts
-} from "../store/reducers/appState";
+} from "../store/reducers/generalReducer";
 import { getSearchedProduct } from "../services/serverServices";
 import theme from "../Constants/theme";
 

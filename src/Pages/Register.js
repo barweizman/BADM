@@ -19,7 +19,7 @@ import {
 } from "@mui/icons-material";
 
 import { useDispatch } from "react-redux";
-import { setUser } from "../store/reducers/appState";
+import { setUser } from "../store/reducers/generalReducer";
 
 import theme from "../Constants/theme";
 

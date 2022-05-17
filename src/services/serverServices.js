@@ -1,4 +1,5 @@
 import {
+  addProductURL,
   getAllProductsURL,
   getFeaturedProductsURL,
   getProductByIdURL,
@@ -110,6 +111,36 @@ export const getSearchedProduct = async val => {
 export const joinNewsletter = async email => {
   try {
     const res = await post(joinNewsletterURL, { email });
+
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+// =========== ADMIN FUNCTIONS :
+
+export const adminAddProduct = async ({
+  title,
+  description,
+  price,
+  category,
+  quantity,
+  type,
+  images,
+  isFeatured
+}) => {
+  try {
+    const res = await post(addProductURL, {
+      title,
+      description,
+      price,
+      category,
+      quantity,
+      type,
+      images,
+      isFeatured
+    });
 
     return { data: res.data, status: res.status };
   } catch (err) {

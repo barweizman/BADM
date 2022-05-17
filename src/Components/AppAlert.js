@@ -1,5 +1,4 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from "react";
 import { Alert, Slide, Snackbar } from "@mui/material";
 
 function SlideTransition(props) {

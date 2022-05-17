@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import AppDialog from "./AppDialog";
 import theme from "../Constants/theme";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { Box, styled, Typography } from "@mui/material";
@@ -7,8 +7,9 @@ import { ArrowLeft, ArrowRight } from "@mui/icons-material";
 
 import { getIsMobile } from "../Constants/helpers";
 import paths from "../Constants/paths";
+import theme from "../Constants/theme";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
     width: "100%",
     height: "100vh",

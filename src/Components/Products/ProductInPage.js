@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { Button, Grid, IconButton, Typography } from "@mui/material";
@@ -8,7 +8,7 @@ import { Add, Remove } from "@mui/icons-material";
 import AppAlert from "../AppAlert";
 
 import { DEC, INC } from "../../Constants/naming";
-import { addToUserCart } from "../../store/reducers/appState";
+import { addToUserCart } from "../../store/reducers/generalReducer";
 import theme from "../../Constants/theme";
 
 const useStyles = makeStyles(() => ({

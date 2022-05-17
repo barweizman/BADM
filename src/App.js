@@ -1,24 +1,26 @@
-import React from "react";
-import { ThemeProvider } from "@mui/styles";
-import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
+import { useSelector } from "react-redux";
 
+import { ThemeProvider } from "@mui/material/styles";
+import { CssBaseline, StyledEngineProvider } from "@mui/material";
+
+import themes from "./Pages/ManagerView/themes";
+
+import NavigationScroll from "./Pages/ManagerView/layout/NavigationScroll";
 import AppRoute from "./AppRoute";
 
-import "./App.css";
-import theme from "./Constants/theme";
-import store from "./store/store";
+const App = () => {
+  const customization = useSelector(state => state.customization);
 
-function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <BrowserRouter>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={themes(customization)}>
+        <CssBaseline />
+        <NavigationScroll>
           <AppRoute />
-        </BrowserRouter>
-      </Provider>
-    </ThemeProvider>
+        </NavigationScroll>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
-}
+};
 
 export default App;

@@ -1,35 +1,45 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import { Route, Routes } from "react-router-dom";
-import { useDispatch } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
+import { getIsCurrentUserAdmin, setIsCurrentUserAdmin, setUser } from "./store/reducers/generalReducer";
+import { getUser } from "./services/serverServices";
 
 import AgeDialog from "./Components/AgeDialog";
+import Cart from "./Pages/Cart";
 import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
 import Register from "./Pages/Register";
 import ProductPage from "./Pages/ProductPage";
 import SearchPageResult from "./Pages/SearchPageResult";
-
-import paths from "./Constants/paths";
-import { getIsOver18, getJwtKey, writeIsOver18 } from "./Constants/helpers";
-import { setUser } from "./store/reducers/appState";
-import { getUser } from "./services/serverServices";
-import Cart from "./Pages/Cart";
 import ProductsCategory from "./Pages/ProductsCategory";
 import MyFavoritesPage from "./Pages/MyFavoritesPage";
 import App404 from "./Pages/App404";
+import ManagerRoutes from "./ManagerRoutes";
+import MainLayout from "./Pages/ManagerView/layout/MainLayout";
+
+import paths from "./Constants/paths";
+import { getIsOver18, getJwtKey, writeIsOver18 } from "./Constants/helpers";
+
+
 
 const AppRoute = () => {
   const dispatch = useDispatch();
+  const state = useSelector(s => s);
   const [ageAlert,setAgeAlert ] = useState(false);
+  const isAdmin = getIsCurrentUserAdmin(state);
 
   useEffect(() => {
     const localJwt = getJwtKey();
     const isOver18 = getIsOver18();
-    const func = async () => getUser();
-
+    const func = () => getUser();
+    
     if (localJwt) {
       func().then(res => {
         if (res.status === 200) {
+          if(res.data?.user?.isAdmin) {
+            dispatch(setIsCurrentUserAdmin(true));
+          }
           dispatch(setUser(res.data.user));
         }
       });
@@ -48,7 +58,13 @@ const AppRoute = () => {
   return (
     <>
     {ageAlert && <AgeDialog open={ageAlert} handleClose={handleCloseAgeDialog} />}
-    <Routes>
+    {/* manager routes */}
+    {isAdmin ?
+      <MainLayout>
+        <ManagerRoutes />
+      </MainLayout>
+    :
+    <Routes> 
       <Route path={paths.index} element={<HomePage />} />
       <Route path={paths.login} element={<LoginPage />} />
       <Route path={paths.register} element={<Register />} />
@@ -59,6 +75,8 @@ const AppRoute = () => {
       <Route path={paths.favorites} element={<MyFavoritesPage />} />
       <Route path="*" element={<App404 />} />
     </Routes>
+    
+    }
     </>
   );
 };

@@ -1,4 +1,3 @@
-import React from "react";
 import AppAnimation from "../AppAnimation";
 
 import WineLoadingAnimation from "../../assets/animations/wine-loading.json";

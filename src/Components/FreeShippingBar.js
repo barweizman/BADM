@@ -1,11 +1,12 @@
-import React from "react";
 import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles(theme => ({
+import theme from "../Constants/theme";
+
+const useStyles = makeStyles(() => ({
   root: {
     height: theme.spacing(5),
-    backgroundColor: theme.palette.secondary.dark,
+    backgroundColor: theme.palette.secondary.main,
     color: theme.palette.primary.main,
     display: "flex",
     alignItems: "center",

@@ -1,5 +1,5 @@
 /* eslint-disable quotes */
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Box } from "@mui/material";
@@ -8,7 +8,7 @@ import { makeStyles } from "@mui/styles";
 import ProductCard from "./ProductCard";
 import SubTitle from "../SubTitle";
 
-import { addToUserCart, getUser, getUserCart, setUser } from "../../store/reducers/appState";
+import { addToUserCart, getUser, getUserCart, setUser } from "../../store/reducers/generalReducer";
 import AppAlert from "../AppAlert";
 import { filters } from "../../Constants/naming";
 import { addToUserFavoriteProducts, deleteProductFromUserFavorites } from "../../services/serverServices";

@@ -1,8 +1,9 @@
-import React from "react";
 import { Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles(theme => ({
+import theme from "../Constants/theme";
+
+const useStyles = makeStyles(() => ({
   title: {
     fontSize: theme.spacing(4),
     fontFamily: ["Righteous", "Avenir Next"],

@@ -44,6 +44,16 @@ export const filters = {
   lowToHigh: "lowToHigh"
 };
 
+export const productCategories = {
+  wine: "Wine",
+  rum: "Rum",
+  vodka: "Vodka",
+  arak: "Arak",
+  beer: "Beer",
+  party: "Party",
+  classic: "Classic"
+};
+
 export const INC = "INC";
 export const DEC = "DEC";
 
