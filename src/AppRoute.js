@@ -48,7 +48,7 @@ const AppRoute = () => {
       setAgeAlert(true);
 
     }
-  }, []);
+  }, [isAdmin]);
 
   const handleCloseAgeDialog = () => {
     setAgeAlert(false);

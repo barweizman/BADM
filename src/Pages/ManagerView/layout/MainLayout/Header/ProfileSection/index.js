@@ -25,7 +25,7 @@ import { IconLogout, IconSettings } from "@tabler/icons";
 
 import MainCard from "../../../../ui-component/cards/MainCard";
 import Transitions from "../../../../ui-component/extended/Transitions";
-import { getUser, logoutUser } from "../../../../../../store/reducers/generalReducer";
+import { getUser, logoutUser, setIsCurrentUserAdmin } from "../../../../../../store/reducers/generalReducer";
 import paths from "../../../../../../Constants/paths";
 import { endLoginSession } from "../../../../../../Constants/helpers";
 
@@ -48,6 +48,7 @@ const ProfileSection = () => {
     const handleLogout = async () => {
         endLoginSession();
         dispatch(logoutUser());
+        dispatch(setIsCurrentUserAdmin(false));
         navigate(paths.index);
     };
 

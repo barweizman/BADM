@@ -6,7 +6,7 @@ import { useLocation } from "react-router-dom";
 const NavigationScroll = ({ children }) => {
   const location = useLocation();
   const { pathname } = location;
-  console.log(pathname);
+
   useEffect(
     () => {
       window.scrollTo({

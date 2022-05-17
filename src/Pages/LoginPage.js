@@ -57,7 +57,7 @@ const LoginPage = () => {
       if (rememberMe) {
         rememberMeSession(res.data.jwt);
       }
-      if(res?.data?.user?.isAdming) {
+      if(res?.data?.user?.isAdmin) {
         dispatch(setIsCurrentUserAdmin(true));
       }
       dispatch(setUser(res.data.user));

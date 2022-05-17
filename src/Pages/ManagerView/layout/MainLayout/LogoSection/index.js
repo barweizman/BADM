@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { ButtonBase, Typography } from "@mui/material";
 
-import config from "../../../config";
 import Logo from "../../../ui-component/Logo";
+import paths from "../../../../../Constants/paths";
 
 const LogoSection = () =>
-  <ButtonBase disableRipple component={Link} to={config.defaultPath}>
+  <ButtonBase disableRipple component={Link} to={paths.index}>
     <Logo />
     <Typography
       ml={5}
@@ -17,7 +17,7 @@ const LogoSection = () =>
         textTransform: "uppercase"
       }}
     >
-      BADM
+      BADM™
     </Typography>
   </ButtonBase>;
 

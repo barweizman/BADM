@@ -34,8 +34,8 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-const StyledInputContainer = styled(Box)(({ isMobile }) => ({
-  width: isMobile ? "70%" : "50%",
+const StyledInputContainer = styled(Box)(({ ismobile }) => ({
+  width: ismobile ? "70%" : "50%",
   height: "40px",
   backgroundColor: "white",
   display: "flex",
@@ -43,35 +43,35 @@ const StyledInputContainer = styled(Box)(({ isMobile }) => ({
   border: "1px solid lightgray"
 }));
 
-const StyledDescription = styled(Box)(({ isMobile }) => ({
+const StyledDescription = styled(Box)(({ ismobile }) => ({
   fontSize: "24px",
   fontWeight: 300,
   marginBottom: "20px",
-  width: isMobile && "70%",
+  width: ismobile && "70%",
   textAlign: "start"
 }));
 
-const StyledTitle = styled(Typography)(({ isMobile }) => ({
-  fontSize: isMobile ? "40px" : "70px",
+const StyledTitle = styled(Typography)(({ ismobile }) => ({
+  fontSize: ismobile ? "40px" : "70px",
   marginBottom: "20px",
-  width: isMobile && "60%"
+  width: ismobile && "60%"
 }));
 
-const StyledContainer = styled(Typography)(({ isMobile }) => ({
+const StyledContainer = styled(Typography)(({ ismobile }) => ({
   height: "60vh",
   backgroundColor: theme.palette.secondary.main,
   display: "flex",
-  alignItems: !isMobile && "center",
+  alignItems: !ismobile && "center",
   justifyContent: "center",
   flexDirection: "column",
   borderTopRightRadius: theme.spacing(80),
   marginTop: theme.spacing(6),
-  marginLeft: isMobile && theme.spacing(2)
+  marginLeft: ismobile && theme.spacing(2)
 }));
 
 const NewsLetter = () => {
   const classes = useStyles();
-  const [isMobile] = useState(getIsMobile());
+  const [ismobile] = useState(getIsMobile());
   const [email, setEmail] = useState("");
   const [emailErr, setEmailErr] = useState();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -97,14 +97,14 @@ const NewsLetter = () => {
      handleClose={() => setIsDialogOpen(false)} 
      msg="Joined successfully to our list. Check your email for a 10% off your first order :)"
      />
-    <StyledContainer component="div" isMobile={isMobile}>
-      <StyledTitle component="h1" isMobile={isMobile}>
+    <StyledContainer component="div" ismobile={ismobile}>
+      <StyledTitle component="h1" ismobile={ismobile}>
         Our Newsletter
       </StyledTitle>
-      <StyledDescription component="div" isMobile={isMobile}>
+      <StyledDescription component="div" ismobile={ismobile}>
         Subscribe now and get updated with our latest promotions
       </StyledDescription>
-      <StyledInputContainer component="div" isMobile={isMobile}>
+      <StyledInputContainer component="div" ismobile={ismobile}>
         <Box
           autoComplete="email"
           component="input"

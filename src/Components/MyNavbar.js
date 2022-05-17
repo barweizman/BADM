@@ -12,7 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getUser, logoutUser } from "../store/reducers/generalReducer";
+import { getUser, logoutUser, setIsCurrentUserAdmin } from "../store/reducers/generalReducer";
 
 import CartIconNavBar from "./Cart/CartIconNavBar";
 import ProductSearch from "./NavBar/ProductSearch";
@@ -49,8 +49,10 @@ const MyNavbar = () => {
   }
 
   const handleLogoutClicked = () => {
+    console.log("!")
     endLoginSession();
     dispatch(logoutUser());
+    dispatch(setIsCurrentUserAdmin(false));
     navigate(paths.index);
   };
 
@@ -118,7 +120,13 @@ const MyNavbar = () => {
                 onClick={handleProfileClicked}
                 color="primary"
             />
-            <ProfilePopper ref={anchorRef.current} open={isPopperOpen} handleClose={handleClosePopper} handleLogoutClicked={handleLogoutClicked} user={user} />
+            <ProfilePopper
+             reference={anchorRef.current}
+              open={isPopperOpen}
+               handleClose={handleClosePopper}
+                handleLogout={handleLogoutClicked}
+                 user={user} 
+                 />
           </>
           : <Button
               sx={{

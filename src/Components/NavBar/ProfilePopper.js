@@ -20,7 +20,13 @@ import { IconLogout } from "@tabler/icons";
 import Transitions from "../../Pages/ManagerView/ui-component/extended/Transitions";
 import MainCard from "../../Pages/ManagerView/ui-component/cards/MainCard";
 
-const ProfilePopper = ({ open, handleClose, handleLogout, user, ref }) => {
+const ProfilePopper = ({
+  open,
+  handleClose,
+  handleLogout,
+  user,
+  reference
+}) => {
   const customization = useSelector(state => state.customization);
   const theme = useTheme();
 
@@ -28,7 +34,7 @@ const ProfilePopper = ({ open, handleClose, handleLogout, user, ref }) => {
     <Popper
       placement="bottom-end"
       open={open}
-      anchorEl={ref}
+      anchorEl={reference}
       role={undefined}
       transition
       disablePortal
