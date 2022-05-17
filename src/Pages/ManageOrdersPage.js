@@ -1,11 +1,11 @@
 import { Box, Card, CircularProgress, Grid, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
-import { getAllOrders } from "../../../../services/serverServices";
-import SubCard from "../../ui-component/cards/SubCard";
-import MainCard from "../../ui-component/cards/MainCard";
-import SecondaryAction from "../../ui-component/cards/CardSecondaryAction";
-import OrderCard from "./ManageOrders/OrderCard";
+import { getAllOrders } from "../services/serverServices";
+import SubCard from "../Components/ManagerView/ui-component/cards/SubCard";
+import MainCard from "../Components/ManagerView/ui-component/cards/MainCard";
+import SecondaryAction from "../Components/ManagerView/ui-component/cards/CardSecondaryAction";
+import OrderCard from "../Components/ManagerView/views/utilities/ManageOrders/OrderCard";
 
 
 const ColorBox = ({ bgcolor, title, data, dark }) => (

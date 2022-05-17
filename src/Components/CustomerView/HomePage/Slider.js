@@ -5,9 +5,9 @@ import { Box, styled, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { ArrowLeft, ArrowRight } from "@mui/icons-material";
 
-import { getIsMobile } from "../Constants/helpers";
-import paths from "../Constants/paths";
-import theme from "../Constants/theme";
+import { getIsMobile } from "../../../Constants/helpers";
+import paths from "../../../Constants/paths";
+import theme from "../../../Constants/theme";
 
 const useStyles = makeStyles(() => ({
   root: {

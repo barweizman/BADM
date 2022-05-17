@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Avatar,
@@ -23,7 +23,7 @@ import { useDispatch } from "react-redux";
 import { setIsCurrentUserAdmin, setUser } from "../store/reducers/generalReducer";
 
 import { validateEmail } from "../Constants/validators";
-import Copyright from "../Components/Copyright";
+import Copyright from "../Components/Common/Copyright";
 import paths from "../Constants/paths";
 import { loginUser } from "../services/serverServices";
 import MyNavbar from "../Components/MyNavbar";

@@ -36,6 +36,9 @@ const UserCard = ({ user }) =>  (
         <Typography variant="h4" component="div" textTransform="capitalize">
           {user.name || "No name"}
         </Typography>
+        <Typography variant="body2" textTransform="capitalize">
+          Favorite count: {user?.favorites.length}
+        </Typography>
         <Typography sx={{ mb: 1.5, fontSize: 15 }}>
           Email: {user.email}
         </Typography>

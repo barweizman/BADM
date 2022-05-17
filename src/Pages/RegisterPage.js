@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Avatar,
@@ -24,7 +24,7 @@ import { setUser } from "../store/reducers/generalReducer";
 import theme from "../Constants/theme";
 
 import { validateEmail, validatePassword } from "../Constants/validators";
-import Copyright from "../Components/Copyright";
+import Copyright from "../Components/Common/Copyright";
 import paths from "../Constants/paths";
 import { registerUser } from "../services/serverServices";
 import { rememberMeSession } from "../Constants/helpers";

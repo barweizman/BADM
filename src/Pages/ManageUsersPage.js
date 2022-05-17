@@ -1,11 +1,11 @@
 import { CircularProgress, Grid, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getAllUsers } from "../../../../services/serverServices";
-import CardSecondaryAction from "../../ui-component/cards/CardSecondaryAction";
+import { getAllUsers } from "../services/serverServices";
+import CardSecondaryAction from "../Components/ManagerView/ui-component/cards/CardSecondaryAction";
 
-import MainCard from "../../ui-component/cards/MainCard";
-import SubCard from "../../ui-component/cards/SubCard";
-import UserCard from "./ManageUsers/UserCard";
+import MainCard from "../Components/ManagerView/ui-component/cards/MainCard";
+import SubCard from "../Components/ManagerView/ui-component/cards/SubCard";
+import UserCard from "../Components/ManagerView/views/utilities/ManageUsers/UserCard";
 
 const SamplePage = () => {
   const [users, setUsers] = useState([]);

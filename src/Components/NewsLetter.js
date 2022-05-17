@@ -7,7 +7,7 @@ import { getIsMobile } from "../Constants/helpers";
 import theme from "../Constants/theme";
 import { joinNewsletter } from "../services/serverServices";
 import { validateEmail } from "../Constants/validators";
-import AppAlert from "./AppAlert";
+import AppAlert from "./Common/AppAlert";
 
 // eslint-disable-next-line no-shadow
 const useStyles = makeStyles(() => ({

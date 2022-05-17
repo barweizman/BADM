@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Divider, Grid } from "@mui/material";
 
 import Footer from "../Components/Footer";
@@ -8,7 +8,7 @@ import MyNavbar from "../Components/MyNavbar";
 import ProductsList from "../Components/Products/ProductsList";
 import NewsLetter from "../Components/NewsLetter";
 import { getFeaturedProducts } from "../services/serverServices";
-import WhatsappButton from "../Components/WhatsappButton";
+import WhatsappButton from "../Components/Common/WhatsappButton";
 import AppAnimation from "../Components/AppAnimation";
 import theme from "../Constants/theme";
 

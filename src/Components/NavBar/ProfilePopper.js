@@ -17,8 +17,8 @@ import { useTheme } from "@mui/material/styles";
 
 import { IconLogout } from "@tabler/icons";
 
-import Transitions from "../../Pages/ManagerView/ui-component/extended/Transitions";
-import MainCard from "../../Pages/ManagerView/ui-component/cards/MainCard";
+import Transitions from "../ManagerView/ui-component/extended/Transitions";
+import MainCard from "../ManagerView/ui-component/cards/MainCard";
 
 const ProfilePopper = ({
   open,

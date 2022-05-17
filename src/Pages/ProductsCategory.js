@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, Divider, Grid } from "@mui/material";
 import { useLocation } from "react-router-dom";
 
 import Footer from "../Components/Footer";
 import FreeShipping from "../Components/FreeShippingBar";
 import MyNavbar from "../Components/MyNavbar";
-import WhatsappButton from "../Components/WhatsappButton";
+import WhatsappButton from "../Components/Common/WhatsappButton";
 import ProductsList from "../Components/Products/ProductsList";
 import NewsLetter from "../Components/NewsLetter";
 

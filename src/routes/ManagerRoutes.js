@@ -1,23 +1,19 @@
 import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
-import paths from "./Constants/paths";
+import paths from "../Constants/paths";
 
-import Loadable from "./Pages/ManagerView/ui-component/Loadable";
+import Loadable from "../Components/ManagerView/ui-component/Loadable";
 
 const DashboardDefault = Loadable(
-  lazy(() => import("./Pages/ManagerView/views/dashboard/Default"))
+  lazy(() => import("../Pages/ManagerDashboardPage"))
 );
 const ProductsUtils = Loadable(
-  lazy(() => import("./Pages/ManagerView/views/utilities/ManageProducts"))
+  lazy(() => import("../Pages/ManageProductsPage"))
 );
-const OrdersUtils = Loadable(
-  lazy(() => import("./Pages/ManagerView/views/utilities/ManageOrders"))
-);
+const OrdersUtils = Loadable(lazy(() => import("../Pages/ManageOrdersPage")));
 
 // sample page routing
-const UsersUtils = Loadable(
-  lazy(() => import("./Pages/ManagerView/views/utilities/ManageUsers"))
-);
+const UsersUtils = Loadable(lazy(() => import("../Pages/ManageUsersPage")));
 
 const ManagerRoutes = () =>
   <Routes>

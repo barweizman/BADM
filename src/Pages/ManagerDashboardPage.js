@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 
 // project imports
-import EarningCard from "./EarningCard";
-import PopularCard from "./PopularCard";
-import TotalOrderLineChartCard from "./TotalOrderLineChartCard";
-import TotalIncomeLightCard from "./TotalIncomeLightCard";
-import TotalGrowthBarChart from "./TotalGrowthBarChart";
+import EarningCard from "../Components/ManagerView/views/dashboard/Default/EarningCard";
+import PopularCard from "../Components/ManagerView/views/dashboard/Default/PopularCard";
+import TotalOrderLineChartCard from "../Components/ManagerView/views/dashboard/Default/TotalOrderLineChartCard";
+import TotalIncomeLightCard from "../Components/ManagerView/views/dashboard/Default/TotalIncomeLightCard";
+import TotalGrowthBarChart from "../Components/ManagerView/views/dashboard/Default/TotalGrowthBarChart";
 
-import { gridSpacing } from "../../../../../store/constant";
+import { gridSpacing } from "../store/constant";
 
 const Dashboard = () => {
   const [isLoading, setLoading] = useState(true);

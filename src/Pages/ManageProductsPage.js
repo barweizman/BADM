@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Box, Icon, Tab, Tabs, Typography } from "@mui/material";
 
-import MainCard from "../../ui-component/cards/MainCard";
-import SecondaryAction from "../../ui-component/cards/CardSecondaryAction";
-import AddProduct from "./ManageProductsTab/AddProduct";
-import AllProducts from "./ManageProductsTab/AllProducts";
-import { getAllProducts } from "../../../../services/serverServices";
+import MainCard from "../Components/ManagerView/ui-component/cards/MainCard";
+import SecondaryAction from "../Components/ManagerView/ui-component/cards/CardSecondaryAction";
+import AddProduct from "../Components/ManagerView/views/utilities/ManageProductsTab/AddProduct";
+import AllProducts from "../Components/ManagerView/views/utilities/ManageProductsTab/AllProducts";
+import { getAllProducts } from "../services/serverServices";
 
 const TabPanel = props => {
   const { children, value, index, ...other } = props;

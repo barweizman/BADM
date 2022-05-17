@@ -9,7 +9,7 @@ import ProductCard from "./ProductCard";
 import SubTitle from "../SubTitle";
 
 import { addToUserCart, getUser, getUserCart, setUser } from "../../store/reducers/generalReducer";
-import AppAlert from "../AppAlert";
+import AppAlert from "../Common/AppAlert";
 import { filters } from "../../Constants/naming";
 import { addToUserFavoriteProducts, deleteProductFromUserFavorites } from "../../services/serverServices";
 

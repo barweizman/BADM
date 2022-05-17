@@ -1,8 +1,7 @@
-import React from "react";
 import { IconButton } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { WhatsappOutlined } from "@mui/icons-material";
-import { toWhatsappLink } from "../Constants/helpers";
+import { toWhatsappLink } from "../../Constants/helpers";
 // import { toWhatsappLink } from "../Constants/helpers";
 
 const useStyles = makeStyles(() => ({

@@ -1,12 +1,14 @@
+import { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
-import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
 import Footer from "../Components/Footer";
 import FreeShippingBar from "../Components/FreeShippingBar";
 import MyNavbar from "../Components/MyNavbar";
 import NewsLetter from "../Components/NewsLetter";
 import Product from "../Components/Products/ProductInPage";
 import ProductsList from "../Components/Products/ProductsList";
+
 import {
   getFeaturedProducts,
   getProductById

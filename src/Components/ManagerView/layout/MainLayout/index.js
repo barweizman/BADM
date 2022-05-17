@@ -70,7 +70,6 @@ const MainLayout = ({ children }) => {
   const theme = useTheme();
   const matchDownMd = useMediaQuery(theme.breakpoints.down("lg"));
 
-  // Handle left drawer
   const leftDrawerOpened = useSelector(state => state.customization.opened);
   const dispatch = useDispatch();
   const handleLeftDrawerToggle = () => {
@@ -87,7 +86,6 @@ const MainLayout = ({ children }) => {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      {/* header */}
       <AppBar
         enableColorOnDark
         position="fixed"
@@ -104,16 +102,11 @@ const MainLayout = ({ children }) => {
           <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
         </Toolbar>
       </AppBar>
-
-      {/* drawer */}
       <Sidebar
         drawerOpen={leftDrawerOpened}
         drawerToggle={handleLeftDrawerToggle}
       />
-
-      {/* main content */}
       <Main theme={theme} open={leftDrawerOpened}>
-        {/* breadcrumb */}
         {children}
         <Breadcrumbs
           separator={IconChevronRight}

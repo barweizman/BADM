@@ -5,7 +5,7 @@ import { Button, Grid, IconButton, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Add, Remove } from "@mui/icons-material";
 
-import AppAlert from "../AppAlert";
+import AppAlert from "../Common/AppAlert";
 
 import { DEC, INC } from "../../Constants/naming";
 import { addToUserCart } from "../../store/reducers/generalReducer";

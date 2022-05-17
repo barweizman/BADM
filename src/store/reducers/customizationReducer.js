@@ -1,4 +1,4 @@
-import config from "../../Pages/ManagerView/config";
+import config from "../../Components/ManagerView/config";
 
 const actionTypes = {
   SET_MENU: "@customization/SET_MENU",
