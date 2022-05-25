@@ -7,9 +7,10 @@ export default Object.freeze({
   cart: "/cart",
   searchResult: "/search",
   favorites: "/favorites",
-  checkout: "/checkout",
+  checkout: "/checkOut",
   managerAddProduct: "/addProduct",
   manageProducts: "/manageProduct",
   manageUsers: "/manageUsers",
-  manageOrders: "/manageOrders"
+  manageOrders: "/manageOrders",
+  
 });

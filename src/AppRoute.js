@@ -2,26 +2,25 @@ import { useEffect, useState} from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getIsCurrentUserAdmin, setIsCurrentUserAdmin, setUser } from "../store/reducers/generalReducer";
-import { getUser } from "../services/serverServices";
+import { getIsCurrentUserAdmin, setIsCurrentUserAdmin, setUser } from "./store/reducers/generalReducer";
+import { getUser } from "./services/serverServices";
 
-import AgeDialog from "../Components/CustomerView/AgeDialog";
-import Cart from "../Pages/CartPage";
-import HomePage from "../Pages/HomePage";
-import LoginPage from "../Pages/LoginPage";
-import Register from "../Pages/RegisterPage";
-import ProductPage from "../Pages/ProductPage";
-import SearchPageResult from "../Pages/SearchResultPage";
-import ProductsCategory from "../Pages/ProductsCategory";
-import MyFavoritesPage from "../Pages/MyFavoritesPage";
-import App404 from "../Pages/404Page";
+import AgeDialog from "./Components/AgeDialog";
+import Cart from "./Pages/Cart";
+import HomePage from "./Pages/HomePage";
+import LoginPage from "./Pages/LoginPage";
+import Register from "./Pages/Register";
+import ProductPage from "./Pages/ProductPage";
+import SearchPageResult from "./Pages/SearchPageResult";
+import ProductsCategory from "./Pages/ProductsCategory";
+import MyFavoritesPage from "./Pages/MyFavoritesPage";
+import App404 from "./Pages/App404";
 import ManagerRoutes from "./ManagerRoutes";
-import MainLayout from "../Components/ManagerView/layout/MainLayout";
-import CheckoutPage from "../Pages/CheckoutPage";
+import MainLayout from "./Pages/ManagerView/layout/MainLayout";
 
-import paths from "../Constants/paths";
-import { getIsOver18, getJwtKey, writeIsOver18 } from "../Constants/helpers";
-
+import paths from "./Constants/paths";
+import { getIsOver18, getJwtKey, writeIsOver18 } from "./Constants/helpers";
+import CheckoutPage from "./Pages/CheckoutPage";
 
 
 
@@ -50,7 +49,7 @@ const AppRoute = () => {
       setAgeAlert(true);
 
     }
-  }, [isAdmin]);
+  }, []);
 
   const handleCloseAgeDialog = () => {
     setAgeAlert(false);
@@ -75,8 +74,7 @@ const AppRoute = () => {
       <Route path={paths.searchResult} element={<SearchPageResult />} />
       <Route path={paths.cart} element={<Cart />} />
       <Route path={paths.favorites} element={<MyFavoritesPage />} />
-      <Route path={paths.checkout} element={<CheckoutPage />} />
-      <Route path="*" element={<App404 />} />
+      
     </Routes>
     
     }
