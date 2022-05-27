@@ -14,7 +14,7 @@ import Footer from "../Components/Footer";
 
 import EmptyCartAnimation from "../assets/animations/empty-cart.json";
 
-import { getUser, getUserCart, removeFromCart } from "../store/reducers/generalReducer";
+import { changeProductQuantity, getUser, getUserCart, removeFromCart } from "../store/reducers/generalReducer";
 import { mobile } from "../Constants/responsive";
 import { findCartProductIndex } from "../Constants/helpers";
 import paths from "../Constants/paths";
@@ -168,11 +168,6 @@ const Cart = () => {
   
   const handleRemoveFromCart = (productId) => {
     dispatch(removeFromCart({id: productId }))
-    const prodIndex = findCartProductIndex(
-      cart.products,
-      productId
-    );
-    console.log(JSON.parse(JSON.stringify(cart.products)).splice(prodIndex, 1));
   }
 
   const handleContinueShopping = () => {
@@ -185,6 +180,15 @@ const Cart = () => {
 
   const handleCheckoutClicked = () => {
     navigate(paths.checkout);
+  }
+
+  const handleChangeQuantity = (product, action) => {
+    if(action === "INC") {
+      console.log("!")
+      dispatch(changeProductQuantity({product, id:product._id, quantity: 1}));
+    }else if(action === "DEC") {
+      dispatch(changeProductQuantity({product, id:product._id, quantity: -1}));
+    }
   }
 
   return (
@@ -222,17 +226,21 @@ const Cart = () => {
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Add />
+                    <IconButton onClick={() => handleChangeQuantity(item.product, "INC")} >
+                      <Add />
+                    </IconButton>
                     <ProductAmount>
                       {item.quantity}
                     </ProductAmount>
-                    <Remove />
+                    <IconButton onClick={() => handleChangeQuantity(item.product, "DEC")} >
+                      <Remove />
+                    </IconButton>
                   </ProductAmountContainer>
                   <ProductPrice>
                   ₪ {item.product.price * item.quantity}
                   </ProductPrice>
                 <Grid >
-                <IconButton onClick={() => handleRemoveFromCart(item.product._id)} >
+                <IconButton onClick={() => handleRemoveFromCart(item.product)} >
                 <Delete />
                 </IconButton>
                 </Grid>

@@ -102,15 +102,6 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
-// const StyledFilterColor = styled(Grid)(({ color }) => ({
-//   width: "20px",
-//   height: "20px",
-//   borderRadius: "50%",
-//   backgroundColor: color,
-//   margin: "0px 5px",
-//   cursor: "pointer"
-// }));
-
 const Product = ({ product }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -134,7 +125,7 @@ const Product = ({ product }) => {
   }
 
   const handleAddToCart = () => {
-    dispatch(addToUserCart({product, quantity: 1}));
+    dispatch(addToUserCart({product, quantity}));
     setAddToCartAlert(true);
   }
 

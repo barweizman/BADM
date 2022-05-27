@@ -23,7 +23,6 @@ const ProductPage = () => {
     const getProducts = async () => {
       const res = await getFeaturedProducts();
       setFeaturedProducts(res.data);
-      console.log(res.data);
     };
 
     getProducts();
@@ -33,7 +32,6 @@ const ProductPage = () => {
     () => {
       const func = async () => {
         const res = await getProductById(id);
-        console.log(res);
         setProduct(res.data);
       };
       window.scrollTo(0, 0);

@@ -24,6 +24,7 @@ export const getCartSession = () => {
   if(sessionCart) {
     return JSON.parse(sessionCart);
   }
+  
   return {
     products: [],
     total: 0

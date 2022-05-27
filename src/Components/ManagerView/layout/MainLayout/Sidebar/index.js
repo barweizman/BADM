@@ -8,7 +8,6 @@ import MenuList from "./MenuList";
 import LogoSection from "../LogoSection";
 import { drawerWidth } from "../../../../../store/constant";
 
-
 const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
     const theme = useTheme();
     const matchUpMd = useMediaQuery(theme.breakpoints.up("md"));

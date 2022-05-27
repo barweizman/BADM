@@ -70,7 +70,27 @@ export const sliceReducer = createSlice({
     },
     setIsCurrentUserAdmin: (state, action) => {
       state.isAdmin = Boolean(action.payload);
-    }
+    },
+    changeProductQuantity: (state, action) => {
+      const prodIndex = findCartProductIndex(
+        state.cart.products,
+        action.payload.id
+      );
+
+      if(prodIndex > -1) {
+        const newProducts =  [...state.cart.products];
+        newProducts[prodIndex] = {
+          product: action.payload.product,
+          quantity: state.cart.products[prodIndex].quantity + action.payload.quantity
+        }
+        if(state.cart.products[prodIndex].quantity + action.payload.quantity === 0) {
+          newProducts.splice(prodIndex, 1); // remove it
+        }
+        state.cart.products = newProducts;
+        state.cart.total = calcCartTotal(state.cart.products);
+        setCartSession(state.cart);
+      }
+    },
   }
 });
 
@@ -78,10 +98,11 @@ export const {
   logoutUser,
   setUser,
   addToUserCart,
+  changeProductQuantity,
   removeFromCart,
   setSearchProdValue,
   setSearchResultProducts,
-  setIsCurrentUserAdmin
+  setIsCurrentUserAdmin,
 } = sliceReducer.actions;
 
 export const getUser = state => state?.appState?.user;
