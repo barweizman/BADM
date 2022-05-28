@@ -1,5 +1,4 @@
 /* eslint-disable no-confusing-arrow */
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -16,7 +15,6 @@ import EmptyCartAnimation from "../assets/animations/empty-cart.json";
 
 import { changeProductQuantity, getUser, getUserCart, removeFromCart } from "../store/reducers/generalReducer";
 import { mobile } from "../Constants/responsive";
-import { findCartProductIndex } from "../Constants/helpers";
 import paths from "../Constants/paths";
 
 const Container = styled.div``;
@@ -166,8 +164,8 @@ const Cart = () => {
   const user = getUser(state);
   const cart = getUserCart(state);
   
-  const handleRemoveFromCart = (productId) => {
-    dispatch(removeFromCart({id: productId }))
+  const handleRemoveFromCart = (product) => {
+    dispatch(removeFromCart({id: product._id }))
   }
 
   const handleContinueShopping = () => {
@@ -258,16 +256,16 @@ const Cart = () => {
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
               <SummaryItemPrice>
-              ₪ {cart.total}
+              $ {cart.total}
               </SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
-              <SummaryItemPrice>₪ 25.90</SummaryItemPrice>
+              <SummaryItemPrice>$ 9.90</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Shipping Discount</SummaryItemText>
-              <SummaryItemPrice>₪ -25.90</SummaryItemPrice>
+              <SummaryItemPrice>$ -9.90</SummaryItemPrice>
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>

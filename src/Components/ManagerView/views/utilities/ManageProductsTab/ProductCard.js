@@ -6,13 +6,8 @@ import {
   Typography
 } from "@mui/material";
 
-const ProductCard = ({product, onClick}) => {
-  const handleOnClick = () => {
-    console.log("1")
-  }
-
-  return (
-    <Card sx={{ maxWidth: 345 }} onClick={handleOnClick}>
+const ProductCard = ({product, onClick}) => (
+    <Card sx={{ maxWidth: 345 }} onClick={onClick}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -32,9 +27,7 @@ const ProductCard = ({product, onClick}) => {
             </Typography>
         </CardContent>
       </CardActionArea>
-      
     </Card>
   );
-};
 
 export default ProductCard;

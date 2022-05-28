@@ -1,17 +1,23 @@
+import { useState } from "react"
 import { CircularProgress, Grid } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import SubCard from "../../../ui-component/cards/SubCard";
+
+import EditProductDialog from "./EditProductDialog";
 import ProductCard from "./ProductCard";
+import SubCard from "../../../ui-component/cards/SubCard";
 
-const useStyles = makeStyles(() => ({
-  root: {}
-}));
 
-const AllProducts = ({ isLoading, products }) => {
-  const classes = useStyles();
+const AllProducts = ({ isLoading, products, refetchProducts }) => {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState(undefined);
+
+  const onProductClick = (product) => {
+    setDialogOpen(true);
+    setCurrentProduct(product)
+  }
 
   return (
-    <Grid className={classes.root}>
+    <>
+    <Grid>
       {isLoading &&
         <Grid container justifyContent="center">
           <CircularProgress />
@@ -20,12 +26,22 @@ const AllProducts = ({ isLoading, products }) => {
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
           {products.map(product =>
             <Grid item xs={2} sm={4} md={4} key={product._id}>
-              <ProductCard product={product} />
+              <ProductCard product={product} onClick={() => onProductClick(product)} />
             </Grid>
           )}
         </Grid>
       </SubCard>
     </Grid>
+    <EditProductDialog 
+      open={dialogOpen} 
+      handleClose={() => {
+        setDialogOpen(false);
+        setCurrentProduct(undefined);
+        refetchProducts();
+      }} 
+      product={currentProduct} 
+    />
+    </>
   );
 };
 

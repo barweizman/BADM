@@ -52,8 +52,8 @@ export const put = (url, data, headers) =>
     withCredentials: false
   });
 
-export const del = (url, data, headers) =>
-  axios.delete(url, data, {
+export const del = (url, headers) =>
+  axios.delete(url, {
     headers: {
       ...headers,
       token: `Bearer ${getJwtKey()}`

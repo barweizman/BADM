@@ -13,7 +13,7 @@ import {
   MenuItem
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   productCategories,
   productTypes
@@ -53,7 +53,7 @@ const productFormInputs = [
   { type: "number", label: "Quantity", id: "quantity" }
 ];
 
-const AddProduct = () => {
+const AddProduct = ({ existingProduct, product, setExistingProduct }) => {
   const classes = useStyles();
   const [productForm, setProductForm] = useState({ ...initProductForm });
   const [curImgUrl, setCurImgUrl] = useState("");
@@ -73,6 +73,9 @@ const AddProduct = () => {
   };
 
   const handleFormChanged = (key, val) => {
+    if (existingProduct && setExistingProduct) {
+      setExistingProduct({ ...product, [key]: val });
+    }
     setProductForm(prevState => ({
       ...prevState,
       [key]: val
@@ -80,6 +83,9 @@ const AddProduct = () => {
   };
 
   const handleToggleFeatured = () => {
+    if (existingProduct && setExistingProduct) {
+      setExistingProduct({ ...product, isFeatured: !product.isFeatured });
+    }
     setProductForm(prevState => ({
       ...prevState,
       isFeatured: !prevState.isFeatured
@@ -89,6 +95,12 @@ const AddProduct = () => {
   const handleCategoryClicked = categoryId => {
     const index = productForm.categories.findIndex(a => a === categoryId);
     if (index === -1) {
+      if (existingProduct && setExistingProduct) {
+        setExistingProduct({
+          ...product,
+          categories: [...product.categories, categoryId]
+        });
+      }
       setProductForm(prevState => ({
         ...prevState,
         categories: [...prevState.categories, categoryId]
@@ -96,6 +108,12 @@ const AddProduct = () => {
     } else {
       const newCategories = [...productForm.categories];
       newCategories.splice(index, 1);
+      if (existingProduct && setExistingProduct) {
+        setExistingProduct({
+          ...product,
+          categories: newCategories
+        });
+      }
       setProductForm(prevState => ({
         ...prevState,
         categories: newCategories
@@ -104,6 +122,12 @@ const AddProduct = () => {
   };
 
   const handleImageAdded = () => {
+    if (existingProduct && setExistingProduct) {
+      setExistingProduct({
+        ...product,
+        images: [...product.images, curImgUrl]
+      });
+    }
     setProductForm(prevState => ({
       ...prevState,
       images: [...prevState.images, curImgUrl]
@@ -119,14 +143,38 @@ const AddProduct = () => {
         ...prevState,
         images: newImages
       }));
+      if (existingProduct && setExistingProduct) {
+        setExistingProduct({
+          ...product,
+          images: newImages
+        });
+      }
     }
   };
+
+  useEffect(
+    () => {
+      if (product && existingProduct) {
+        setProductForm({
+          title: product.title,
+          description: product.description,
+          price: product.price,
+          categories: [...product.category],
+          quantity: product.quantity,
+          type: product.type,
+          images: [...product.images],
+          isFeatured: product.isFeatured
+        });
+      }
+    },
+    [product]
+  );
 
   return (
     <Grid container className={classes.root}>
       <Grid container justifyContent="center">
         <Typography variant="h3" textAlign="center" color={isLoading && "gray"}>
-          Add Product
+          {!existingProduct && "Add Product"}
         </Typography>
         {isLoading &&
           <Grid container justifyContent="center">
@@ -255,13 +303,14 @@ const AddProduct = () => {
         </Grid>
       </Grid>
       <Grid container justifyContent="center">
-        <Button
-          disabled={isLoading}
-          onClick={handleUploadProduct}
-          variant="contained"
-        >
-          Upload Product
-        </Button>
+        {!existingProduct &&
+          <Button
+            disabled={isLoading}
+            onClick={handleUploadProduct}
+            variant="contained"
+          >
+            Upload Product
+          </Button>}
       </Grid>
     </Grid>
   );

@@ -37,25 +37,29 @@ const ManageProducts = () => {
   const [value, setValue] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState([]);
+  const [refetchProducts, setRefetchProducts] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  useEffect(() => {
-    const fun = async () => {
-      setIsLoading(true);
-      const res = await getAllProducts(null, null, null, true);
-      setIsLoading(false);
+  useEffect(
+    () => {
+      const fun = async () => {
+        setIsLoading(true);
+        const res = await getAllProducts(null, null, null, true);
+        setIsLoading(false);
 
-      if (res.status === 200) {
-        setProducts(res.data);
-      } else {
-        // error
-      }
-    };
-    fun();
-  }, []);
+        if (res.status === 200) {
+          setProducts(res.data);
+        } else {
+          // error
+        }
+      };
+      fun();
+    },
+    [refetchProducts]
+  );
 
   return (
     <MainCard
@@ -79,7 +83,12 @@ const ManageProducts = () => {
           <AddProduct />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <AllProducts products={products} isLoading={isLoading} />
+          <AllProducts
+            products={products}
+            isLoading={isLoading}
+            refetchProducts={() =>
+              setRefetchProducts(prevState => prevState + 1)}
+          />
         </TabPanel>
       </Box>
     </MainCard>

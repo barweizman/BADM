@@ -26,8 +26,6 @@ const AppDialog = ({ open, handleClose, title, children, btnText }) =>
     </DialogTitle>
     <DialogContent>
       {children}
-      {/* <DialogContentText id="alert-dialog-slide-description"> */}
-      {/* </DialogContentText> */}
     </DialogContent>
     <DialogActions>
       <Button onClick={handleClose} sx={{ textTransform: "capitalize" }}>

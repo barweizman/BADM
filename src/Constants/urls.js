@@ -15,26 +15,26 @@ export const cartUpdate = "updateCart/:id";
 
 export const orderEndPoint = `/${api}/orders`;
 const orderAdd = "addOrder";
-const orderUpdate = "updateOrder/:id";
-const orderDelete = "deleteOrder/:id";
+const orderUpdate = "updateOrder";
+const orderDelete = "deleteOrder";
 const orderFind = "findOrder/:id";
 const orderGetAll = "getOrders";
 const orderGetIncome = "getIncomeOrder/:month";
 
 const productEndPoint = `/${api}/products`;
 const productAdd = "addProduct";
-const productUpdate = "updateProduct/:id";
-const productDelete = "deleteProduct/:id";
+const productUpdate = "updateProduct";
+const productDelete = "deleteProduct";
 const productFind = "findProduct";
 const productGet = "getProducts";
 const productGetFeatured = "getFeaturedProducts";
 const productSearch = "searchProducts";
 
 const userEndPoint = `/${api}/users`;
-const userChangeInfo = "changeInfo/";
+const userChangeInfo = "changeInfo";
 const userFavorites = "favorites";
-const userDelete = "deleteUser/";
-const userFind = "findUser/";
+const userDelete = "deleteUser";
+const userFind = "findUser";
 const userGetAll = "getUsers";
 
 const newsletterEndPoint = `/${api}/newsletter`;

@@ -8,8 +8,12 @@ import {
     Avatar,
     Box,
     Chip,
+    CircularProgress,
     ClickAwayListener,
     Divider,
+    Drawer,
+    Grid,
+    IconButton,
     List,
     ListItemButton,
     ListItemIcon,
@@ -17,17 +21,23 @@ import {
     Paper,
     Popper,
     Stack,
+    TextField,
     Typography
 } from "@mui/material";
+import { Send } from "@mui/icons-material";
 
 import PerfectScrollbar from "react-perfect-scrollbar";
-import { IconLogout, IconSettings } from "@tabler/icons";
+import { IconLogout, IconSettings, IconUser} from "@tabler/icons";
+
+import { userChangeInfo } from "../../../../../../services/serverServices";
 
 import MainCard from "../../../../ui-component/cards/MainCard";
 import Transitions from "../../../../ui-component/extended/Transitions";
-import { getUser, logoutUser, setIsCurrentUserAdmin } from "../../../../../../store/reducers/generalReducer";
+import { getUser, logoutUser, setIsCurrentUserAdmin, setUser } from "../../../../../../store/reducers/generalReducer";
 import paths from "../../../../../../Constants/paths";
 import { endLoginSession } from "../../../../../../Constants/helpers";
+import SubCard from "../../../../ui-component/cards/SubCard";
+import { gridSpacing } from "../../../../../../store/constant";
 
 
 const ProfileSection = () => {
@@ -40,17 +50,36 @@ const ProfileSection = () => {
     const user = getUser(state);
     const [selectedIndex,] = useState(-1);
     const [open, setOpen] = useState(false);
+    const [sideBarOpen, setSideBarOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [userName, setUserName] = useState(user ? user.name : "");
+
     /**
      * anchorRef is used on different componets and specifying one type leads to other components throwing an error
      * */
     const anchorRef = useRef(null);
-    
+
     const handleLogout = async () => {
         endLoginSession();
         dispatch(logoutUser());
         dispatch(setIsCurrentUserAdmin(false));
         navigate(paths.index);
     };
+
+    const handleEditProfile = async () => {
+        setOpen(false);
+        setSideBarOpen(true);
+    }
+
+    const handleChangeUserName =async () => {
+        setLoading(true);
+        const res = await userChangeInfo(user._id, userName);
+        setLoading(false);
+        if(res.status === 200) {
+            dispatch(setUser(res.data))
+        }
+
+    }
 
     const handleClose = (event) => {
         if (anchorRef.current && anchorRef.current.contains(event.target)) {
@@ -143,7 +172,7 @@ const ProfileSection = () => {
                                             <Stack direction="row" spacing={0.5} alignItems="center">
                                                 <Typography variant="h4">Hello,</Typography>
                                                 <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
-                                                    {user.name}
+                                                    {user?.name}
                                                 </Typography>
                                             </Stack>
                                             <Typography variant="subtitle2">Store Admin</Typography>
@@ -178,6 +207,16 @@ const ProfileSection = () => {
                                                     </ListItemIcon>
                                                     <ListItemText primary={<Typography variant="body2">Logout</Typography>} />
                                                 </ListItemButton>
+                                                <ListItemButton
+                                                    sx={{ borderRadius: `${customization.borderRadius}px` }}
+                                                    selected={selectedIndex === 5}
+                                                    onClick={handleEditProfile}
+                                                >
+                                                    <ListItemIcon>
+                                                        <IconUser stroke={1.5} size="1.3rem" />
+                                                    </ListItemIcon>
+                                                    <ListItemText primary={<Typography variant="body2">Edit Profile</Typography>} />
+                                                </ListItemButton>
                                             </List>
                                         </Box>
                                     </PerfectScrollbar>
@@ -187,6 +226,49 @@ const ProfileSection = () => {
                     </Transitions>
                 )}
             </Popper>
+            <Drawer
+                anchor="right"
+                onClose={() => setSideBarOpen(false)}
+                open={sideBarOpen}
+                PaperProps={{
+                    sx: {
+                        width: 280
+                    }
+                }}
+            >
+                <PerfectScrollbar component="div">
+                    <Grid container spacing={gridSpacing} sx={{ p: 3 }}>
+                        <Grid item xs={12}>
+                            {/* font family */}
+                            <SubCard title="Edit Your Profile">
+                                    <Typography variant="caption" >
+                                        Hello {user?.name}
+                                    </Typography>
+                                    <Typography variant="body2" >
+                                    Your Email: {user?.email}
+                                    </Typography>
+                                </SubCard>
+                                <Typography variant="caption" sx={{mt: theme.spacing(4)}} >
+                                    *Password is secure
+                                </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                                {loading && <CircularProgress />}
+                            <Grid container alignItems="center"  >
+                                <TextField 
+                                    label="Name"
+                                    defaultValue={userName}
+                                    onChange={(e)=> setUserName(e.target.value)}
+                                    disabled={loading}
+                                />
+                                <IconButton onClick={handleChangeUserName} disabled={loading} >
+                                    <Send />
+                                </IconButton>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </PerfectScrollbar>
+            </Drawer>
         </>
     );
 };

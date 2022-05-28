@@ -1,5 +1,8 @@
 import {
   addProductURL,
+  changeUserInfoURL,
+  deleteOrderURL,
+  deleteProductURL,
   getAllOrdersURL,
   getAllProductsURL,
   getAllUsersURL,
@@ -10,6 +13,8 @@ import {
   joinNewsletterURL,
   loginURL,
   registerURL,
+  updateOrderURL,
+  updateProductURL,
   userFavoritesURL
 } from "../Constants/urls";
 import { handleErrResponse, post, get, put, del } from "./axios";
@@ -122,6 +127,16 @@ export const joinNewsletter = async email => {
   }
 };
 
+export const userChangeInfo = async (id, name) => {
+  try {
+    const res = await put(`${changeUserInfoURL}/${id}`, { name });
+
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
 // =========== ADMIN FUNCTIONS :
 
 export const adminAddProduct = async ({
@@ -165,6 +180,46 @@ export const getAllUsers = async () => {
 export const getAllOrders = async () => {
   try {
     const res = await get(getAllOrdersURL);
+
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const deleteProduct = async id => {
+  try {
+    const res = await del(`${deleteProductURL}/${id}`);
+
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const updateProduct = async (id, product) => {
+  try {
+    const res = await put(`${updateProductURL}/${id}`, product);
+
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const updateOrder = async (id, order) => {
+  try {
+    const res = await put(`${updateOrderURL}/${id}`, order);
+
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const deleteOrder = async id => {
+  try {
+    const res = await del(`${deleteOrderURL}/${id}`);
 
     return { data: res.data, status: res.status };
   } catch (err) {
