@@ -7,8 +7,10 @@ import {
   getAllProductsURL,
   getAllUsersURL,
   getFeaturedProductsURL,
+  getOrdersIncomeByMonthURL,
   getProductByIdURL,
   getSearchedProductURL,
+  getStoreIncomeURL,
   getUserURL,
   joinNewsletterURL,
   loginURL,
@@ -177,9 +179,29 @@ export const getAllUsers = async () => {
   }
 };
 
-export const getAllOrders = async () => {
+export const getStoreIncome = async () => {
   try {
-    const res = await get(getAllOrdersURL);
+    const res = await get(getStoreIncomeURL);
+
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const getStoreIncomeByMonth = async month => {
+  try {
+    const res = await get(`${getOrdersIncomeByMonthURL}/${month}`);
+
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const getAllOrders = async topOrders => {
+  try {
+    const res = await get(`${getAllOrdersURL}?top=${topOrders}`);
 
     return { data: res.data, status: res.status };
   } catch (err) {

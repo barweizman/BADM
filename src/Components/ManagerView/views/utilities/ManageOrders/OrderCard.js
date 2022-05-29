@@ -1,12 +1,5 @@
-import {
-  Avatar,
-  Badge,
-  Card,
-  CardActions,
-  CardContent,
-  Grid,
-  Typography
-} from "@mui/material";
+/* eslint-disable no-nested-ternary */
+import { Card, CardActions, CardContent, Typography } from "@mui/material";
 
 const dateOptions = {
   weekday: "long",
@@ -19,7 +12,10 @@ const OrderCard = ({ order, handleOrderClicked }) =>
   <Card
     sx={{
       minWidth: 275,
-      backgroundColor: "#F7F5F2",
+      backgroundColor:
+        order.status.toLowerCase() === "completed"
+          ? "#B8F1B0"
+          : order.status.toLowerCase() === "pending" ? "#9FB4FF" : "#FFF56D",
       cursor: "pointer"
     }}
     onClick={handleOrderClicked}
@@ -31,7 +27,11 @@ const OrderCard = ({ order, handleOrderClicked }) =>
       <Typography variant="h4" component="div" textTransform="capitalize">
         Price: {order.price}$
       </Typography>
-      <Typography sx={{ mt: 1.5, fontSize: 15 }} textTransform="capitalize">
+      <Typography
+        sx={{ mt: 1.5, fontSize: 17 }}
+        textTransform="capitalize"
+        fontWeight="800"
+      >
         Status: {order.status}
       </Typography>
       <Typography variant="body2" sx={{ mt: 1 }}>

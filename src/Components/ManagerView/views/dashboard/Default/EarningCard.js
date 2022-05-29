@@ -54,21 +54,14 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
     }
 }));
 
-// ===========================|| DASHBOARD DEFAULT - EARNING CARD ||=========================== //
-
-const EarningCard = ({ isLoading }) => {
+const EarningCard = ({ isLoading, incomeByMonth }) => {
     const theme = useTheme();
-
-    const [anchorEl, setAnchorEl] = useState(null);
-
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
+    const dataByMonth = new Array(12).fill(0);
+    incomeByMonth?.map(i => {
+        dataByMonth[Number(i._id)] = i.totalIncome;
+        return i
+    });
+    console.log(incomeByMonth)
     return (
         // eslint-disable-next-line react/jsx-no-useless-fragment
         <>
@@ -82,7 +75,7 @@ const EarningCard = ({ isLoading }) => {
                                 <Grid container alignItems="center">
                                     <Grid item>
                                         <Typography sx={{ fontSize: "2.125rem", fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                            $500.00
+                                            ${dataByMonth[new Date().getMonth() + 1]}
                                         </Typography>
                                     </Grid>
                                     <Grid item>

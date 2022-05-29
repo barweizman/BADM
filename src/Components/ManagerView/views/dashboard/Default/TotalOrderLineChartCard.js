@@ -57,8 +57,14 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 // ==============================|| DASHBOARD - TOTAL ORDER LINE CHART CARD ||============================== //
 
-const TotalOrderLineChartCard = ({ isLoading }) => {
+const TotalOrderLineChartCard = ({ isLoading, incomeByMonth  }) => {
     const theme = useTheme();
+
+    const dataByMonth = new Array(12).fill(0);
+    incomeByMonth?.map(i => {
+        dataByMonth[Number(i._id)] = i.totalIncome;
+        return i
+    });
 
     const [timeValue, setTimeValue] = useState(false);
     const handleChangeTime = (event, newValue) => {
@@ -83,7 +89,7 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                                             sx={{ color: "inherit" }}
                                             onClick={(e) => handleChangeTime(e, true)}
                                         >
-                                            Month
+                                            Current Month
                                         </Button>
                                         <Button
                                             disableElevation
@@ -92,7 +98,7 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                                             sx={{ color: "inherit" }}
                                             onClick={(e) => handleChangeTime(e, false)}
                                         >
-                                            Year
+                                            Current Year
                                         </Button>
                                     </Grid>
                                 </Grid>
@@ -104,11 +110,11 @@ const TotalOrderLineChartCard = ({ isLoading }) => {
                                             <Grid item>
                                                 {timeValue ? (
                                                     <Typography sx={{ fontSize: "2.125rem", fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                                        $108
+                                                        ${dataByMonth[new Date().getMonth() + 1]}
                                                     </Typography>
                                                 ) : (
                                                     <Typography sx={{ fontSize: "2.125rem", fontWeight: 500, mr: 1, mt: 1.75, mb: 0.75 }}>
-                                                        $961
+                                                        ${dataByMonth.reduce((a, b) => a + b)}
                                                     </Typography>
                                                 )}
                                             </Grid>

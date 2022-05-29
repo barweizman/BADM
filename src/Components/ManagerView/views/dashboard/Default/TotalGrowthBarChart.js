@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import {  useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import { useTheme } from "@mui/material/styles";
-import { Grid, MenuItem, TextField, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 import ApexCharts from "apexcharts";
 import Chart from "react-apexcharts";
@@ -11,28 +11,12 @@ import SkeletonTotalGrowthBarChart from "../../../ui-component/cards/Skeleton/To
 import MainCard from "../../../ui-component/cards/MainCard";
 import { gridSpacing } from "../../../../../store/constant";
 
-import chartData from "./chart-data/total-growth-bar-chart";
+import chartDataFunction from "./chart-data/total-growth-bar-chart";
 
-const status = [
-    {
-        value: "today",
-        label: "Today"
-    },
-    {
-        value: "month",
-        label: "This Month"
-    },
-    {
-        value: "year",
-        label: "This Year"
-    }
-];
-
-const TotalGrowthBarChart = ({ isLoading }) => {
-    const [value, setValue] = useState("today");
+const TotalGrowthBarChart = ({ incomeByMonth, isLoading,totalIncome}) => {
     const theme = useTheme();
+    const chartData = chartDataFunction(incomeByMonth);
     const customization = useSelector((state) => state.customization);
-
     const { navType } = customization;
     const { primary } = theme.palette.text;
     const darkLight = theme.palette.dark.light;
@@ -80,7 +64,6 @@ const TotalGrowthBarChart = ({ isLoading }) => {
             ApexCharts.exec("bar-chart", "updateOptions", newChartData);
         }
     }, [navType, primary200, primaryDark, secondaryMain, secondaryLight, primary, darkLight, grey200, isLoading, grey500]);
-
     return (
         <>
             {isLoading ? (
@@ -96,23 +79,9 @@ const TotalGrowthBarChart = ({ isLoading }) => {
                                             <Typography variant="subtitle2">Total Growth</Typography>
                                         </Grid>
                                         <Grid item>
-                                            <Typography variant="h3">$2,324.00</Typography>
+                                            <Typography variant="h3">{Number(totalIncome / 10).toFixed()}$</Typography>
                                         </Grid>
                                     </Grid>
-                                </Grid>
-                                <Grid item>
-                                    <TextField
-                                        id="standard-select-currency"
-                                        select
-                                        value={value}
-                                        onChange={(e) => setValue(e.target.value)}
-                                    >
-                                        {status.map((option) => (
-                                            <MenuItem key={option.value} value={option.value}>
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
-                                    </TextField>
                                 </Grid>
                             </Grid>
                         </Grid>

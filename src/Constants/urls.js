@@ -19,7 +19,8 @@ const orderUpdate = "updateOrder";
 const orderDelete = "deleteOrder";
 const orderFind = "findOrder/:id";
 const orderGetAll = "getOrders";
-const orderGetIncome = "getIncomeOrder/:month";
+const orderGetIncome = "getIncomeOrder";
+const orderGetStoreIncome = "getStoreIncomeOrder";
 
 const productEndPoint = `/${api}/products`;
 const productAdd = "addProduct";
@@ -62,7 +63,8 @@ export const addOrderURL = `${orderEndPoint}/${orderAdd}`;
 export const deleteOrderURL = `${orderEndPoint}/${orderDelete}`;
 export const findOrderURL = `${orderEndPoint}/${orderFind}`;
 export const getAllOrdersURL = `${orderEndPoint}/${orderGetAll}`;
-export const getOrdersIncomeURL = `${orderEndPoint}/${orderGetIncome}`;
+export const getOrdersIncomeByMonthURL = `${orderEndPoint}/${orderGetIncome}`;
 export const updateOrderURL = `${orderEndPoint}/${orderUpdate}`;
+export const getStoreIncomeURL = `${orderEndPoint}/${orderGetStoreIncome}`;
 
 export const joinNewsletterURL = `${newsletterEndPoint}/${newsletterJoin}`;

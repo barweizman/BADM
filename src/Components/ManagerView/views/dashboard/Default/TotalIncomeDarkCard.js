@@ -34,8 +34,6 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
     }
 }));
 
-// ==============================|| DASHBOARD - TOTAL INCOME DARK CARD ||============================== //
-
 const TotalIncomeDarkCard = ({ isLoading }) => {
     const theme = useTheme();
 
