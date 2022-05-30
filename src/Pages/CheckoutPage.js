@@ -25,8 +25,8 @@ import {createUserOrder,loginUser} from "../services/serverServices"
 import { validateEmail, validatePassword } from "../Constants/validators";
 import { getUser,getUserCart, resetUserCart, setIsCurrentUserAdmin, setUser } from "../store/reducers/generalReducer";
 import { deleteCartSession, rememberMeSession, setCartSession } from "../Constants/helpers";
-import ValidationAnimation from "../assets/animations/validation.json";
 import paths from "../Constants/paths";
+import ValidationAnimation from "../assets/animations/validation.json";
 
 
 const initialErrors = {
@@ -142,9 +142,9 @@ const CheckoutPage = () => {
 			if(res.status === 200) {
 				dispatch(resetUserCart());
 				setOrderForm({ ...initialForm });
+				await wait(1500);
 				// navigate(`${paths.userProfile}/${user._id}`);
 			}
-			await wait(1500);
 			setIsLoading(false);
 		}
 

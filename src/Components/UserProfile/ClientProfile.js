@@ -7,16 +7,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { makeStyles } from "@mui/styles";
 import {  SportsBar } from "@mui/icons-material";
 
-import {getUser, setUser} from "../../store/reducers/generalReducer";
+import ClientOrderCard from "./ClientOrderCard";
 import UserHeader from "./UserHeader";
+
+import {getUser, setUser} from "../../store/reducers/generalReducer";
 import componentStyles from "./profileStyles";
 import { updateOrder, userChangeInfo } from "../../services/serverServices";
-import ClientOrderCard from "./ClientOrderCard";
-import UserProfileProductCard from "./UserProfileProductCard";
+import CancelOrderDialog from "./CancelOrderDialog";
 
 const useStyles = makeStyles(componentStyles);
 
-const ClientProfile = ({favorites, orders}) => {
+const ClientProfile = ({favorites, orders, refetch}) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const state = useSelector(s => s);
@@ -24,13 +25,24 @@ const ClientProfile = ({favorites, orders}) => {
   
   const [localLoading, setLocalLoading] = useState(false);
   const [name, setName] = useState(user?.name || "" );
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [orderToCancel, setOrderToCancel] = useState();
 
   const handleCancelOrder = async (orderId, order) => {
+    console.log(orderId)
+    console.log(order)
     setLocalLoading(true);
     const res = await updateOrder(orderId, order);
     setLocalLoading(false);
     if(res.status === 200) {
-      // refetch orders
+      setDialogOpen(false);
+      refetch();
+    }
+  }
+
+  const handleApproveCancelDialog = () => {
+    if(orderToCancel) {
+      handleCancelOrder(orderToCancel._id, {...orderToCancel, status: "Canceled"});
     }
   }
 
@@ -46,13 +58,18 @@ const ClientProfile = ({favorites, orders}) => {
   const handleNameChange = (newName) => {
     setName(newName);
   }
-
   useEffect(() => {
     setName(user?.name);
   }, [user])
 
   return (
     <>
+      <CancelOrderDialog 
+        open={dialogOpen}
+        handleClose={() => setDialogOpen(false)}
+        handleApprove={handleApproveCancelDialog} 
+        loading={localLoading}
+       />
       <UserHeader user={user} />
       <Container
         sx={{
@@ -169,9 +186,12 @@ const ClientProfile = ({favorites, orders}) => {
                 <div className={classes.plLg4}>
                   <Grid container>
                     {orders?.map(order => (
-                    <Grid item xs={12}>
-                      <ClientOrderCard order={order} handleCancelOrder={() => handleCancelOrder(order._id, {...order, status: "Canceled"})} />
-                    </Grid>
+                      <Grid item xs={12}>
+                        <ClientOrderCard order={order} handleCancelOrder={() => {
+                          setDialogOpen(true);
+                          setOrderToCancel(order);
+                        }} />
+                      </Grid>
                     ))}
                   </Grid>
                 </div>
