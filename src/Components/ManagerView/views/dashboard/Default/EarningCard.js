@@ -61,7 +61,7 @@ const EarningCard = ({ isLoading, incomeByMonth }) => {
         dataByMonth[Number(i._id)] = i.totalIncome;
         return i
     });
-    console.log(incomeByMonth)
+
     return (
         // eslint-disable-next-line react/jsx-no-useless-fragment
         <>

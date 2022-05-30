@@ -18,6 +18,9 @@ export const endLoginSession = () => {
 export const setCartSession = cart => {
   localStorage.setItem(CART_SESSION_KEY, JSON.stringify(cart));
 }
+export const deleteCartSession = () => {
+  localStorage.removeItem(CART_SESSION_KEY);
+}
 
 export const getCartSession = () => {
   const sessionCart = localStorage.getItem(CART_SESSION_KEY);

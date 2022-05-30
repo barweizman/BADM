@@ -1,8 +1,11 @@
 import {
+  addOrderURL,
   addProductURL,
   changeUserInfoURL,
   deleteOrderURL,
   deleteProductURL,
+  findOrderURL,
+  findUserURL,
   getAllOrdersURL,
   getAllProductsURL,
   getAllUsersURL,
@@ -44,6 +47,16 @@ export const registerUser = async (email, password, name) => {
 export const getUser = async () => {
   try {
     const res = await get(getUserURL);
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const getUserById = async id => {
+  try {
+    const res = await get(`${findUserURL}/${id}`);
+
     return { data: res.data, status: res.status };
   } catch (err) {
     return handleErrResponse(err);
@@ -132,6 +145,26 @@ export const joinNewsletter = async email => {
 export const userChangeInfo = async (id, name) => {
   try {
     const res = await put(`${changeUserInfoURL}/${id}`, { name });
+
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const getUserOrders = async id => {
+  try {
+    const res = await get(`${findOrderURL}/${id}`);
+
+    return { data: res.data, status: res.status };
+  } catch (err) {
+    return handleErrResponse(err);
+  }
+};
+
+export const createUserOrder = async order => {
+  try {
+    const res = await post(addOrderURL, order);
 
     return { data: res.data, status: res.status };
   } catch (err) {

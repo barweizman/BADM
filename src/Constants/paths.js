@@ -8,9 +8,9 @@ export default Object.freeze({
   searchResult: "/search",
   favorites: "/favorites",
   checkout: "/checkOut",
+  userProfile: "/profile",
   managerAddProduct: "/addProduct",
   manageProducts: "/manageProduct",
   manageUsers: "/manageUsers",
-  manageOrders: "/manageOrders",
-  
+  manageOrders: "/manageOrders"
 });

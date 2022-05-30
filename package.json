@@ -38,6 +38,7 @@
     "react-router": "6.0.0-beta.0",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
+    "reactstrap": "^9.0.3",
     "redux": "^4.1.2",
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4",
@@ -52,10 +53,17 @@
     "lint": "eslint src/* --color"
   },
   "eslintConfig": {
-    "extends": ["react-app", "react-app/jest"]
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",

@@ -17,6 +17,7 @@ const orderStatusOptions = [
     {key: 0, value: "Pending"},
     {key: 1, value: "Shipped"},
     {key: 2, value: "Completed"},
+    {key: 3, value: "Canceled"},
 ]
 
 const dateOptions = {

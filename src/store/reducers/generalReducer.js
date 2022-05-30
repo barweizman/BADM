@@ -2,6 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   calcCartTotal,
+  deleteCartSession,
   findCartProductIndex,
   getCartSession,
   setCartSession
@@ -91,6 +92,13 @@ export const sliceReducer = createSlice({
         setCartSession(state.cart);
       }
     },
+    resetUserCart: state => {
+      state.cart = {
+        products: [],
+        total: 0
+      };
+      deleteCartSession();
+    }
   }
 });
 
@@ -103,6 +111,7 @@ export const {
   setSearchProdValue,
   setSearchResultProducts,
   setIsCurrentUserAdmin,
+  resetUserCart,
 } = sliceReducer.actions;
 
 export const getUser = state => state?.appState?.user;

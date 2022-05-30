@@ -21,6 +21,7 @@ import CheckoutPage from "../Pages/CheckoutPage";
 
 import paths from "../Constants/paths";
 import { getIsOver18, getJwtKey, writeIsOver18 } from "../Constants/helpers";
+import UserPage from "../Pages/UserPage";
 
 
 
@@ -76,6 +77,7 @@ const AppRoute = () => {
       <Route path={paths.cart} element={<Cart />} />
       <Route path={paths.favorites} element={<MyFavoritesPage />} />
       <Route path={paths.checkout} element={<CheckoutPage />} />
+      <Route path={`${paths.userProfile}/:uid`} element={<UserPage />} />
       <Route path="*" element={<App404 />} />
     </Routes>
     

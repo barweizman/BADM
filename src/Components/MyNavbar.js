@@ -37,10 +37,6 @@ const MyNavbar = () => {
     navigate(paths.login);
   };
 
-  const handleProfileClicked = () => {
-    setIsPopperOpen(prevState => !prevState);
-  };
-
   const handleClosePopper = (event) => {
     if (anchorRef.current && anchorRef.current.contains(event?.target)) {
       return;
@@ -49,12 +45,16 @@ const MyNavbar = () => {
   }
 
   const handleLogoutClicked = () => {
-    console.log("!")
     endLoginSession();
     dispatch(logoutUser());
     dispatch(setIsCurrentUserAdmin(false));
     navigate(paths.index);
   };
+
+  const handleProfileClicked = () => {
+    setIsPopperOpen(prevState => !prevState);
+    navigate(`${paths.userProfile}/${user._id}`);
+  }
 
   const handleLogoClicked = () => {
     navigate(paths.index);
@@ -125,6 +125,7 @@ const MyNavbar = () => {
               open={isPopperOpen}
                handleClose={handleClosePopper}
                 handleLogout={handleLogoutClicked}
+                handleProfileClicked={handleProfileClicked}
                  user={user} 
                  />
           </>

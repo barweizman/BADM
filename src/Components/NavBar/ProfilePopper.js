@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-import { IconLogout } from "@tabler/icons";
+import { IconLogout, IconUser } from "@tabler/icons";
 
 import Transitions from "../ManagerView/ui-component/extended/Transitions";
 import MainCard from "../ManagerView/ui-component/cards/MainCard";
@@ -24,6 +24,7 @@ const ProfilePopper = ({
   open,
   handleClose,
   handleLogout,
+  handleProfileClicked,
   user,
   reference
 }) => {
@@ -104,6 +105,19 @@ const ProfilePopper = ({
                         }
                       }}
                     >
+                      <ListItemButton
+                        sx={{ borderRadius: `${customization.borderRadius}px` }}
+                        onClick={handleProfileClicked}
+                      >
+                        <ListItemIcon>
+                          <IconUser stroke={1.5} size="1.3rem" />
+                        </ListItemIcon>
+                        <ListItemText
+                          primary={
+                            <Typography variant="body2">My Profile</Typography>
+                          }
+                        />
+                      </ListItemButton>
                       <ListItemButton
                         sx={{ borderRadius: `${customization.borderRadius}px` }}
                         onClick={handleLogout}
