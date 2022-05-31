@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import { useEffect, useState} from "react";
 import { Route, Routes } from "react-router-dom";
 
@@ -17,12 +18,13 @@ import MyFavoritesPage from "../Pages/MyFavoritesPage";
 import App404 from "../Pages/404Page";
 import ManagerRoutes from "./ManagerRoutes";
 import MainLayout from "../Components/ManagerView/layout/MainLayout";
-import CheckoutPage from "../Pages/CheckoutPage";
+import ClientCheckoutPage from "../Pages/ClientCheckoutPage";
+// import CheckoutPage from "../Pages/CheckoutPage";
 
 import paths from "../Constants/paths";
 import { getIsOver18, getJwtKey, writeIsOver18 } from "../Constants/helpers";
 import UserPage from "../Pages/UserPage";
-
+import LoadingAnimation from "../Components/Common/LoadingAnimation";
 
 
 
@@ -30,6 +32,7 @@ const AppRoute = () => {
   const dispatch = useDispatch();
   const state = useSelector(s => s);
   const [ageAlert,setAgeAlert ] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const isAdmin = getIsCurrentUserAdmin(state);
 
   useEffect(() => {
@@ -45,6 +48,7 @@ const AppRoute = () => {
           }
           dispatch(setUser(res.data.user));
         }
+        setIsLoading(false);
       });
     }
     if(!isOver18) {
@@ -61,8 +65,7 @@ const AppRoute = () => {
   return (
     <>
     {ageAlert && <AgeDialog open={ageAlert} handleClose={handleCloseAgeDialog} />}
-    {/* manager routes */}
-    {isAdmin ?
+    {isLoading ? <LoadingAnimation /> : isAdmin ?
       <MainLayout>
         <ManagerRoutes />
       </MainLayout>
@@ -70,13 +73,13 @@ const AppRoute = () => {
     <Routes> 
       <Route path={paths.index} element={<HomePage />} />
       <Route path={paths.login} element={<LoginPage />} />
+      <Route path={paths.checkout} element={<ClientCheckoutPage />} />
       <Route path={paths.register} element={<Register />} />
-      <Route path={`${paths.product}/:id`} element={<ProductPage />} />
-      <Route path={`${paths.products}/:category`} element={<ProductsCategory />} />
       <Route path={paths.searchResult} element={<SearchPageResult />} />
       <Route path={paths.cart} element={<Cart />} />
       <Route path={paths.favorites} element={<MyFavoritesPage />} />
-      <Route path={paths.checkout} element={<CheckoutPage />} />
+      <Route path={`${paths.product}/:id`} element={<ProductPage />} />
+      <Route path={`${paths.products}/:category`} element={<ProductsCategory />} />
       <Route path={`${paths.userProfile}/:uid`} element={<UserPage />} />
       <Route path="*" element={<App404 />} />
     </Routes>

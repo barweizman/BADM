@@ -2,15 +2,15 @@ import  { useEffect, useState } from "react";
 import { Divider, Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 
-import AppAnimation from "../Components/AppAnimation";
-import Footer from "../Components/Footer";
-import FreeShipping from "../Components/FreeShippingBar";
-import MyNavbar from "../Components/MyNavbar";
+import AppAnimation from "../Components/Common/AppAnimation";
+import Footer from "../Components/Common/Footer";
+import FreeShipping from "../Components/Common/FreeShippingBar";
+import MyNavbar from "../Components/NavBar/MyNavbar";
 import WhatsappButton from "../Components/Common/WhatsappButton";
 import ProductsList from "../Components/Products/ProductsList";
-import NewsLetter from "../Components/NewsLetter";
-import ProductSortByOptions from "../Components/ProductSortByOptions";
-import SearchBox from "../Components/SearchBox";
+import NewsLetter from "../Components/Common/NewsLetter";
+import ProductSortByOptions from "../Components/Products/ProductSortByOptions";
+import SearchBox from "../Components/Common/SearchBox";
 
 import { getFeaturedProducts } from "../services/serverServices";
 import { getSearchResultProduct } from "../store/reducers/generalReducer";

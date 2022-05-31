@@ -1,5 +1,5 @@
 import { Box, Grid, Typography } from "@mui/material";
-import AppDialog from "../AppDialog";
+import AppDialog from "../Common/AppDialog";
 import theme from "../../Constants/theme";
 
 const AgeDialog = ({ open, handleClose }) =>

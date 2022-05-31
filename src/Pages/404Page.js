@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { Divider, Grid } from "@mui/material";
 
-import Footer from "../Components/Footer";
-import FreeShipping from "../Components/FreeShippingBar";
-import MyNavbar from "../Components/MyNavbar";
+import Footer from "../Components/Common/Footer";
+import FreeShipping from "../Components/Common/FreeShippingBar";
+import MyNavbar from "../Components/NavBar/MyNavbar";
 
 import ProductsList from "../Components/Products/ProductsList";
-import NewsLetter from "../Components/NewsLetter";
+import NewsLetter from "../Components/Common/NewsLetter";
 import { getFeaturedProducts } from "../services/serverServices";
 import WhatsappButton from "../Components/Common/WhatsappButton";
-import AppAnimation from "../Components/AppAnimation";
+import AppAnimation from "../Components/Common/AppAnimation";
 import theme from "../Constants/theme";
 
 const App404 = () => {

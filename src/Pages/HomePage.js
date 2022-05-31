@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { Grid } from "@mui/material";
 
 import CategoriesList from "../Components/Categories/CategoriesList";
-import Footer from "../Components/Footer";
-import FreeShipping from "../Components/FreeShippingBar";
-import MyNavbar from "../Components/MyNavbar";
+import Footer from "../Components/Common/Footer";
+import FreeShipping from "../Components/Common/FreeShippingBar";
+import MyNavbar from "../Components/NavBar/MyNavbar";
 import Slider from "../Components/CustomerView/HomePage/Slider";
 
 import { categories, sliderItems } from "../Constants/data";
 import ProductsList from "../Components/Products/ProductsList";
-import NewsLetter from "../Components/NewsLetter";
+import NewsLetter from "../Components/Common/NewsLetter";
 import { getFeaturedProducts } from "../services/serverServices";
 import WhatsappButton from "../Components/Common/WhatsappButton";
 

@@ -26,7 +26,7 @@ import { validateEmail } from "../Constants/validators";
 import Copyright from "../Components/Common/Copyright";
 import paths from "../Constants/paths";
 import { loginUser } from "../services/serverServices";
-import MyNavbar from "../Components/MyNavbar";
+import MyNavbar from "../Components/NavBar/MyNavbar";
 import { rememberMeSession } from "../Constants/helpers";
 
 const initialErrors = {

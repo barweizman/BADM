@@ -3,10 +3,10 @@ import { Grid } from "@mui/material";
 import { useSelector } from "react-redux";
 
 import ClientProfile from "../Components/UserProfile/ClientProfile";
-import Footer from "../Components/Footer";
-import FreeShipping from "../Components/FreeShippingBar";
-import MyNavbar from "../Components/MyNavbar";
-import NewsLetter from "../Components/NewsLetter";
+import Footer from "../Components/Common/Footer";
+import FreeShipping from "../Components/Common/FreeShippingBar";
+import MyNavbar from "../Components/NavBar/MyNavbar";
+import NewsLetter from "../Components/Common/NewsLetter";
 import WhatsappButton from "../Components/Common/WhatsappButton";
 
 import { getUserById, getUserFavoriteProducts, getUserOrders } from "../services/serverServices";

@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { Grid, Typography } from "@mui/material";
 
 import Lottie from "lottie-web";
-import App404 from "../assets/animations/404.json";
-import theme from "../Constants/theme";
+import App404 from "../../assets/animations/404.json";
+import theme from "../../Constants/theme";
 
 const AppAnimation = ({ animationSize, loop, LottieCmp, title, subTitle }) => {
   useEffect(

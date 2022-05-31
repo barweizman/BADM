@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Box, Grid, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Search } from "@mui/icons-material";
 
-import { DEBOUNCE_TIME } from "../Constants/naming";
+import { DEBOUNCE_TIME } from "../../Constants/naming";
 import {
   getSearchProdValue,
   setSearchProdValue,
   setSearchResultProducts
-} from "../store/reducers/generalReducer";
-import { getSearchedProduct } from "../services/serverServices";
-import theme from "../Constants/theme";
+} from "../../store/reducers/generalReducer";
+import { getSearchedProduct } from "../../services/serverServices";
+import theme from "../../Constants/theme";
 
 const useStyles = makeStyles(() => ({
   root: {}

@@ -28,7 +28,7 @@ import Copyright from "../Components/Common/Copyright";
 import paths from "../Constants/paths";
 import { registerUser } from "../services/serverServices";
 import { rememberMeSession } from "../Constants/helpers";
-import MyNavbar from "../Components/MyNavbar";
+import MyNavbar from "../Components/NavBar/MyNavbar";
 
 const initialErrors = {
   email: false,

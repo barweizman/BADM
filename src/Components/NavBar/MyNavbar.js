@@ -12,15 +12,15 @@ import {
 import { useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getUser, logoutUser, setIsCurrentUserAdmin } from "../store/reducers/generalReducer";
+import { getUser, logoutUser, setIsCurrentUserAdmin } from "../../store/reducers/generalReducer";
 
-import CartIconNavBar from "./Cart/CartIconNavBar";
-import ProductSearch from "./NavBar/ProductSearch";
-import ProductFavorites from "./NavBar/ProductFavorites";
+import CartIconNavBar from "../Cart/CartIconNavBar";
+import ProductSearch from "./ProductSearch";
+import ProductFavorites from "./ProductFavorites";
 
-import paths from "../Constants/paths";
-import ProfilePopper from "./NavBar/ProfilePopper";
-import { endLoginSession } from "../Constants/helpers";
+import paths from "../../Constants/paths";
+import ProfilePopper from "./ProfilePopper";
+import { endLoginSession } from "../../Constants/helpers";
 
 const MyNavbar = () => {
   const navigate = useNavigate();

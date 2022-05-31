@@ -6,10 +6,10 @@ import styled from "styled-components";
 import { Grid, IconButton } from "@mui/material";
 import { Add, Delete, Remove } from "@mui/icons-material";
 
-import AppAnimation from "../Components/AppAnimation";
-import FreeShippingBar from "../Components/FreeShippingBar";
-import MyNavbar from "../Components/MyNavbar";
-import Footer from "../Components/Footer";
+import AppAnimation from "../Components/Common/AppAnimation";
+import FreeShippingBar from "../Components/Common/FreeShippingBar";
+import MyNavbar from "../Components/NavBar/MyNavbar";
+import Footer from "../Components/Common/Footer";
 
 import EmptyCartAnimation from "../assets/animations/empty-cart.json";
 
@@ -163,7 +163,7 @@ const Cart = () => {
 
   const user = getUser(state);
   const cart = getUserCart(state);
-  
+
   const handleRemoveFromCart = (product) => {
     dispatch(removeFromCart({id: product._id }))
   }
@@ -201,7 +201,7 @@ const Cart = () => {
             <TopText>Shopping Bag({cart?.products.length})</TopText>
             <TopText onClick={handleMoveToFavorite} >Your Wishlist ({user?.favorites.length})</TopText>
           </TopTexts>
-          <TopButton type="filled" onClick={handleCheckoutClicked} >CHECKOUT NOW</TopButton>
+          <TopButton type="filled" onClick={handleCheckoutClicked} disabled={cart?.products?.length === 0} >CHECKOUT NOW</TopButton>
         </Top>
         <Bottom>
           <Info>
@@ -235,7 +235,7 @@ const Cart = () => {
                     </IconButton>
                   </ProductAmountContainer>
                   <ProductPrice>
-                  ₪ {item.product.price * item.quantity}
+                  $ {item.product.price * item.quantity}
                   </ProductPrice>
                 <Grid >
                 <IconButton onClick={() => handleRemoveFromCart(item.product)} >
@@ -270,7 +270,7 @@ const Cart = () => {
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>
-              ₪ {cart.total} 
+              $ {cart.total} 
               </SummaryItemPrice>
             </SummaryItem>
             {/* <StripeCheckout
@@ -283,7 +283,12 @@ const Cart = () => {
               token={onToken}
               stripeKey={KEY}
             > */}
-            <Button onClick={handleCheckoutClicked} >CHECKOUT NOW</Button>
+            <Button 
+              onClick={handleCheckoutClicked}
+              disabled={cart?.products?.length === 0} 
+             >
+               CHECKOUT NOW
+              </Button>
             {/* </StripeCheckout> */}
           </Summary>
         </Bottom>

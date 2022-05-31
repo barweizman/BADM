@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 import CategoryItem from "./CategoryItem";
-import SubTitle from "../SubTitle";
+import SubTitle from "../Common/SubTitle";
 
 const useStyles = makeStyles(() => ({
   root: {

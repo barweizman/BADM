@@ -1,4 +1,4 @@
-import AppAnimation from "../AppAnimation";
+import AppAnimation from "./AppAnimation";
 
 import WineLoadingAnimation from "../../assets/animations/wine-loading.json";
 

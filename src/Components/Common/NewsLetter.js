@@ -3,11 +3,11 @@ import { Box, Button, Typography, styled } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Send } from "@mui/icons-material";
 
-import { getIsMobile } from "../Constants/helpers";
-import theme from "../Constants/theme";
-import { joinNewsletter } from "../services/serverServices";
-import { validateEmail } from "../Constants/validators";
-import AppAlert from "./Common/AppAlert";
+import { getIsMobile } from "../../Constants/helpers";
+import theme from "../../Constants/theme";
+import { joinNewsletter } from "../../services/serverServices";
+import { validateEmail } from "../../Constants/validators";
+import AppAlert from "./AppAlert";
 
 // eslint-disable-next-line no-shadow
 const useStyles = makeStyles(() => ({

@@ -1,8 +1,6 @@
 import axios from "axios";
 import { getJwtKey } from "../Constants/helpers";
 
-console.log("process.env.REACT_APP_ENV = ", process.env.REACT_APP_ENV);
-
 if (process.env.REACT_APP_ENV === "LOCAL") {
   axios.defaults.baseURL = "http://localhost:5001";
 } else {

@@ -15,8 +15,6 @@ const ClientOrderCard = ({ order, handleCancelOrder }) => {
     new Date(order.createdAt).getTime() + 30 * 60 * 1000 >=
       new Date().getTime() && order.status !== "Canceled";
 
-  console.log(canBeCanceled);
-
   return (
     <Card
       sx={{

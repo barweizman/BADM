@@ -12,7 +12,6 @@ const ProductsUtils = Loadable(
 );
 const OrdersUtils = Loadable(lazy(() => import("../Pages/ManageOrdersPage")));
 
-// sample page routing
 const UsersUtils = Loadable(lazy(() => import("../Pages/ManageUsersPage")));
 
 const ManagerRoutes = () =>

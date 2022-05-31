@@ -6,7 +6,7 @@ import { Box } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 import ProductCard from "./ProductCard";
-import SubTitle from "../SubTitle";
+import SubTitle from "../Common/SubTitle";
 
 import { addToUserCart, getUser, getUserCart, setUser } from "../../store/reducers/generalReducer";
 import AppAlert from "../Common/AppAlert";

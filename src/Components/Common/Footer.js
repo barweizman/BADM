@@ -1,6 +1,6 @@
 import { Box, Grid, IconButton, Typography, Paper } from "@mui/material";
-import theme from "../Constants/theme";
-import { authours, GITHUB_ICON, LINKEDIN_ICON } from "../Constants/naming";
+import theme from "../../Constants/theme";
+import { authours, GITHUB_ICON, LINKEDIN_ICON } from "../../Constants/naming";
 
 const Footer = () =>
   <Typography

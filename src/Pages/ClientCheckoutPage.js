@@ -10,21 +10,21 @@ import {
 	Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { wait } from "@testing-library/user-event/dist/utils";
 
-import AppAnimation from "../Components/AppAnimation";
-import FreeShipping from "../Components/FreeShippingBar";
+import AppAnimation from "../Components/Common/AppAnimation";
+import FreeShipping from "../Components/Common/FreeShippingBar";
 import LoginDialog from "../Components/Common/LoginDialog";
-import MyNavbar from "../Components/MyNavbar";
+import MyNavbar from "../Components/NavBar/MyNavbar";
 import WhatsappButton from "../Components/Common/WhatsappButton";
 
 import theme from "../Constants/theme";
 import {createUserOrder,loginUser} from "../services/serverServices"
 import { validateEmail, validatePassword } from "../Constants/validators";
 import { getUser,getUserCart, resetUserCart, setIsCurrentUserAdmin, setUser } from "../store/reducers/generalReducer";
-import { deleteCartSession, rememberMeSession, setCartSession } from "../Constants/helpers";
+import { rememberMeSession } from "../Constants/helpers";
 import paths from "../Constants/paths";
 import ValidationAnimation from "../assets/animations/validation.json";
 
@@ -48,15 +48,15 @@ const initialForm = {
 	cc: "",
 	cvv: "",
 	year: "2022",
-	month: "1",
+	month: "12",
 }
+const today = new Date();
+const months = Array.from({length:  12 - today.getMonth()}, (_, i) => i + today.getMonth() + 1 );
+const years = Array.from({length: 12}, (_, i) => i + today.getFullYear());
 
-const months = Array.from({length: 12}, (_, i) => i + 1);
-const years = Array.from({length: 12}, (_, i) => i + 2022);
-
-const CheckoutPage = () => {
+const ClientCheckoutPage = () => {
 	const state = useSelector(s => s);
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
 	const [formErrors, setFormErrors] = useState({ ...initialErrors });
@@ -65,7 +65,7 @@ const CheckoutPage = () => {
 	const [dialogOpen, setDialogOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 
-	const user = getUser(state);
+    const user = getUser(state);
 	const cart = getUserCart(state);
 
 	const isLoginFormValid = (email, password) => {
@@ -138,13 +138,12 @@ const CheckoutPage = () => {
 				address: orderForm.address
 			}
 			setIsLoading(true);
-			console.log(order);
 			const res = await createUserOrder(order);
 			if(res.status === 200) {
 				dispatch(resetUserCart());
 				setOrderForm({ ...initialForm });
 				await wait(1500);
-				// navigate(`${paths.userProfile}/${user._id}`);
+				navigate(`${paths.userProfile}/${user._id}`);
 			}
 			setIsLoading(false);
 		}
@@ -219,7 +218,7 @@ const CheckoutPage = () => {
 							alignItems: "center",
 						}}
 					>
-						<Typography component="h1" variant="h5">
+						<Typography component="h1" variant="h3">
 							Check Out
 						</Typography>
 						{user ? 
@@ -385,4 +384,4 @@ const CheckoutPage = () => {
 	);
 };
 
-export default CheckoutPage;
+export default ClientCheckoutPage;

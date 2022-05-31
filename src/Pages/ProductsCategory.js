@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { Box, Divider, Grid } from "@mui/material";
 import { useLocation } from "react-router-dom";
 
-import Footer from "../Components/Footer";
-import FreeShipping from "../Components/FreeShippingBar";
-import MyNavbar from "../Components/MyNavbar";
+import Footer from "../Components/Common/Footer";
+import FreeShipping from "../Components/Common/FreeShippingBar";
+import MyNavbar from "../Components/NavBar/MyNavbar";
 import WhatsappButton from "../Components/Common/WhatsappButton";
 import ProductsList from "../Components/Products/ProductsList";
-import NewsLetter from "../Components/NewsLetter";
+import NewsLetter from "../Components/Common/NewsLetter";
 
 import {
   getAllProducts,

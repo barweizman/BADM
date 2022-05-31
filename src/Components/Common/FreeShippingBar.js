@@ -1,7 +1,7 @@
 import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
-import theme from "../Constants/theme";
+import theme from "../../Constants/theme";
 
 const useStyles = makeStyles(() => ({
   root: {

@@ -1,7 +1,6 @@
-import React from "react";
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { filters } from "../Constants/naming";
-import theme from "../Constants/theme";
+import { filters } from "../../Constants/naming";
+import theme from "../../Constants/theme";
 
 const filterOptions = [
   { key: 1, val: filters.date, name: "Date" },
