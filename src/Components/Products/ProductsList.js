@@ -46,7 +46,6 @@ const ProductsList = ({products, subTitle, sortBy}) => {
     }else {
       setAlertMessage("Added to favorites");
       const res = await addToUserFavoriteProducts(user._id, productId);
-      console.log(res);
       dispatch(setUser(res.data));
     }
   }

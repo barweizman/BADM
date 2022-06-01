@@ -2,6 +2,7 @@
 import {
 	Box,
 	Button,
+	Chip,
 	CssBaseline,
 	Grid,
 	MenuItem,
@@ -12,7 +13,10 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import Calendar from "react-calendar";
 import { wait } from "@testing-library/user-event/dist/utils";
+
+import "../Calendar.css";
 
 import AppAnimation from "../Components/Common/AppAnimation";
 import FreeShipping from "../Components/Common/FreeShippingBar";
@@ -43,12 +47,16 @@ const initialOrderErrors = {
 	month: false,
 };
 
+const deliveryTimeOptions = [{val: 8, label: "8:00-12:00"}, {val: 12, label: "12:00-17:00"}];
+
 const initialForm = {
 	address: "",
 	cc: "",
 	cvv: "",
 	year: "2022",
 	month: "12",
+	deliveryDate: new Date(),
+	deliveryTime: deliveryTimeOptions[0].val
 }
 const today = new Date();
 const months = Array.from({length:  12 - today.getMonth()}, (_, i) => i + today.getMonth() + 1 );
@@ -64,6 +72,7 @@ const ClientCheckoutPage = () => {
 	const [orderForm, setOrderForm] = useState({ ...initialForm });
 	const [dialogOpen, setDialogOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
+
 
     const user = getUser(state);
 	const cart = getUserCart(state);
@@ -135,7 +144,8 @@ const ClientCheckoutPage = () => {
 				userId: user._id,
 				products,
 				price: cart.total,
-				address: orderForm.address
+				address: orderForm.address,
+				deliveryDate: new Date(orderForm.deliveryDate.setHours(Number(orderForm.deliveryTime)))
 			}
 			setIsLoading(true);
 			const res = await createUserOrder(order);
@@ -168,7 +178,6 @@ const ClientCheckoutPage = () => {
 	}
 
 	const handleOpenLoginDialog = () => setDialogOpen(true);
-
 	return (
 		<>
 		{isLoading && (
@@ -347,7 +356,40 @@ const ClientCheckoutPage = () => {
 									)) }
 								</TextField>
 							</Grid>
-
+							<Typography
+								style={{
+									alignItems: "center",
+									marginTop: "20px",
+									marginBottom: "20px",
+								}}
+								component="h2"
+								variant="h5"
+							>
+								Delivery Day
+							</Typography>
+							<Grid item>
+								<Calendar 
+									minDate={new Date()}
+									onChange={e => setOrderForm(prevState => ({...prevState, deliveryDate: new Date(e)}))} 
+								 	value={orderForm.deliveryDate}
+								 />
+							</Grid>
+							<Grid item xs={5.5} mt={theme.spacing(3)}>
+								<Typography>
+									Delivery Time:
+								</Typography>
+							</Grid>
+							<Grid item xs={5.5} >
+								{deliveryTimeOptions.map(opt => (
+									<Chip
+									 	label={opt.label}
+									  	key={opt.val}
+										color={orderForm.deliveryTime === opt.val ? "primary" : "secondary"}
+									 	sx={{m: 2}} 
+										 onClick={() => setOrderForm(prevState => ({...prevState, deliveryTime: opt.val}))}
+									 />
+								))}
+							</Grid>
 							<Button
 								type="submit"
 								fullWidth

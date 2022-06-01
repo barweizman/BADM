@@ -108,7 +108,6 @@ const Slider = ({ sliderItems }) => {
   };
 
   const handleShowMoreClicked = categoryName => {
-    console.log("!@");
     navigate(`${paths.products}/${categoryName}`);
   };
 

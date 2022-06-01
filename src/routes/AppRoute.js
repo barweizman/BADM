@@ -50,6 +50,8 @@ const AppRoute = () => {
         }
         setIsLoading(false);
       });
+    } else {
+      setIsLoading(false);
     }
     if(!isOver18) {
       setAgeAlert(true);

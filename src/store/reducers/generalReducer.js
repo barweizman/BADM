@@ -29,15 +29,18 @@ export const sliceReducer = createSlice({
     addToUserCart: (state, action) => {
       const prodIndex = findCartProductIndex(
         state.cart.products,
-        action.payload.id
+        action.payload.product?._id
       );
+      
       if (prodIndex > -1) {
-        state.cart.products[prodIndex] = {
-          product: action.payload.id,
+        const newCart = [...JSON.parse(JSON.stringify(state.cart.products))];
+        newCart[prodIndex] = {
+          product: action.payload.product,
           quantity:
             state.cart.products[prodIndex].quantity +
             (1 || action.payload.quantity)
         };
+        state.cart.products = newCart;
       } else {
         state.cart.products = [
           ...state.cart.products,

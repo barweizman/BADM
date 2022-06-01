@@ -162,7 +162,7 @@ const Product = ({ product }) => {
           {product.description}
         </Typography>
         <Typography className={classes.price} variant="subtitle1">
-        ₪{product.price}
+        ${product.price}
         </Typography>
         <Grid className={classes.filterContainer}>
             <Typography variant="span"  className={classes.filterTitle}>
@@ -180,13 +180,6 @@ const Product = ({ product }) => {
             </IconButton>
             </Grid>
         </Grid>
-        <Grid className={classes.filterContainer}>
-            <select className={classes.filterSize}>
-                {product.size?.map(item => (
-                    <option>{item}</option>
-                ))}
-            </select>
-        </Grid>
         Categories:
         {product?.category.map(category => (
         <Typography 
@@ -202,7 +195,7 @@ const Product = ({ product }) => {
           <Button 
             className={classes.btn}
             onClick={handleAddToCart}
-            disabled={product.quantity === 0}
+            disabled={product.quantity === 0 || quantity === 0}
             >
               Add To Cart
             </Button>
